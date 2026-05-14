@@ -73,8 +73,8 @@ body {
 .screen-scroll {
   flex: 1;
   overflow-y: auto;
-  overflow-x: hidden;
-  padding-bottom: 80px;
+  overflow-x: 200px;
+  padding-bottom: 60px;
   -webkit-overflow-scrolling: touch;
   scrollbar-width: none;
 }
@@ -103,10 +103,11 @@ body {
 .logo-block.center { align-items: center; }
 .logo-mamb {
   font-family: 'Playfair Display', serif;
-  font-weight: 700;
+  font-weight: 800;
   font-size: 26px;
   letter-spacing: 2px;
   color: var(--text-dark);
+  
 }
 .logo-sub {
   font-size: 8.5px;
@@ -256,7 +257,7 @@ body {
 
 .art-card {
   flex-shrink: 0;
-  width: 160px;
+  width: 250px;
   background: var(--white);
   border-radius: var(--radius);
   overflow: hidden;
@@ -446,11 +447,13 @@ body {
 }
 .explore-title {
   font-family: 'Playfair Display', serif;
-  font-size: 24px;
+  font-size: 20px;
   font-weight: 700;
   color: var(--text-dark);
   letter-spacing: 2px;
   margin: 10px 0 6px;
+  position: relative;
+  top: -15px;
 }
 .explore-sub {
   font-size: 12px;
@@ -458,6 +461,9 @@ body {
   line-height: 1.5;
   max-width: 280px;
   margin: 0 auto;
+  position: relative;
+  top: -10px;
+  
 }
 
 /* 
@@ -474,7 +480,7 @@ body {
 
 .top-card {
   flex-shrink: 0;
-  width: 120px;
+  width: 150px;
   cursor: pointer;
   transition: transform 0.2s;
 }
@@ -528,7 +534,7 @@ body {
 
 .fav-card {
   flex-shrink: 0;
-  width: 88px;
+  width: 100px;
   cursor: pointer;
 }
 .fav-img {
@@ -922,43 +928,70 @@ body {
 .photo-btn:hover { background: var(--rust); }
 
 .upload-form { padding: 0 18px 20px; }
+.form-des{
+  background-color: #C8963E;
+  padding-top: 10px;
+  padding-bottom: 10px ;
+  border-radius:20px;
+
+}
+.form-des p{
+  color: white;
+  
+}
+
 .form-title {
-  font-size: 11px;
+  font-size: 15px;
   font-weight: 700;
   letter-spacing: 1px;
   color: var(--text-mid);
   margin-bottom: 12px;
+  text-align: center;
+
 }
 .form-row {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 10+-
+  px;
   margin-bottom: 10px;
+  margin-left: 20px;
+  margin-top: 10px;
+  padding: 5px;
+  text-align: center;
+  
 }
 .form-row label {
-  font-size: 10.5px;
+  font-size: 13px;
   font-weight: 700;
   letter-spacing: 0.5px;
   color: var(--text-mid);
   width: 70px;
   flex-shrink: 0;
+  color: white;
+  padding-left: 1px;
+  
+
 }
 .form-row input {
-  flex: 1;
+ 
   border: none;
   border-bottom: 1.5px solid var(--cream2);
-  background: none;
   padding: 6px 0;
   font-family: 'DM Sans', sans-serif;
   font-size: 13px;
   color: var(--text-dark);
   outline: none;
   transition: border-color 0.2s;
+  border-radius: 5px;
+  width: 70%;
+  
 }
 .form-row input:focus { border-color: var(--copper); }
 
 #obra-desc {
   width: 100%;
+  
   border: 1.5px solid var(--cream2);
   border-radius: var(--radius-sm);
   background: var(--white);
@@ -968,8 +1001,9 @@ body {
   color: var(--text-dark);
   outline: none;
   resize: none;
-  min-height: 80px;
-  margin-bottom: 14px;
+  min-height: 100px;
+  position: relative;
+  margin-top: 15px;
   transition: border-color 0.2s;
 }
 #obra-desc:focus { border-color: var(--copper); }
@@ -977,7 +1011,8 @@ body {
 
 .submit-obra-btn {
   width: 100%;
-  background: var(--text-dark);
+  height: 50px;
+  background: var(--copper);
   color: #fff;
   border: none;
   border-radius: 10px;
@@ -988,6 +1023,7 @@ body {
   letter-spacing: 1.5px;
   cursor: pointer;
   transition: background 0.2s;
+  margin-top: 20px;
 }
 .submit-obra-btn:hover { background: var(--rust); }
 
@@ -1082,7 +1118,7 @@ body {
   font-size: 10px;
   font-weight: 700;
   letter-spacing: 1.5px;
-  color: var(--text-light);
+  color: black;
   margin-bottom: 10px;
 }
 .perfil-list-block ul { list-style: none; }
@@ -1112,7 +1148,9 @@ body {
   cursor: pointer;
   text-align: center;
   transition: background 0.2s;
+  margin-top: 25px;
 }
+
 .logout-btn:hover { background: var(--rust); }
 
 /* 
@@ -1214,6 +1252,11 @@ em{
   line-height: 1.5;
   margin-bottom: 8px;
 }
+#screen-about .screen-scroll {
+  max-height: calc(100vh - 15px); /* 64px = altura del nav */
+  overflow-y: scroll;
+}
+
 .quote-attr { font-size: 10.5px; color: rgba(255,255,255,0.75); }
 
 .alianzas { display: flex; flex-wrap: wrap; gap: 8px; }

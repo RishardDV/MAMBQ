@@ -9,7 +9,7 @@
 </head>
 <body>
 
-  <div class="screen active" id="screen-inicio">
+  <div class="screen active" id="screen-galeria">
     <div class="screen-scroll">
       <header class="app-header">
         <div class="logo-block">
@@ -161,10 +161,13 @@
   </div>
 
 
-  <div class="screen" id="screen-galeria">
+  <div class="screen active" id="screen-inicio">
     <div class="screen-scroll">
       <header class="app-header">
-        <p class="screen-page-title">INICIO</p>
+        <div class="logo-block">
+          <span class="logo-mamb">MAMB</span>
+          <span class="logo-sub">Museo de Arte Moderno de Barranquilla</span>
+        </div>
         <div class="header-actions">
           <button class="icon-btn"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg></button>
           <button class="avatar-btn"><img src="https://i.pravatar.cc/40?img=5" alt="Avatar" /></button>
@@ -172,10 +175,7 @@
       </header>
 
       <div class="explore-hero">
-        <div class="logo-block center">
-          <span class="logo-mamb">MAMB</span>
-          <span class="logo-sub">Museo de Arte Moderno de Barranquilla</span>
-        </div>
+        
         <h1 class="explore-title">EXPLORA EL ARTE</h1>
         <p class="explore-sub">Conecta con el arte, encuentra tu obra favorita y compártela</p>
       </div>
@@ -357,15 +357,17 @@
       </button>
 
       <div class="upload-form">
-        <p class="form-title">DETALLES:</p>
-        <div class="form-row">
-          <label>TÍTULO:</label>
-          <input type="text" id="obra-titulo" />
-        </div>
-        <div class="form-row">
-          <label>DESCRIBE:</label>
-          <input type="text" id="obra-describe" />
-        </div>
+        <div class="form-des">
+          <p class="form-title">DETALLES:</p>
+          <div class="form-row">
+            <label>TÍTULO:</label>
+            <input type="text" id="obra-titulo" />
+          </div>
+          <div class="form-row">
+            <label>AUTOR:</label>
+            <input type="text" id="obra-describe" />
+          </div>
+        </div>  
         <textarea id="obra-desc" placeholder="Agrega una descripción o nota sobre esta obra..."></textarea>
         <button class="submit-obra-btn" onclick="submitObra()">PUBLICAR OBRA</button>
       </div>
@@ -383,7 +385,6 @@
           <button class="icon-btn"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg></button>
         </div>
       </header>
-      <div class="page-label-top">PERFIL</div>
 
       <div class="perfil-top">
         <div class="perfil-avatar-wrap">
