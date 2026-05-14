@@ -1071,37 +1071,40 @@ body {
 
 .perfil-user-name {
   font-family: 'Playfair Display', serif;
-  font-size: 16px;
+  font-size: 20px;
   font-weight: 700;
   color: var(--text-dark);
   letter-spacing: 1px;
   margin-bottom: 3px;
   text-align: center;
 }
-.perfil-user-role { font-size: 11.5px; color: var(--text-light); text-align: center; }
+.perfil-user-role { font-size: 13px; color: var(--text-light); text-align: center; }
 
 .perfil-data-card {
+  
   background: var(--gold);
   border-radius: var(--radius);
-  margin: 0 18px 14px;
+  margin: 30px 18px 40px;
   padding: 14px 16px;
   box-shadow: var(--shadow);
+  
 }
 .perfil-data-row {
+  
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
-  padding: 5px 0;
+  padding: 10px 0;
   border-bottom: 1px solid rgba(255,255,255,0.2);
 }
 .perfil-data-row:last-child { border-bottom: none; }
 .perfil-data-row span:first-child {
-  font-size: 11px;
+  font-size: 16px;
   font-weight: 600;
   color: rgba(255,255,255,0.85);
 }
 .perfil-data-row span:last-child {
-  font-size: 11px;
+  font-size: 13px;
   color: #fff;
   text-align: right;
   max-width: 60%;
@@ -1115,7 +1118,7 @@ body {
   box-shadow: var(--shadow);
 }
 .perfil-list-block h3 {
-  font-size: 10px;
+  font-size: 13px;
   font-weight: 700;
   letter-spacing: 1.5px;
   color: black;
@@ -1125,7 +1128,7 @@ body {
 .perfil-list-block li { padding: 5px 0; border-bottom: 1px solid var(--cream2); }
 .perfil-list-block li:last-child { border-bottom: none; }
 .perfil-list-block a {
-  font-size: 13px;
+  font-size: 15px;
   color: var(--copper);
   text-decoration: none;
   font-weight: 500;
@@ -1134,21 +1137,21 @@ body {
 
 .logout-btn {
   display: block;
-  width: calc(100% - 36px);
-  margin: 4px 18px 30px;
+  height: 50px;
+  width: 92%;
+  margin: 30px 18px 30px;
   background: var(--gold);
   color: #fff;
   border: none;
   border-radius: 10px;
   padding: 13px;
   font-family: 'DM Sans', sans-serif;
-  font-size: 12px;
+  font-size: 15px;
   font-weight: 700;
   letter-spacing: 1.5px;
   cursor: pointer;
   text-align: center;
   transition: background 0.2s;
-  margin-top: 25px;
 }
 
 .logout-btn:hover { background: var(--rust); }
