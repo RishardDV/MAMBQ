@@ -73,7 +73,7 @@ body {
 .screen-scroll {
   flex: 1;
   overflow-y: auto;
-  overflow-x: 200px;
+  overflow-x: hidden;
   padding-bottom: 60px;
   -webkit-overflow-scrolling: touch;
   scrollbar-width: none;
