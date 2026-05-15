@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>MAMB – Museo de Arte Moderno de Barranquilla</title>
   <link rel="stylesheet" href="style.css" />
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
@@ -87,6 +87,77 @@
               </div>
             </div>
           </div>
+
+          <div class="art-card" onclick="openArtwork('noche')">
+            <div class="art-card-img bg-navy-soft">
+              <span class="badge-dest">DESTACADA</span>
+              <button class="like-btn" onclick="event.stopPropagation(); toggleLike(this)">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+                <span>189</span>
+              </button>
+            </div>
+            <div class="art-card-info">
+              <h3>Noche Azul</h3>
+              <p>M. Álvarez</p>
+              <div class="art-card-footer">
+                <span class="tag">Acrílico · 2020</span>
+                <button class="arrow-btn">→</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="art-card" onclick="openArtwork('fuego')">
+            <div class="art-card-img bg-rust-soft">
+              <button class="like-btn liked" onclick="event.stopPropagation(); toggleLike(this)">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+                <span>76</span>
+              </button>
+            </div>
+            <div class="art-card-info">
+              <h3>Fuego Vivo</h3>
+              <p>L. Torres</p>
+              <div class="art-card-footer">
+                <span class="tag">Mixta · 2018</span>
+                <button class="arrow-btn">→</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="art-card" onclick="openArtwork('selva')">
+            <div class="art-card-img bg-green-soft">
+              <span class="badge-dest">DESTACADA</span>
+              <button class="like-btn" onclick="event.stopPropagation(); toggleLike(this)">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+                <span>312</span>
+              </button>
+              <div class="art-bg-shape shape-green small"></div>
+            </div>
+            <div class="art-card-info">
+              <h3>Selva Viva</h3>
+              <p>R. Guerrero</p>
+              <div class="art-card-footer">
+                <span class="tag">Óleo · 2023</span>
+                <button class="arrow-btn">→</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="art-card" onclick="openArtwork('misterio')">
+            <div class="art-card-img bg-purple">
+              <button class="like-btn" onclick="event.stopPropagation(); toggleLike(this)">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+                <span>95</span>
+              </button>
+            </div>
+            <div class="art-card-info">
+              <h3>Misterio</h3>
+              <p>A. Pérez</p>
+              <div class="art-card-footer">
+                <span class="tag">Escultura · 2022</span>
+                <button class="arrow-btn">→</button>
+              </div>
+            </div>
+          </div>
         </div>
         <div class="dots"><span class="dot active"></span><span class="dot"></span><span class="dot"></span></div>
       </section>
@@ -133,6 +204,75 @@
               <p>Jorge Cepeda Samudio</p>
               <div class="art-card-footer">
                 <span class="tag">Acuarela · 2021</span>
+                <button class="arrow-btn">→</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="art-card" onclick="openArtwork('rio')">
+            <div class="art-card-img bg-navy">
+              <button class="like-btn liked" onclick="event.stopPropagation(); toggleLike(this)">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+                <span>143</span>
+              </button>
+            </div>
+            <div class="art-card-info">
+              <h3>Río Magdalena</h3>
+              <p>R. Guerrero</p>
+              <div class="art-card-footer">
+                <span class="tag">Acrílico · 2022</span>
+                <button class="arrow-btn">→</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="art-card" onclick="openArtwork('misterio')">
+            <div class="art-card-img bg-magenta">
+              <button class="like-btn" onclick="event.stopPropagation(); toggleLike(this)">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+                <span>67</span>
+              </button>
+            </div>
+            <div class="art-card-info">
+              <h3>Rosa del Tiempo</h3>
+              <p>M. Álvarez</p>
+              <div class="art-card-footer">
+                <span class="tag">Mixta · 2021</span>
+                <button class="arrow-btn">→</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="art-card" onclick="openArtwork('selva')">
+            <div class="art-card-img bg-slate">
+              <button class="like-btn liked" onclick="event.stopPropagation(); toggleLike(this)">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+                <span>231</span>
+              </button>
+            </div>
+            <div class="art-card-info">
+              <h3>Abstracción I</h3>
+              <p>A. Pérez</p>
+              <div class="art-card-footer">
+                <span class="tag">Escultura · 2014</span>
+                <button class="arrow-btn">→</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="art-card" onclick="openArtwork('noche')">
+            <div class="art-card-img bg-teal">
+              <span class="badge-dest">NUEVA</span>
+              <button class="like-btn" onclick="event.stopPropagation(); toggleLike(this)">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+                <span>88</span>
+              </button>
+            </div>
+            <div class="art-card-info">
+              <h3>Mar de Coral</h3>
+              <p>L. Torres</p>
+              <div class="art-card-footer">
+                <span class="tag">Acuarela · 2023</span>
                 <button class="arrow-btn">→</button>
               </div>
             </div>
@@ -204,6 +344,31 @@
             <p class="top-card-name">Río Magdalena</p>
             <p class="top-card-meta">Acrílico · 2022</p>
           </div>
+          <div class="top-card" onclick="openArtwork('noche')">
+            <div class="top-card-img bg-navy-soft"><span class="rank-num">4</span></div>
+            <p class="top-card-name">Noche Azul</p>
+            <p class="top-card-meta">Mixta · 2020</p>
+          </div>
+          <div class="top-card" onclick="openArtwork('fuego')">
+            <div class="top-card-img bg-rust-soft"><span class="rank-num">5</span></div>
+            <p class="top-card-name">Fuego Vivo</p>
+            <p class="top-card-meta">Óleo · 2018</p>
+          </div>
+          <div class="top-card" onclick="openArtwork('misterio')">
+            <div class="top-card-img bg-magenta"><span class="rank-num">6</span></div>
+            <p class="top-card-name">Rosa del Tiempo</p>
+            <p class="top-card-meta">Acuarela · 2021</p>
+          </div>
+          <div class="top-card" onclick="openArtwork('selva')">
+            <div class="top-card-img bg-teal"><span class="rank-num">7</span></div>
+            <p class="top-card-name">Mar de Coral</p>
+            <p class="top-card-meta">Acrílico · 2023</p>
+          </div>
+          <div class="top-card" onclick="openArtwork('misterio')">
+            <div class="top-card-img bg-purple"><span class="rank-num">8</span></div>
+            <p class="top-card-name">Misterio</p>
+            <p class="top-card-meta">Escultura · 2022</p>
+          </div>
         </div>
         <div class="dots"><span class="dot active"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span></div>
       </section>
@@ -233,6 +398,26 @@
             <div class="fav-img bg-purple"><span class="fav-heart">♥</span></div>
             <p class="fav-name">Misterio</p><p class="fav-author">A. Pérez</p>
           </div>
+          <div class="fav-card" onclick="openArtwork('crepusculo')">
+            <div class="fav-img bg-rust"><span class="fav-heart">♥</span></div>
+            <p class="fav-name">Crepúsculo Caribe</p><p class="fav-author">J. Cepeda</p>
+          </div>
+          <div class="fav-card" onclick="openArtwork('sierra')">
+            <div class="fav-img bg-green"><span class="fav-heart">♥</span></div>
+            <p class="fav-name">Sierra Nevada</p><p class="fav-author">J. Cepeda</p>
+          </div>
+          <div class="fav-card" onclick="openArtwork('rio')">
+            <div class="fav-img bg-navy"><span class="fav-heart">♥</span></div>
+            <p class="fav-name">Río Magdalena</p><p class="fav-author">R. Guerrero</p>
+          </div>
+          <div class="fav-card" onclick="openArtwork('noche')">
+            <div class="fav-img bg-teal"><span class="fav-heart">♥</span></div>
+            <p class="fav-name">Mar de Coral</p><p class="fav-author">L. Torres</p>
+          </div>
+          <div class="fav-card" onclick="openArtwork('misterio')">
+            <div class="fav-img bg-magenta"><span class="fav-heart">♥</span></div>
+            <p class="fav-name">Rosa del Tiempo</p><p class="fav-author">M. Álvarez</p>
+          </div>
         </div>
         <div class="dots"><span class="dot active"></span><span class="dot"></span><span class="dot"></span></div>
       </section>
@@ -257,6 +442,22 @@
           <div class="gallery-card">
             <div class="gallery-img bg-teal"><span class="pub-badge public">Publicada</span></div>
             <p class="gallery-name">Mar de Coral</p><p class="gallery-year">2023</p>
+          </div>
+          <div class="gallery-card">
+            <div class="gallery-img bg-navy-soft"><span class="pub-badge private">Privada</span></div>
+            <p class="gallery-name">Luz del Norte</p><p class="gallery-year">2019</p>
+          </div>
+          <div class="gallery-card">
+            <div class="gallery-img bg-rust-soft"><span class="pub-badge public">Publicada</span></div>
+            <p class="gallery-name">Abstracción II</p><p class="gallery-year">2020</p>
+          </div>
+          <div class="gallery-card">
+            <div class="gallery-img bg-green-soft"><span class="pub-badge public">Publicada</span></div>
+            <p class="gallery-name">Caribe Eterno</p><p class="gallery-year">2022</p>
+          </div>
+          <div class="gallery-card">
+            <div class="gallery-img bg-purple"><span class="pub-badge private">Privada</span></div>
+            <p class="gallery-name">Sombras</p><p class="gallery-year">2015</p>
           </div>
           <div class="gallery-card add-new" onclick="navigate('screen-subir', document.querySelector('[data-screen=screen-subir]'))">
             <div class="gallery-img gallery-add-btn">+</div>
@@ -489,6 +690,10 @@
   </div>
 
   <nav class="bottom-nav" id="bottom-nav">
+    <div class="desktop-logo" aria-hidden="true">
+      <span class="logo-mamb">MAMB</span>
+      <span class="logo-sub">Museo de Arte Moderno de Barranquilla</span>
+    </div>
     <button class="nav-btn active" data-screen="screen-inicio" onclick="navigate('screen-inicio', this)">
       <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
       <span>Inicio</span>
