@@ -492,3 +492,162 @@ document.addEventListener('touchend', (e) => {
     goBack();
   }
 }, { passive: true });
+
+/* ============================================================
+   PANTALLA IA – MAMB Pose Detector
+   Pega este bloque al final de tu app.js
+   ============================================================ */
+
+const IA_MODEL_URL = "https://teachablemachine.withgoogle.com/models/dyyi3qHP7/";
+
+// Mapeo de nombres técnicos → nombres legibles
+const IA_LABEL_MAP = {
+  "class 7": "pensando",
+  "class 8": "sorprendido"
+};
+
+function iaGetDisplayName(rawName) {
+  if (!rawName) return rawName;
+  const n = rawName.trim().toLowerCase();
+  if (/^class\s*7$/i.test(n) || n === "7") return "pensando";
+  if (/^class\s*8$/i.test(n) || n === "8") return "sorprendido";
+  return IA_LABEL_MAP[rawName] || rawName;
+}
+
+// Estado local del módulo IA
+const iaState = {
+  model: null,
+  webcam: null,
+  ctx: null,
+  maxPredictions: 0,
+  running: false
+};
+
+/* ── Iniciar detección ── */
+async function iaInit() {
+  if (iaState.running) return;
+
+  const btnStart       = document.getElementById('ia-btn-start');
+  const statusEl       = document.getElementById('ia-status');
+  const canvasWrap     = document.getElementById('ia-canvas-wrap');
+  const placeholder    = document.getElementById('ia-placeholder');
+  const topCard        = document.getElementById('ia-top-card');
+  const labelContainer = document.getElementById('ia-label-container');
+
+  btnStart.disabled = true;
+  iaSetStatus('loading', '● Cargando modelo…');
+
+  try {
+    // Cargar modelo
+    iaState.model = await tmPose.load(
+      IA_MODEL_URL + "model.json",
+      IA_MODEL_URL + "metadata.json"
+    );
+    iaState.maxPredictions = iaState.model.getTotalClasses();
+
+    // Configurar webcam cuadrada
+    const size = 260;
+    iaState.webcam = new tmPose.Webcam(size, size, true); // espejo
+    await iaState.webcam.setup();
+    await iaState.webcam.play();
+
+    // Preparar canvas
+    const canvas = document.getElementById('ia-canvas');
+    canvas.width  = size;
+    canvas.height = size;
+    iaState.ctx = canvas.getContext('2d');
+
+    // Construir barras
+    iaBuildBars(labelContainer);
+
+    // Activar UI
+    iaState.running = true;
+    placeholder.classList.add('hidden');
+    canvasWrap.classList.add('active');
+    topCard.classList.add('visible');
+    iaSetStatus('online', '● Detección activa');
+
+    window.requestAnimationFrame(iaLoop);
+
+  } catch (err) {
+    console.error('IA Error:', err);
+    iaSetStatus('', '⚠ Error al cargar el modelo');
+    btnStart.disabled = false;
+    showToast('No se pudo iniciar la cámara');
+  }
+}
+
+/* ── Loop de predicción ── */
+async function iaLoop() {
+  if (!iaState.running) return;
+  iaState.webcam.update();
+  await iaPredict();
+  window.requestAnimationFrame(iaLoop);
+}
+
+/* ── Predicción ── */
+async function iaPredict() {
+  const { pose, posenetOutput } = await iaState.model.estimatePose(iaState.webcam.canvas);
+  const predictions = await iaState.model.predict(posenetOutput);
+
+  const best = predictions.reduce((a, b) => a.probability > b.probability ? a : b);
+
+  // Actualizar barras
+  predictions.forEach((p, i) => {
+    const pct   = (p.probability * 100).toFixed(1);
+    const isDom = p.className === best.className;
+    const name  = iaGetDisplayName(p.className || p.label || '');
+
+    const nameEl = document.getElementById(`ia-name-${i}`);
+    const pctEl  = document.getElementById(`ia-pct-${i}`);
+    const fillEl = document.getElementById(`ia-fill-${i}`);
+
+    if (nameEl) nameEl.textContent = name;
+    if (pctEl)  { pctEl.textContent = pct + '%'; pctEl.classList.toggle('high', isDom); }
+    if (fillEl) { fillEl.style.width = pct + '%'; fillEl.classList.toggle('dominant', isDom); }
+  });
+
+  // Tarjeta principal
+  const bestName = iaGetDisplayName(best.className || best.label || '');
+  document.getElementById('ia-top-name').textContent = bestName;
+  document.getElementById('ia-top-pct').textContent  = (best.probability * 100).toFixed(0) + '%';
+
+  // Dibujar pose
+  iaDraw(pose);
+}
+
+/* ── Dibujar frame + esqueleto ── */
+function iaDraw(pose) {
+  if (!iaState.webcam.canvas) return;
+  iaState.ctx.drawImage(iaState.webcam.canvas, 0, 0);
+  if (pose) {
+    tmPose.drawKeypoints(pose.keypoints, 0.5, iaState.ctx);
+    tmPose.drawSkeleton(pose.keypoints, 0.5, iaState.ctx);
+  }
+}
+
+/* ── Construir barras dinámicas ── */
+function iaBuildBars(container) {
+  container.innerHTML = '';
+  for (let i = 0; i < iaState.maxPredictions; i++) {
+    const item = document.createElement('div');
+    item.className = 'ia-bar-item';
+    item.innerHTML = `
+      <div class="ia-bar-header">
+        <span class="ia-bar-name" id="ia-name-${i}">Clase ${i + 1}</span>
+        <span class="ia-bar-pct"  id="ia-pct-${i}">0%</span>
+      </div>
+      <div class="ia-bar-track">
+        <div class="ia-bar-fill" id="ia-fill-${i}"></div>
+      </div>`;
+    container.appendChild(item);
+  }
+}
+
+/* ── Actualizar badge de status ── */
+function iaSetStatus(cls, text) {
+  const el = document.getElementById('ia-status');
+  if (!el) return;
+  el.className = 'ia-status-badge' + (cls ? ' ' + cls : '');
+  el.textContent = text;
+}

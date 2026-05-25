@@ -2144,3 +2144,307 @@ em{
   .modal-sheet { max-width: 520px; }
   .toast { position: fixed; }
 }
+
+/* ============================================================
+   PANTALLA IA — MAMB Pose Detector
+   Pega esto al final de tu style.css
+   ============================================================ */
+
+/* ── Contenedor principal ── */
+#screen-ia .screen-scroll {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-bottom: 80px;
+}
+
+/* ── Hero intro ── */
+.ia-hero {
+  width: 100%;
+  padding: 22px 18px 16px;
+  background: linear-gradient(160deg, rgba(193,68,14,0.09) 0%, transparent 70%);
+  border-bottom: 1px solid var(--cream2);
+  text-align: center;
+}
+.ia-hero-label {
+  font-size: 9.5px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  color: var(--rust);
+  text-transform: uppercase;
+  margin-bottom: 6px;
+}
+.ia-hero-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--text-dark);
+  margin-bottom: 6px;
+}
+.ia-hero-sub {
+  font-size: 12px;
+  color: var(--text-mid);
+  line-height: 1.55;
+  max-width: 300px;
+  margin: 0 auto;
+}
+
+/* ── Cámara + canvas ── */
+.ia-camera-block {
+  width: calc(100% - 36px);
+  max-width: 360px;
+  margin: 18px 0 0;
+  position: relative;
+}
+
+.ia-canvas-wrap {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  border-radius: var(--radius);
+  overflow: hidden;
+  background: var(--text-dark);
+  position: relative;
+  box-shadow: var(--shadow-md);
+  border: 2px solid var(--cream2);
+}
+
+#ia-canvas {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  border-radius: calc(var(--radius) - 2px);
+}
+
+/* Placeholder antes de iniciar */
+.ia-placeholder {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background: linear-gradient(160deg, #1A1008, #2C1A0A);
+  border-radius: calc(var(--radius) - 2px);
+  color: rgba(255,255,255,0.55);
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+  transition: opacity 0.4s;
+}
+.ia-placeholder.hidden { opacity: 0; pointer-events: none; }
+.ia-placeholder-icon { font-size: 36px; opacity: 0.6; }
+
+/* Línea de scan animada */
+.ia-scan-line {
+  position: absolute;
+  left: 0; right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--rust-light), transparent);
+  top: 0;
+  animation: iaScan 2.4s ease-in-out infinite;
+  opacity: 0;
+  pointer-events: none;
+}
+.ia-canvas-wrap.active .ia-scan-line { opacity: 1; }
+
+@keyframes iaScan {
+  0%   { top: 0%;    opacity: 0; }
+  10%  { opacity: 1; }
+  90%  { opacity: 1; }
+  100% { top: 100%;  opacity: 0; }
+}
+
+/* Esquinas decorativas */
+.ia-corner {
+  position: absolute;
+  width: 16px; height: 16px;
+  border-color: var(--copper);
+  border-style: solid;
+  opacity: 0.7;
+  pointer-events: none;
+}
+.ia-corner.tl { top: 6px; left: 6px;  border-width: 2px 0 0 2px; }
+.ia-corner.tr { top: 6px; right: 6px; border-width: 2px 2px 0 0; }
+.ia-corner.bl { bottom: 6px; left: 6px;  border-width: 0 0 2px 2px; }
+.ia-corner.br { bottom: 6px; right: 6px; border-width: 0 2px 2px 0; }
+
+/* Badge de status sobre la cámara */
+.ia-status-badge {
+  position: absolute;
+  bottom: 10px; left: 50%;
+  transform: translateX(-50%);
+  background: rgba(0,0,0,0.5);
+  color: #fff;
+  font-size: 9.5px;
+  font-weight: 600;
+  letter-spacing: 1px;
+  padding: 4px 12px;
+  border-radius: 20px;
+  backdrop-filter: blur(6px);
+  white-space: nowrap;
+  transition: background 0.3s;
+}
+.ia-status-badge.online { background: rgba(45,106,79,0.75); }
+.ia-status-badge.loading { background: rgba(160,82,45,0.75); }
+
+/* ── Botón iniciar ── */
+.ia-start-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: calc(100% - 36px);
+  max-width: 360px;
+  margin: 14px 0 0;
+  padding: 13px;
+  background: var(--text-dark);
+  color: #fff;
+  border: none;
+  border-radius: 12px;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.15s;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.18);
+}
+.ia-start-btn:hover:not(:disabled) { background: var(--rust); transform: translateY(-1px); }
+.ia-start-btn:disabled { opacity: 0.55; cursor: not-allowed; }
+
+/* ── Tarjeta resultado principal ── */
+.ia-top-card {
+  width: calc(100% - 36px);
+  max-width: 360px;
+  margin: 16px 0 0;
+  background: var(--white);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 14px 16px;
+  display: none;
+  align-items: center;
+  justify-content: space-between;
+  border-left: 4px solid var(--rust);
+}
+.ia-top-card.visible { display: flex; }
+
+.ia-top-left {}
+.ia-top-badge {
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  color: var(--text-light);
+  text-transform: uppercase;
+  margin-bottom: 4px;
+}
+.ia-top-name {
+  font-family: 'Playfair Display', serif;
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--text-dark);
+  text-transform: capitalize;
+}
+.ia-top-pct {
+  font-family: 'Playfair Display', serif;
+  font-size: 32px;
+  font-weight: 700;
+  color: var(--rust);
+}
+
+/* ── Barras de probabilidad ── */
+.ia-bars-block {
+  width: calc(100% - 36px);
+  max-width: 360px;
+  margin: 12px 0 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.ia-bar-item {
+  background: var(--white);
+  border-radius: var(--radius-sm);
+  padding: 10px 12px;
+  box-shadow: var(--shadow);
+}
+.ia-bar-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 6px;
+}
+.ia-bar-name {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text-dark);
+  text-transform: capitalize;
+}
+.ia-bar-pct {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--text-light);
+  transition: color 0.2s;
+}
+.ia-bar-pct.high { color: var(--rust); }
+
+.ia-bar-track {
+  height: 6px;
+  background: var(--cream2);
+  border-radius: 4px;
+  overflow: hidden;
+}
+.ia-bar-fill {
+  height: 100%;
+  width: 0%;
+  background: var(--cream2);
+  border-radius: 4px;
+  transition: width 0.15s ease-out, background 0.2s;
+}
+.ia-bar-fill.dominant { background: linear-gradient(90deg, var(--rust), var(--rust-light)); }
+
+/* ── Info pill inferior ── */
+.ia-info-pill {
+  width: calc(100% - 36px);
+  max-width: 360px;
+  margin: 14px 0 0;
+  background: var(--cream2);
+  border-radius: 10px;
+  padding: 10px 14px;
+  font-size: 10.5px;
+  color: var(--text-light);
+  text-align: center;
+  line-height: 1.5;
+}
+.ia-info-pill strong { color: var(--text-mid); }
+
+/* ── DESKTOP overrides ── */
+@media (min-width: 1024px) {
+  .ia-hero {
+    padding: 52px 56px 28px;
+    text-align: left;
+    max-width: 1360px;
+    margin: 0 auto;
+    border-bottom: none;
+  }
+  .ia-hero-title { font-size: 32px; }
+  .ia-hero-sub   { font-size: 15px; max-width: 480px; margin: 0; }
+
+  #screen-ia .screen-scroll {
+    align-items: flex-start;
+    padding-left: 56px;
+    padding-right: 56px;
+  }
+
+  .ia-camera-block,
+  .ia-start-btn,
+  .ia-top-card,
+  .ia-bars-block,
+  .ia-info-pill {
+    max-width: 480px;
+    width: 100%;
+    margin-left: 0;
+    margin-right: 0;
+  }
+}
