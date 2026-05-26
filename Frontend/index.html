@@ -18,7 +18,30 @@
   }
 </script>
 <body>
-  <div class="screen active" id="screen-galeria">
+  <div class="startup-overlay" id="startup-overlay">
+    <div class="startup-splash" id="startup-splash">
+      <div class="logo-block center splash-logo-block">
+        <span class="logo-mamb">MAMB</span>
+        <span class="logo-sub">Museo de Arte Moderno de Barranquilla</span>
+      </div>
+    </div>
+    <div class="name-entry hidden" id="name-entry">
+      <div class="name-entry-card intro-card">
+        <p class="name-entry-label">BIENVENIDO AL RECORRIDO DIGITAL</p>
+        <h2>Registra tu nombre y empieza</h2>
+        <ul class="intro-points">
+          <li>Explora obras destacadas y colecciones completas.</li>
+          <li>Usa filtros y búsqueda para encontrar artistas y piezas.</li>
+          <li>Accede rápido al inicio sin login tradicional.</li>
+        </ul>
+        <form id="name-form">
+          <input type="text" id="visitor-name" maxlength="40" placeholder="Tu nombre" required />
+          <button type="submit">Empezar</button>
+        </form>
+      </div>
+    </div>
+  </div>
+  <div class="screen" id="screen-galeria">
     <div class="screen-scroll">
       <header class="app-header">
         <div class="logo-block">
@@ -38,16 +61,16 @@
 
       <div class="search-bar">
         <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
-        <input type="text" placeholder="Buscar título de la obra de arte" />
+        <input type="text" id="gallery-search" placeholder="Buscar título de la obra de arte o artista" />
       </div>
 
       <div class="filter-chips">
-        <button class="chip active">Todas</button>
-        <button class="chip">Óleo</button>
-        <button class="chip">Acuarela</button>
-        <button class="chip">Acrílico</button>
-        <button class="chip">Mixta</button>
-        <button class="chip">Escultura</button>
+        <button class="chip active" data-filter="all">Todas</button>
+        <button class="chip" data-filter="Óleo">Óleo</button>
+        <button class="chip" data-filter="Acuarela">Acuarela</button>
+        <button class="chip" data-filter="Acrílico">Acrílico</button>
+        <button class="chip" data-filter="Mixta">Mixta</button>
+        <button class="chip" data-filter="Escultura">Escultura</button>
       </div>
 
       <section class="home-section">
@@ -59,7 +82,7 @@
           <a href="#" class="ver-todo">Ver todo →</a>
         </div>
         <div class="cards-scroll">
-          <div class="art-card" onclick="openArtwork('crepusculo')">
+          <div class="art-card gallery-item" data-title="Crepúsculo Caribe" data-artist="Álvaro Cepeda Samudio" data-medium="Óleo" onclick="openArtwork('crepusculo')">
             <div class="art-card-img bg-rust">
               <span class="badge-dest">DESTACADA</span>
               <button class="like-btn" onclick="event.stopPropagation(); toggleLike(this)">
@@ -70,7 +93,7 @@
             </div>
             <div class="art-card-info">
               <h3>Crepúsculo Caribe</h3>
-              <p>Jorge Cepeda Samudio</p>
+              <p>Álvaro Cepeda Samudio</p>
               <div class="art-card-footer">
                 <span class="tag">Óleo · 2019</span>
                 <button class="arrow-btn">→</button>
@@ -78,7 +101,7 @@
             </div>
           </div>
 
-          <div class="art-card" onclick="openArtwork('sierra')">
+          <div class="art-card gallery-item" data-title="Sierra Nevada" data-artist="Álvaro Cepeda Samudio" data-medium="Acuarela" onclick="openArtwork('sierra')">
             <div class="art-card-img bg-green">
               <span class="badge-dest">DESTACADA</span>
               <button class="like-btn liked" onclick="event.stopPropagation(); toggleLike(this)">
@@ -89,7 +112,7 @@
             </div>
             <div class="art-card-info">
               <h3>Sierra Nevada</h3>
-              <p>Jorge Cepeda Samudio</p>
+              <p>Álvaro Cepeda Samudio</p>
               <div class="art-card-footer">
                 <span class="tag">Acuarela · 2021</span>
                 <button class="arrow-btn">→</button>
@@ -97,7 +120,7 @@
             </div>
           </div>
 
-          <div class="art-card" onclick="openArtwork('noche')">
+          <div class="art-card gallery-item" data-title="Noche Azul" data-artist="M. Álvarez" data-medium="Acrílico" onclick="openArtwork('noche')">
             <div class="art-card-img bg-navy-soft">
               <span class="badge-dest">DESTACADA</span>
               <button class="like-btn" onclick="event.stopPropagation(); toggleLike(this)">
@@ -115,7 +138,7 @@
             </div>
           </div>
 
-          <div class="art-card" onclick="openArtwork('fuego')">
+          <div class="art-card gallery-item" data-title="Fuego Vivo" data-artist="L. Torres" data-medium="Mixta" onclick="openArtwork('fuego')">
             <div class="art-card-img bg-rust-soft">
               <button class="like-btn liked" onclick="event.stopPropagation(); toggleLike(this)">
                 <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
@@ -132,7 +155,7 @@
             </div>
           </div>
 
-          <div class="art-card" onclick="openArtwork('selva')">
+          <div class="art-card gallery-item" data-title="Selva Viva" data-artist="R. Guerrero" data-medium="Óleo" onclick="openArtwork('selva')">
             <div class="art-card-img bg-green-soft">
               <span class="badge-dest">DESTACADA</span>
               <button class="like-btn" onclick="event.stopPropagation(); toggleLike(this)">
@@ -151,7 +174,7 @@
             </div>
           </div>
 
-          <div class="art-card" onclick="openArtwork('misterio')">
+          <div class="art-card gallery-item" data-title="Misterio" data-artist="A. Pérez" data-medium="Escultura" onclick="openArtwork('misterio')">
             <div class="art-card-img bg-purple">
               <button class="like-btn" onclick="event.stopPropagation(); toggleLike(this)">
                 <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
@@ -180,7 +203,7 @@
           <a href="#" class="ver-todo">Ver todo →</a>
         </div>
         <div class="cards-scroll">
-          <div class="art-card" onclick="openArtwork('crepusculo')">
+          <div class="art-card gallery-item" data-title="Crepúsculo Caribe" data-artist="Álvaro Cepeda Samudio" data-medium="Óleo" onclick="openArtwork('crepusculo')">
             <div class="art-card-img bg-rust">
               <span class="badge-dest">DESTACADA</span>
               <button class="like-btn liked" onclick="event.stopPropagation(); toggleLike(this)">
@@ -191,7 +214,7 @@
             </div>
             <div class="art-card-info">
               <h3>Crepúsculo Caribe</h3>
-              <p>Jorge Cepeda Samudio</p>
+              <p>Álvaro Cepeda Samudio</p>
               <div class="art-card-footer">
                 <span class="tag">Óleo · 2019</span>
                 <button class="arrow-btn">→</button>
@@ -199,7 +222,7 @@
             </div>
           </div>
 
-          <div class="art-card" onclick="openArtwork('sierra')">
+          <div class="art-card gallery-item" data-title="Sierra Nevada" data-artist="Álvaro Cepeda Samudio" data-medium="Acuarela" onclick="openArtwork('sierra')">
             <div class="art-card-img bg-green">
               <span class="badge-dest">DESTACADA</span>
               <button class="like-btn" onclick="event.stopPropagation(); toggleLike(this)">
@@ -210,7 +233,7 @@
             </div>
             <div class="art-card-info">
               <h3>Sierra Nevada</h3>
-              <p>Jorge Cepeda Samudio</p>
+              <p>Álvaro Cepeda Samudio</p>
               <div class="art-card-footer">
                 <span class="tag">Acuarela · 2021</span>
                 <button class="arrow-btn">→</button>
@@ -235,7 +258,7 @@
             </div>
           </div>
 
-          <div class="art-card" onclick="openArtwork('misterio')">
+          <div class="art-card gallery-item" data-title="Misterio" data-artist="A. Pérez" data-medium="Escultura" onclick="openArtwork('misterio')">
             <div class="art-card-img bg-magenta">
               <button class="like-btn" onclick="event.stopPropagation(); toggleLike(this)">
                 <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
@@ -252,7 +275,7 @@
             </div>
           </div>
 
-          <div class="art-card" onclick="openArtwork('selva')">
+          <div class="art-card gallery-item" data-title="Selva Viva" data-artist="R. Guerrero" data-medium="Óleo" onclick="openArtwork('selva')">
             <div class="art-card-img bg-slate">
               <button class="like-btn liked" onclick="event.stopPropagation(); toggleLike(this)">
                 <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
@@ -269,7 +292,7 @@
             </div>
           </div>
 
-          <div class="art-card" onclick="openArtwork('noche')">
+          <div class="art-card gallery-item" data-title="Noche Azul" data-artist="M. Álvarez" data-medium="Acrílico" onclick="openArtwork('noche')">
             <div class="art-card-img bg-teal">
               <span class="badge-dest">NUEVA</span>
               <button class="like-btn" onclick="event.stopPropagation(); toggleLike(this)">
@@ -333,7 +356,7 @@
         <div class="section-header">
           <div>
             <p class="section-label">TOP OBRAS</p>
-            <h2 class="section-title">Jorge Cepeda Samudio</h2>
+            <h2 class="section-title">Álvaro Cepeda Samudio</h2>
           </div>
           <a href="#" class="ver-todo">Ver todo →</a>
         </div>
@@ -709,6 +732,32 @@
     </div>
   </div>
 
+
+  <div class="screen" id="screen-collection">
+    <div class="screen-scroll">
+      <header class="app-header">
+        <div class="logo-block">
+          <span class="logo-mamb">MAMB</span>
+          <span class="logo-sub">Museo de Arte Moderno de Barranquilla</span>
+        </div>
+        <div class="header-actions">
+          <button class="icon-btn" onclick="goBack()" aria-label="Volver">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5"/><path d="M12 19l-7-7 7-7"/></svg>
+          </button>
+        </div>
+      </header>
+      <section class="home-section collection-screen-section">
+        <div class="section-header">
+          <div>
+            <p class="section-label">VER TODO</p>
+            <h2 class="section-title" id="collection-title">Colección completa</h2>
+          </div>
+        </div>
+        <div class="collection-grid" id="collection-grid"></div>
+      </section>
+    </div>
+  </div>
+
   <nav class="bottom-nav" id="bottom-nav">
     <div class="desktop-logo" aria-hidden="true">
       <span class="logo-mamb">MAMB</span>
@@ -769,7 +818,7 @@
 
   <div class="toast" id="toast"></div>
 
-  <script src="/Backend/app.js"></script>
+  <script src="./app.js"></script>
   <div class="screen" id="screen-ia">
   <div class="screen-scroll">
  
