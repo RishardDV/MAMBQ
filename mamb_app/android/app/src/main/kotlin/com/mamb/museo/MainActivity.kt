@@ -1,4 +1,4 @@
-package com.example.mamb_app
+package com.mamb_app
 
 import io.flutter.embedding.android.FlutterActivity
 
