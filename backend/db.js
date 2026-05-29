@@ -14,9 +14,17 @@ const initDb = async () => {
       image_url    VARCHAR(500) NOT NULL,
       autor_apodo  VARCHAR(20)  NOT NULL DEFAULT 'Artista',
       avatar_index INTEGER      DEFAULT 0,
-      likes_count  INTEGER      DEFAULT 0,
-      created_at   TIMESTAMP    DEFAULT NOW()
+      likes_count    INTEGER      DEFAULT 0,
+      rating_total   INTEGER      DEFAULT 0,
+      rating_count   INTEGER      DEFAULT 0,
+      created_at     TIMESTAMP    DEFAULT NOW()
     );
+    -- add rating columns if table already exists
+    DO $$ BEGIN
+      ALTER TABLE obras ADD COLUMN IF NOT EXISTS rating_total INTEGER DEFAULT 0;
+      ALTER TABLE obras ADD COLUMN IF NOT EXISTS rating_count INTEGER DEFAULT 0;
+    EXCEPTION WHEN OTHERS THEN NULL;
+    END $$;
   `);
   console.log('✅ Tabla obras lista (PostgreSQL)');
 };

@@ -3,6 +3,9 @@ const multer = require('multer');
 const path = require('path');
 const fs = require('fs');
 const Obra = require('../models/Obra');
+const { asyncHandler } = require('../utils/asyncHandler');
+const { AppError } = require('../utils/AppError');
+const { validateArtworkPayload } = require('../utils/artworkValidation');
 
 const storage = multer.diskStorage({
   destination: (req, file, cb) => cb(null, path.join(__dirname, '../uploads')),
@@ -19,95 +22,85 @@ const upload = multer({
   fileFilter: (req, file, cb) => {
     const ext = path.extname(file.originalname).toLowerCase();
     if (file.mimetype.startsWith('image/') || ALLOWED_EXT.includes(ext)) cb(null, true);
-    else cb(new Error('Solo se permiten imágenes'), false);
+    else cb(new AppError('Solo se permiten imagenes', 400), false);
   },
 });
 
 // GET /api/obras
-router.get('/', async (req, res) => {
-  try {
-    const { search, autorApodo, page = 1, limit = 50 } = req.query;
-    const obras = await Obra.findAll({ search, autorApodo, page, limit });
-    res.json(obras);
-  } catch (err) {
-    console.error('Error listando obras:', err);
-    res.status(500).json({ error: 'Error al obtener obras' });
-  }
-});
+router.get('/', asyncHandler(async (req, res) => {
+  const { search, autorApodo, page = 1, limit = 50 } = req.query;
+  const obras = await Obra.findAll({ search, autorApodo, page, limit });
+  res.json(obras);
+}));
 
 // GET /api/obras/:id
-router.get('/:id', async (req, res) => {
-  try {
-    const obra = await Obra.findById(req.params.id);
-    if (!obra) return res.status(404).json({ error: 'Obra no encontrada' });
-    res.json(obra);
-  } catch (err) {
-    console.error('Error obteniendo obra:', err);
-    res.status(500).json({ error: 'Error al obtener la obra' });
-  }
-});
+router.get('/:id', asyncHandler(async (req, res) => {
+  const obra = await Obra.findById(req.params.id);
+  if (!obra) throw new AppError('Obra no encontrada', 404);
+  res.json(obra);
+}));
 
-// POST /api/obras — multipart: image + titulo + descripcion + autorApodo + avatarIndex
-router.post('/', upload.single('image'), async (req, res) => {
-  try {
-    if (!req.file) return res.status(400).json({ error: 'La imagen es requerida' });
+// POST /api/obras
+router.post('/', upload.single('image'), asyncHandler(async (req, res) => {
+  if (!req.file) throw new AppError('La imagen es requerida', 400);
 
-    const { titulo, descripcion, autorApodo, avatarIndex } = req.body;
-    if (!titulo || !titulo.trim()) {
-      fs.unlinkSync(req.file.path);
-      return res.status(400).json({ error: 'El título es requerido' });
-    }
+  const validated = validateArtworkPayload(req.body);
+  const imageUrl = `${req.protocol}://${req.get('host')}/uploads/${req.file.filename}`;
 
-    const imageUrl = `${req.protocol}://${req.get('host')}/uploads/${req.file.filename}`;
+  const obra = await Obra.create({
+    ...validated,
+    imageUrl,
+  });
 
-    const obra = await Obra.create({
-      titulo: titulo.trim(),
-      descripcion: descripcion ? descripcion.trim() : '',
-      imageUrl,
-      autorApodo: autorApodo ? autorApodo.trim() : 'Artista',
-      avatarIndex: avatarIndex ? parseInt(avatarIndex) : 0,
-    });
+  res.status(201).json(obra);
+}));
 
-    res.status(201).json(obra);
-  } catch (err) {
-    console.error('Error subiendo obra:', err);
-    if (req.file && fs.existsSync(req.file.path)) fs.unlinkSync(req.file.path);
-    res.status(500).json({ error: 'Error al publicar la obra' });
-  }
-});
+// PATCH /api/obras/:id
+router.patch('/:id', asyncHandler(async (req, res) => {
+  const obra = await Obra.findById(req.params.id);
+  if (!obra) throw new AppError('Obra no encontrada', 404);
+
+  const updates = validateArtworkPayload(req.body, true);
+  const updated = await Obra.update(req.params.id, updates);
+  res.json(updated);
+}));
 
 // DELETE /api/obras/:id
-router.delete('/:id', async (req, res) => {
-  try {
-    const obra = await Obra.findById(req.params.id);
-    if (!obra) return res.status(404).json({ error: 'Obra no encontrada' });
+router.delete('/:id', asyncHandler(async (req, res) => {
+  const obra = await Obra.findById(req.params.id);
+  if (!obra) throw new AppError('Obra no encontrada', 404);
 
-    const filename = obra.imageUrl.split('/uploads/')[1];
-    if (filename) {
-      const filePath = path.join(__dirname, '../uploads', filename);
-      if (fs.existsSync(filePath)) fs.unlinkSync(filePath);
-    }
-
-    await Obra.delete(req.params.id);
-    res.json({ message: 'Obra eliminada' });
-  } catch (err) {
-    console.error('Error eliminando obra:', err);
-    res.status(500).json({ error: 'Error al eliminar la obra' });
+  const filename = obra.imageUrl.split('/uploads/')[1];
+  if (filename) {
+    const filePath = path.join(__dirname, '../uploads', filename);
+    if (fs.existsSync(filePath)) fs.unlinkSync(filePath);
   }
-});
 
-// POST /api/obras/:id/like — increment like count (no auth, client tracks state locally)
-router.post('/:id/like', async (req, res) => {
-  try {
-    const obra = await Obra.findById(req.params.id);
-    if (!obra) return res.status(404).json({ error: 'Obra no encontrada' });
+  await Obra.delete(req.params.id);
+  res.json({ message: 'Obra eliminada' });
+}));
 
-    const likes = await Obra.incrementLike(req.params.id);
-    res.json({ likes });
-  } catch (err) {
-    console.error('Error en like:', err);
-    res.status(500).json({ error: 'Error al procesar el like' });
+// POST /api/obras/:id/like
+router.post('/:id/like', asyncHandler(async (req, res) => {
+  const obra = await Obra.findById(req.params.id);
+  if (!obra) throw new AppError('Obra no encontrada', 404);
+
+  const likes = await Obra.incrementLike(req.params.id);
+  res.json({ likes });
+}));
+
+// POST /api/obras/:id/rate
+router.post('/:id/rate', asyncHandler(async (req, res) => {
+  const value = Number(req.body.value);
+  if (!Number.isInteger(value) || value < 1 || value > 5) {
+    throw new AppError('Rating debe ser un entero entre 1 y 5', 400);
   }
-});
+
+  const obra = await Obra.findById(req.params.id);
+  if (!obra) throw new AppError('Obra no encontrada', 404);
+
+  const rating = await Obra.addRating(req.params.id, value);
+  res.json(rating);
+}));
 
 module.exports = router;

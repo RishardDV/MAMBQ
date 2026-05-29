@@ -1,3 +1,8 @@
+(function () {
+'use strict';
+
+/* ── STATE ───────────────────────────────────────────── */
+
 const state = {
   currentScreen: 'screen-inicio',
   previousScreen: null,
@@ -6,29 +11,31 @@ const state = {
   artworkFollowed: false,
   artworkFaved: false,
   activeFilter: 'all',
+  currentArtworkId: null,
+  apiObras: [],
   artworks: {
     crepusculo: {
-      title: 'Crepúsculo Caribe',
-      artist: 'Álvaro Cepeda Samudio',
+      title: 'Crepusculo Caribe',
+      artist: 'Alvaro Cepeda Samudio',
       initials: 'A',
       count: 48,
-      type: 'PINTURA · ÓLEO',
+      type: 'PINTURA . OLEO',
       likes: 248,
-      desc: 'Una obra que captura la atmósfera cálida del Caribe con énfasis en luz, horizonte y memoria visual.',
+      desc: 'Una obra que captura la atmosfera calida del Caribe con enfasis en luz, horizonte y memoria visual.',
       bg: 'bg-rust',
       year: '2019',
-      medium: 'Óleo',
+      medium: 'Oleo',
       image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/3/30/%22Violence%22_.webp/1200px-%22Violence%22_.webp.png',
       imagePosition: 'center center'
     },
     sierra: {
       title: 'Sierra Nevada',
-      artist: 'Álvaro Cepeda Samudio',
+      artist: 'Alvaro Cepeda Samudio',
       initials: 'A',
       count: 48,
-      type: 'PINTURA · ACUARELA',
+      type: 'PINTURA . ACUARELA',
       likes: 104,
-      desc: 'Interpretación del paisaje desde capas suaves de color y profundidad atmosférica.',
+      desc: 'Interpretacion del paisaje desde capas suaves de color y profundidad atmosferica.',
       bg: 'bg-green',
       year: '2021',
       medium: 'Acuarela',
@@ -36,30 +43,30 @@ const state = {
       imagePosition: 'center center'
     },
     rio: {
-      title: 'Río Magdalena',
+      title: 'Rio Magdalena',
       artist: 'R. Guerrero',
       initials: 'R',
       count: 24,
-      type: 'PINTURA · ACRÍLICO',
+      type: 'PINTURA . ACRILICO',
       likes: 143,
-      desc: 'Paisaje fluvial de lectura contemporánea, con dirección cromática controlada y ritmo horizontal.',
+      desc: 'Paisaje fluvial de lectura contemporanea, con direccion cromatica controlada y ritmo horizontal.',
       bg: 'bg-navy',
       year: '2022',
-      medium: 'Acrílico',
+      medium: 'Acrilico',
       image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/c/c5/MuralObregon.JPG/1280px-MuralObregon.JPG',
       imagePosition: 'center center'
     },
     noche: {
       title: 'Noche Azul',
-      artist: 'M. Álvarez',
+      artist: 'M. Alvarez',
       initials: 'M',
       count: 22,
-      type: 'PINTURA · ACRÍLICO',
+      type: 'PINTURA . ACRILICO',
       likes: 189,
-      desc: 'Composición nocturna apoyada en azules profundos y silencios visuales.',
+      desc: 'Composicion nocturna apoyada en azules profundos y silencios visuales.',
       bg: 'bg-navy-soft',
       year: '2020',
-      medium: 'Acrílico',
+      medium: 'Acrilico',
       image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/0/0d/Museo_de_Arte_Moderno_de_Barranquilla.jpg/1200px-Museo_de_Arte_Moderno_de_Barranquilla.jpg',
       imagePosition: 'center center'
     },
@@ -68,9 +75,9 @@ const state = {
       artist: 'L. Torres',
       initials: 'L',
       count: 31,
-      type: 'PINTURA · MIXTA',
+      type: 'PINTURA . MIXTA',
       likes: 76,
-      desc: 'Trabajo visual de alta energía, con color saturado y sensación de movimiento interno.',
+      desc: 'Trabajo visual de alta energia, con color saturado y sensacion de movimiento interno.',
       bg: 'bg-rust-soft',
       year: '2018',
       medium: 'Mixta',
@@ -82,23 +89,23 @@ const state = {
       artist: 'R. Guerrero',
       initials: 'R',
       count: 19,
-      type: 'PINTURA · ÓLEO',
+      type: 'PINTURA . OLEO',
       likes: 312,
-      desc: 'Paisaje de densidad vegetal con predominio de masa cromática y profundidad orgánica.',
+      desc: 'Paisaje de densidad vegetal con predominio de masa cromatica y profundidad organica.',
       bg: 'bg-green-soft',
       year: '2023',
-      medium: 'Óleo',
+      medium: 'Oleo',
       image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/c/c8/Alvaro_Cepeda_Samudio.jpg/800px-Alvaro_Cepeda_Samudio.jpg',
       imagePosition: 'top center'
     },
     misterio: {
       title: 'Misterio',
-      artist: 'A. Pérez',
+      artist: 'A. Perez',
       initials: 'A',
       count: 14,
-      type: 'ESCULTURA · MIXTA',
+      type: 'ESCULTURA . MIXTA',
       likes: 95,
-      desc: 'Pieza de lenguaje abstracto que enfatiza tensión espacial, volumen y pausa visual.',
+      desc: 'Pieza de lenguaje abstracto que enfatiza tension espacial, volumen y pausa visual.',
       bg: 'bg-purple',
       year: '2022',
       medium: 'Escultura',
@@ -115,383 +122,726 @@ const state = {
   }
 };
 
+/* ── NAVIGATION ─────────────────────────────────────── */
+
 function navigate(screenId, btn) {
-  const current = document.getElementById(state.currentScreen);
+  var current = document.getElementById(state.currentScreen);
   if (current) current.classList.remove('active');
 
-  const next = document.getElementById(screenId);
+  var next = document.getElementById(screenId);
   if (next) next.classList.add('active');
 
   state.previousScreen = state.currentScreen;
   state.currentScreen = screenId;
 
-  document.querySelectorAll('.nav-btn').forEach((b) => b.classList.remove('active'));
+  document.querySelectorAll('.nav-btn').forEach(function (b) { b.classList.remove('active'); });
   if (btn) btn.classList.add('active');
 
-  const scroll = next?.querySelector('.screen-scroll');
+  var scroll = next ? next.querySelector('.screen-scroll') : null;
   if (scroll) scroll.scrollTop = 0;
+
+  if (screenId === 'screen-memoria') setTimeout(mgRestart, 100);
+  if (screenId === 'screen-galeria') loadObrasFromAPI();
 }
+window.navigate = navigate;
 
 function goBack() {
   if (!state.previousScreen) return;
-  const prev = state.previousScreen;
-  const btn = document.querySelector(`[data-screen="${prev}"]`);
+  var prev = state.previousScreen;
+  var btn = document.querySelector('[data-screen="' + prev + '"]');
   navigate(prev, btn);
 }
+window.goBack = goBack;
+
+/* ── ARTWORK DETAIL ─────────────────────────────────── */
+
+var gradients = {
+  'bg-rust': 'linear-gradient(160deg, #9B3309 0%, #C1440E 40%, #E8845C 80%, #4B2A0E 100%)',
+  'bg-green': 'linear-gradient(160deg, #1A4A2E 0%, #2D6A4F 40%, #52B788 80%, #1B3A1E 100%)',
+  'bg-navy': 'linear-gradient(160deg, #0A1E35 0%, #1B3A5C 40%, #2A5880 80%, #0A1A2E 100%)',
+  'bg-navy-soft': 'linear-gradient(160deg, #1A3A5C 0%, #2A5880 40%, #3E7AB5 80%, #1B2C40 100%)',
+  'bg-rust-soft': 'linear-gradient(160deg, #A03020 0%, #D4622A 40%, #E8A87C 80%, #5C2A1A 100%)',
+  'bg-green-soft': 'linear-gradient(160deg, #1A3A2E 0%, #2D6A4F 40%, #74C69D 80%, #1A3A20 100%)',
+  'bg-purple': 'linear-gradient(160deg, #3A1050 0%, #7B2D8B 40%, #AB47BC 80%, #2A0A3C 100%)',
+  'bg-teal': 'linear-gradient(160deg, #003840 0%, #006064 40%, #00838F 80%, #003840 100%)',
+  'bg-slate': 'linear-gradient(160deg, #2E3C43 0%, #546E7A 40%, #78909C 80%, #1A2B33 100%)',
+  'bg-magenta': 'linear-gradient(160deg, #7B0030 0%, #C2185B 40%, #E91E63 80%, #4A001F 100%)'
+};
 
 function applyArtworkHeroStyle(el, data) {
-  const gradients = {
-    'bg-rust': 'linear-gradient(160deg, #9B3309 0%, #C1440E 40%, #E8845C 80%, #4B2A0E 100%)',
-    'bg-green': 'linear-gradient(160deg, #1A4A2E 0%, #2D6A4F 40%, #52B788 80%, #1B3A1E 100%)',
-    'bg-navy': 'linear-gradient(160deg, #0A1E35 0%, #1B3A5C 40%, #2A5880 80%, #0A1A2E 100%)',
-    'bg-navy-soft': 'linear-gradient(160deg, #1A3A5C 0%, #2A5880 40%, #3E7AB5 80%, #1B2C40 100%)',
-    'bg-rust-soft': 'linear-gradient(160deg, #A03020 0%, #D4622A 40%, #E8A87C 80%, #5C2A1A 100%)',
-    'bg-green-soft': 'linear-gradient(160deg, #1A3A2E 0%, #2D6A4F 40%, #74C69D 80%, #1A3A20 100%)',
-    'bg-purple': 'linear-gradient(160deg, #3A1050 0%, #7B2D8B 40%, #AB47BC 80%, #2A0A3C 100%)',
-    'bg-teal': 'linear-gradient(160deg, #003840 0%, #006064 40%, #00838F 80%, #003840 100%)',
-    'bg-slate': 'linear-gradient(160deg, #2E3C43 0%, #546E7A 40%, #78909C 80%, #1A2B33 100%)',
-    'bg-magenta': 'linear-gradient(160deg, #7B0030 0%, #C2185B 40%, #E91E63 80%, #4A001F 100%)'
-  };
-  const gradient = gradients[data.bg] || gradients['bg-rust'];
-  el.style.background = `${gradient}, url('${data.image}')`;
-  el.style.backgroundSize = 'cover';
-  el.style.backgroundPosition = data.imagePosition || 'center center';
-  el.style.backgroundBlendMode = 'multiply';
+  if (data.image) {
+    var g = gradients[data.bg] || gradients['bg-rust'];
+    el.style.background = g + ", url('" + data.image + "')";
+    el.style.backgroundSize = 'cover';
+    el.style.backgroundPosition = data.imagePosition || 'center center';
+    el.style.backgroundBlendMode = 'multiply';
+  } else if (data.imageUrl) {
+    el.style.background = "linear-gradient(160deg, rgba(0,0,0,0.3), rgba(0,0,0,0.5)), url('" + data.imageUrl + "')";
+    el.style.backgroundSize = 'cover';
+    el.style.backgroundPosition = 'center center';
+  } else {
+    el.style.background = gradients['bg-rust'];
+  }
 }
 
 function openArtwork(id) {
-  const data = state.artworks[id];
-  if (!data) return;
+  var data = state.artworks[id];
+  if (data) {
+    state.currentArtworkId = id;
+    state.artworkLiked = false;
+    state.artworkFollowed = false;
+    state.artworkFaved = false;
 
-  state.artworkLiked = false;
-  state.artworkFollowed = false;
-  state.artworkFaved = false;
+    document.getElementById('artwork-title').textContent = data.title;
+    document.getElementById('artwork-artist').textContent = data.artist;
+    document.getElementById('artist-initials').textContent = data.initials;
+    document.getElementById('artwork-count').textContent = data.count;
+    document.getElementById('artwork-desc').textContent = data.desc;
+    document.getElementById('cta-like-count').textContent = data.likes;
+    document.querySelector('.artwork-type-tag').textContent = data.type;
+    applyArtworkHeroStyle(document.getElementById('artwork-hero-bg'), data);
+  } else {
+    var apiObra = state.apiObras.find(function (o) { return o._id === id; });
+    if (!apiObra) return;
+    state.currentArtworkId = id;
+    state.artworkLiked = false;
+    state.artworkFollowed = false;
+    state.artworkFaved = false;
 
-  document.getElementById('artwork-title').textContent = data.title;
-  document.getElementById('artwork-artist').textContent = data.artist;
-  document.getElementById('artist-initials').textContent = data.initials;
-  document.getElementById('artwork-count').textContent = data.count;
-  document.getElementById('artwork-desc').textContent = data.desc;
-  document.getElementById('cta-like-count').textContent = data.likes;
-  document.querySelector('.artwork-type-tag').textContent = data.type;
-  applyArtworkHeroStyle(document.getElementById('artwork-hero-bg'), data);
+    document.getElementById('artwork-title').textContent = apiObra.titulo;
+    document.getElementById('artwork-artist').textContent = apiObra.autorApodo;
+    document.getElementById('artist-initials').textContent = (apiObra.autorApodo || 'A')[0].toUpperCase();
+    document.getElementById('artwork-count').textContent = '1';
+    document.getElementById('artwork-desc').textContent = apiObra.descripcion || 'Obra subida por un visitante del museo.';
+    document.getElementById('cta-like-count').textContent = apiObra.likes || 0;
+    document.querySelector('.artwork-type-tag').textContent = 'OBRA DE VISITANTE';
+    applyArtworkHeroStyle(document.getElementById('artwork-hero-bg'), apiObra);
+  }
 
   document.getElementById('art-heart-btn').classList.remove('liked');
   document.getElementById('cta-like').classList.remove('active');
   document.getElementById('follow-btn').textContent = 'Seguir';
   document.getElementById('follow-btn').classList.remove('following');
 
-  const favBtn = document.getElementById('cta-fav');
+  var favBtn = document.getElementById('cta-fav');
   favBtn.classList.remove('added');
   favBtn.innerHTML = '<svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>Agregar a favoritos';
 
-  const current = document.getElementById(state.currentScreen);
+  var current = document.getElementById(state.currentScreen);
   if (current) current.classList.remove('active');
   document.getElementById('screen-artwork').classList.add('active');
   state.previousScreen = state.currentScreen;
   state.currentScreen = 'screen-artwork';
-  document.querySelectorAll('.nav-btn').forEach((b) => b.classList.remove('active'));
+  document.querySelectorAll('.nav-btn').forEach(function (b) { b.classList.remove('active'); });
 }
+window.openArtwork = openArtwork;
+
+/* ── LIKES ──────────────────────────────────────────── */
 
 function toggleLike(btn) {
-  const liked = btn.classList.toggle('liked');
-  const countEl = btn.querySelector('span');
+  var liked = btn.classList.toggle('liked');
+  var countEl = btn.querySelector('span');
   if (!countEl) return;
-  const count = parseInt(countEl.textContent, 10) || 0;
+  var count = parseInt(countEl.textContent, 10) || 0;
   countEl.textContent = liked ? count + 1 : Math.max(0, count - 1);
+  var card = btn.closest('[data-api-id]');
+  if (card && liked && window.API) {
+    API.likeObra(card.dataset.apiId).catch(function () {});
+  }
 }
+window.toggleLike = toggleLike;
 
 function toggleArtLike() {
   state.artworkLiked = !state.artworkLiked;
   document.getElementById('art-heart-btn').classList.toggle('liked', state.artworkLiked);
 }
+window.toggleArtLike = toggleArtLike;
 
 function toggleCTALike(btn) {
   state.artworkLiked = !state.artworkLiked;
   btn.classList.toggle('active', state.artworkLiked);
   document.getElementById('art-heart-btn').classList.toggle('liked', state.artworkLiked);
-  const countEl = document.getElementById('cta-like-count');
-  const count = parseInt(countEl.textContent, 10) || 0;
+  var countEl = document.getElementById('cta-like-count');
+  var count = parseInt(countEl.textContent, 10) || 0;
   countEl.textContent = state.artworkLiked ? count + 1 : Math.max(0, count - 1);
+  if (state.artworkLiked && state.currentArtworkId && window.API) {
+    var apiObra = state.apiObras.find(function (o) { return o._id === state.currentArtworkId; });
+    if (apiObra) API.likeObra(apiObra._id).catch(function () {});
+  }
 }
+window.toggleCTALike = toggleCTALike;
+
+function rateApiObra(id, value) {
+  if (!window.API) return;
+  API.rateObra(id, value).then(function (result) {
+    var obra = state.apiObras.find(function (o) { return o._id === id; });
+    if (obra) {
+      obra.ratingTotal = result.ratingTotal;
+      obra.ratingCount = result.ratingCount;
+    }
+    loadObrasFromAPI();
+    showToast('Calificacion enviada: ' + value + ' estrella' + (value > 1 ? 's' : ''));
+  }).catch(function () {
+    showToast('Error al calificar');
+  });
+}
+window.rateApiObra = rateApiObra;
 
 function addToFavs(btn) {
   if (state.artworkFaved) return;
   state.artworkFaved = true;
   btn.classList.add('added');
-  btn.innerHTML = '<svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>Añadido a favoritos';
-  showToast('Obra añadida a favoritos');
+  btn.innerHTML = '<svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>Anadido a favoritos';
+  showToast('Obra anadida a favoritos');
 }
+window.addToFavs = addToFavs;
 
 function toggleFollow(btn) {
   state.artworkFollowed = !state.artworkFollowed;
   btn.textContent = state.artworkFollowed ? 'Siguiendo' : 'Seguir';
   btn.classList.toggle('following', state.artworkFollowed);
 }
+window.toggleFollow = toggleFollow;
 
 function shareArtwork() {
-  const title = document.getElementById('artwork-title').textContent;
+  var title = document.getElementById('artwork-title').textContent;
   if (navigator.share) {
-    navigator.share({ title: `${title} - MAMB`, text: `Descubre ${title} en el MAMB`, url: location.href }).catch(() => {});
+    navigator.share({ title: title + ' - MAMB', text: 'Descubre ' + title + ' en el MAMB', url: location.href }).catch(function () {});
     return;
   }
-  navigator.clipboard?.writeText(location.href).catch(() => {});
+  if (navigator.clipboard) navigator.clipboard.writeText(location.href).catch(function () {});
   showToast('Enlace copiado');
 }
+window.shareArtwork = shareArtwork;
+
+/* ── DOWNLOAD ARTWORK ───────────────────────────────── */
+
+function downloadArtwork() {
+  var data = state.artworks[state.currentArtworkId];
+  var imageUrl = data ? data.image : null;
+
+  if (!imageUrl) {
+    var apiObra = state.apiObras.find(function (o) { return o._id === state.currentArtworkId; });
+    if (apiObra) imageUrl = apiObra.imageUrl;
+  }
+
+  if (!imageUrl) {
+    showToast('No hay imagen para descargar');
+    return;
+  }
+
+  var link = document.createElement('a');
+  link.href = imageUrl;
+  link.download = (document.getElementById('artwork-title').textContent || 'obra').replace(/\s+/g, '_') + '.jpg';
+  link.target = '_blank';
+  link.click();
+  showToast('Descargando imagen...');
+}
+window.downloadArtwork = downloadArtwork;
+
+/* ── FILE UPLOAD ────────────────────────────────────── */
+
+var selectedFile = null;
 
 function triggerFileInput() {
   document.getElementById('file-input').click();
 }
+window.triggerFileInput = triggerFileInput;
 
 function handleFileSelect(input) {
-  const file = input.files?.[0];
+  var file = input.files ? input.files[0] : null;
   if (!file) return;
-  const preview = document.getElementById('upload-preview');
-  const inner = document.getElementById('upload-zone-inner');
-  const reader = new FileReader();
-  reader.onload = (e) => {
+  selectedFile = file;
+  var preview = document.getElementById('upload-preview');
+  var inner = document.getElementById('upload-zone-inner');
+  var reader = new FileReader();
+  reader.onload = function (e) {
     preview.src = e.target.result;
     preview.classList.remove('hidden');
     inner.classList.add('hidden');
   };
   reader.readAsDataURL(file);
 }
+window.handleFileSelect = handleFileSelect;
 
 function submitObra() {
-  const titulo = document.getElementById('obra-titulo').value.trim();
-  const hasFile = !document.getElementById('upload-preview').classList.contains('hidden');
-  if (!titulo) return showToast('Ingresa un título para la obra');
-  if (!hasFile) return showToast('Selecciona una imagen');
-  showToast('Propuesta temporal registrada');
+  var titulo = document.getElementById('obra-titulo').value.trim();
+  var autorApodo = (document.getElementById('obra-describe') ? document.getElementById('obra-describe').value.trim() : '') || 'Artista';
+  var descripcion = (document.getElementById('obra-desc') ? document.getElementById('obra-desc').value.trim() : '') || '';
+
+  // Validate with moderation
+  var validator = window.UsernameModeration;
+  if (validator) {
+    var nameCheck = validator.validateUsername(autorApodo, {
+      minLength: 2, maxLength: 20, blacklist: validator.DEFAULT_BLACKLIST
+    });
+    if (!nameCheck.valid) {
+      showToast(nameCheck.reason);
+      return;
+    }
+  }
+
+  if (!titulo) return showToast('Ingresa un titulo para la obra');
+  if (!selectedFile) return showToast('Selecciona una imagen');
+
+  var submitBtn = document.querySelector('.submit-obra-btn');
+  if (submitBtn) {
+    submitBtn.disabled = true;
+    submitBtn.textContent = 'PUBLICANDO...';
+  }
+
+  if (window.API) {
+    API.createObra({
+      titulo: titulo,
+      descripcion: descripcion,
+      autorApodo: autorApodo,
+      avatarIndex: 0,
+      imageFile: selectedFile
+    }).then(function () {
+      showToast('Obra publicada exitosamente!');
+      document.getElementById('obra-titulo').value = '';
+      if (document.getElementById('obra-describe')) document.getElementById('obra-describe').value = '';
+      if (document.getElementById('obra-desc')) document.getElementById('obra-desc').value = '';
+      document.getElementById('upload-preview').classList.add('hidden');
+      document.getElementById('upload-zone-inner').classList.remove('hidden');
+      selectedFile = null;
+      setTimeout(function () {
+        navigate('screen-galeria', document.querySelector('[data-screen="screen-galeria"]'));
+      }, 1000);
+    }).catch(function (err) {
+      showToast(err.message || 'Error al publicar la obra');
+    }).finally(function () {
+      if (submitBtn) {
+        submitBtn.disabled = false;
+        submitBtn.textContent = 'PUBLICAR OBRA';
+      }
+    });
+  } else {
+    showToast('Error: API no disponible');
+    if (submitBtn) { submitBtn.disabled = false; submitBtn.textContent = 'PUBLICAR OBRA'; }
+  }
+}
+window.submitObra = submitObra;
+
+/* ── API INTEGRATION ────────────────────────────────── */
+
+var BG_CLASSES = ['bg-rust', 'bg-green', 'bg-navy', 'bg-navy-soft', 'bg-rust-soft', 'bg-green-soft', 'bg-purple', 'bg-teal', 'bg-slate', 'bg-magenta'];
+
+function getRatingAvg(obra) {
+  return obra.ratingCount > 0 ? obra.ratingTotal / obra.ratingCount : 0;
 }
 
-function openAvatarModal() {
-  document.getElementById('avatar-overlay').classList.remove('hidden');
+function formatRating(obra) {
+  var avg = getRatingAvg(obra);
+  return avg ? avg.toFixed(1) : '0.0';
 }
+
+function buildStarRow(obraId) {
+  var stars = '';
+  for (var s = 1; s <= 5; s++) {
+    stars += '<button class="rating-star" type="button" onclick="event.stopPropagation(); rateApiObra(\'' + obraId + '\',' + s + ')" aria-label="Puntuar ' + s + ' estrellas">\u2605</button>';
+  }
+  return stars;
+}
+
+function buildApiCard(obra, index) {
+  var bgClass = BG_CLASSES[index % BG_CLASSES.length];
+  var avg = getRatingAvg(obra);
+  var filledStars = Math.max(1, Math.round(avg || 1));
+  return '<div class="art-card gallery-item" data-title="' + obra.titulo + '" data-artist="' + obra.autorApodo + '" data-medium="Visitante" data-api-id="' + obra._id + '" onclick="openArtwork(\'' + obra._id + '\')">' +
+    '<div class="art-card-img ' + bgClass + '" style="background-image: linear-gradient(rgba(0,0,0,.08), rgba(0,0,0,.25)), url(\'' + obra.imageUrl + '\'); background-size: cover; background-position: center center;">' +
+      '<span class="badge-dest">VISITANTE</span>' +
+      '<button class="like-btn" onclick="event.stopPropagation(); toggleLike(this)">' +
+        '<svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>' +
+        '<span>' + (obra.likes || 0) + '</span>' +
+      '</button>' +
+    '</div>' +
+    '<div class="art-card-info">' +
+      '<h3>' + obra.titulo + '</h3>' +
+      '<p>' + obra.autorApodo + '</p>' +
+      '<div class="obra-rating-display">' +
+        '<span class="obra-rating-stars">' + '\u2605'.repeat(filledStars) + '\u2606'.repeat(5 - filledStars) + '</span>' +
+        '<span class="obra-rating-text">' + formatRating(obra) + ' (' + (obra.ratingCount || 0) + ')</span>' +
+      '</div>' +
+      '<div class="obra-rating-actions">' + buildStarRow(obra._id) + '</div>' +
+      '<div class="art-card-footer">' +
+        '<span class="tag">' + new Date(obra.createdAt).toLocaleDateString('es-CO') + '</span>' +
+        '<button class="arrow-btn">\u2192</button>' +
+      '</div>' +
+    '</div>' +
+  '</div>';
+}
+
+function loadObrasFromAPI() {
+  if (!window.API) return;
+  var container = document.getElementById('api-obras-container');
+  if (!container) return;
+
+  API.getObras().then(function (obras) {
+    state.apiObras = obras;
+    if (obras.length === 0) {
+      container.innerHTML = '<p class="api-empty-msg">Aun no hay obras de visitantes. Se el primero en subir una!</p>';
+      return;
+    }
+    container.innerHTML = obras.map(function (o, i) { return buildApiCard(o, i); }).join('');
+  }).catch(function () {
+    container.innerHTML = '<p class="api-empty-msg">No se pudieron cargar las obras del servidor.</p>';
+  });
+}
+
+function loadObrasForInicio() {
+  if (!window.API) return;
+  var container = document.getElementById('api-inicio-obras');
+  if (!container) return;
+
+  API.getObras({ limit: 6 }).then(function (obras) {
+    state.apiObras = obras;
+    if (obras.length === 0) { container.innerHTML = ''; return; }
+    container.innerHTML = obras.map(function (o, i) {
+      var bgClass = BG_CLASSES[i % BG_CLASSES.length];
+      return '<div class="top-card" onclick="openArtwork(\'' + o._id + '\')">' +
+        '<div class="top-card-img ' + bgClass + '" style="background-image: linear-gradient(rgba(0,0,0,.08), rgba(0,0,0,.25)), url(\'' + o.imageUrl + '\'); background-size: cover; background-position: center center;">' +
+          '<span class="rank-num">' + (i + 1) + '</span>' +
+        '</div>' +
+        '<p class="top-card-name">' + o.titulo + '</p>' +
+        '<p class="top-card-meta">' + o.autorApodo + '</p>' +
+      '</div>';
+    }).join('');
+  }).catch(function () {});
+}
+
+/* ── AVATAR ─────────────────────────────────────────── */
+
+function openAvatarModal() { document.getElementById('avatar-overlay').classList.remove('hidden'); }
+window.openAvatarModal = openAvatarModal;
 
 function closeAvatarModal() {
   document.getElementById('avatar-overlay').classList.add('hidden');
-  document.querySelectorAll('.av-opt').forEach((av) => av.classList.remove('selected'));
+  document.querySelectorAll('.av-opt').forEach(function (av) { av.classList.remove('selected'); });
   state.selectedAvatar = null;
 }
+window.closeAvatarModal = closeAvatarModal;
 
 function selectAvatar(img) {
-  document.querySelectorAll('.av-opt').forEach((av) => av.classList.remove('selected'));
+  document.querySelectorAll('.av-opt').forEach(function (av) { av.classList.remove('selected'); });
   img.classList.add('selected');
   state.selectedAvatar = img.src;
 }
+window.selectAvatar = selectAvatar;
 
 function confirmAvatar() {
   if (!state.selectedAvatar) return showToast('Selecciona un avatar');
-  const mainAvatar = document.getElementById('perfil-main-avatar');
-  const headerAvatar = document.getElementById('header-avatar');
+  var mainAvatar = document.getElementById('perfil-main-avatar');
+  var headerAvatar = document.getElementById('header-avatar');
   if (mainAvatar) mainAvatar.src = state.selectedAvatar;
   if (headerAvatar) headerAvatar.src = state.selectedAvatar;
   closeAvatarModal();
   showToast('Avatar actualizado');
 }
+window.confirmAvatar = confirmAvatar;
+
+/* ── COLLECTIONS ────────────────────────────────────── */
 
 function buildCollectionCards(ids) {
-  return ids.map((id) => {
-    const art = state.artworks[id];
-    return `
-      <div class="art-card collection-card" onclick="openArtwork('${id}')">
-        <div class="art-card-img real-art-image" style="background-image:linear-gradient(rgba(0,0,0,.08), rgba(0,0,0,.18)), url('${art.image}'); background-position:${art.imagePosition || 'center center'}">
-          <span class="badge-dest">${art.medium.toUpperCase()}</span>
-        </div>
-        <div class="art-card-info">
-          <h3>${art.title}</h3>
-          <p>${art.artist}</p>
-          <div class="art-card-footer">
-            <span class="tag">${art.medium} · ${art.year}</span>
-            <button class="arrow-btn">→</button>
-          </div>
-        </div>
-      </div>`;
+  return ids.map(function (id) {
+    var art = state.artworks[id];
+    if (!art) return '';
+    return '<div class="art-card collection-card" onclick="openArtwork(\'' + id + '\')">' +
+      '<div class="art-card-img real-art-image" style="background-image:linear-gradient(rgba(0,0,0,.08), rgba(0,0,0,.18)), url(\'' + art.image + '\'); background-position:' + (art.imagePosition || 'center center') + '">' +
+        '<span class="badge-dest">' + art.medium.toUpperCase() + '</span>' +
+      '</div>' +
+      '<div class="art-card-info"><h3>' + art.title + '</h3><p>' + art.artist + '</p>' +
+        '<div class="art-card-footer"><span class="tag">' + art.medium + ' . ' + art.year + '</span><button class="arrow-btn">→</button></div>' +
+      '</div></div>';
   }).join('');
 }
 
 function openCollectionView(key, title) {
-  const ids = state.collections[key] || [];
-  const target = document.getElementById('collection-grid');
-  const titleEl = document.getElementById('collection-title');
+  var ids = state.collections[key] || [];
+  var target = document.getElementById('collection-grid');
+  var titleEl = document.getElementById('collection-title');
   if (!target || !titleEl) return;
   titleEl.textContent = title;
   target.innerHTML = buildCollectionCards(ids);
 
-  const current = document.getElementById(state.currentScreen);
+  var current = document.getElementById(state.currentScreen);
   if (current) current.classList.remove('active');
   document.getElementById('screen-collection').classList.add('active');
   state.previousScreen = state.currentScreen;
   state.currentScreen = 'screen-collection';
-  document.querySelectorAll('.nav-btn').forEach((b) => b.classList.remove('active'));
+  document.querySelectorAll('.nav-btn').forEach(function (b) { b.classList.remove('active'); });
 }
 
+/* ── GALLERY FILTER ─────────────────────────────────── */
+
 function applyGalleryFilter() {
-  const query = (document.getElementById('gallery-search')?.value || '').trim().toLowerCase();
-  const filter = state.activeFilter;
-  document.querySelectorAll('.gallery-item').forEach((card) => {
-    const title = (card.dataset.title || '').toLowerCase();
-    const artist = (card.dataset.artist || '').toLowerCase();
-    const medium = card.dataset.medium || '';
-    const matchesQuery = !query || title.includes(query) || artist.includes(query) || medium.toLowerCase().includes(query);
-    const matchesFilter = filter === 'all' || medium === filter;
+  var query = (document.getElementById('gallery-search') ? document.getElementById('gallery-search').value : '').trim().toLowerCase();
+  var filter = state.activeFilter;
+  document.querySelectorAll('.gallery-item').forEach(function (card) {
+    var title = (card.dataset.title || '').toLowerCase();
+    var artist = (card.dataset.artist || '').toLowerCase();
+    var medium = card.dataset.medium || '';
+    var matchesQuery = !query || title.includes(query) || artist.includes(query) || medium.toLowerCase().includes(query);
+    var matchesFilter = filter === 'all' || medium === filter;
     card.classList.toggle('is-hidden', !(matchesQuery && matchesFilter));
   });
 }
 
 function applyRealArtworkImages() {
-  Object.entries(state.artworks).forEach(([id, art]) => {
-    document.querySelectorAll(`[onclick*="${id}"]`).forEach((card) => {
-      const visual = card.querySelector('.art-card-img, .top-card-img, .fav-img, .gallery-img');
+  Object.entries(state.artworks).forEach(function (entry) {
+    var id = entry[0], art = entry[1];
+    document.querySelectorAll('[onclick*="' + id + '"]').forEach(function (card) {
+      var visual = card.querySelector('.art-card-img, .top-card-img, .fav-img, .gallery-img');
       if (!visual) return;
       visual.classList.add('real-art-image');
-      visual.style.backgroundImage = `linear-gradient(rgba(0,0,0,.08), rgba(0,0,0,.18)), url('${art.image}')`;
+      visual.style.backgroundImage = "linear-gradient(rgba(0,0,0,.08), rgba(0,0,0,.18)), url('" + art.image + "')";
       visual.style.backgroundSize = 'cover';
       visual.style.backgroundPosition = art.imagePosition || 'center center';
       visual.style.backgroundRepeat = 'no-repeat';
     });
   });
 }
+
 function initDotsAnimation() {
-  const scrollContainers = document.querySelectorAll('.cards-scroll, .top-obras-scroll, .fav-scroll, .gallery-scroll');
-  scrollContainers.forEach((container) => {
-    const section = container.closest('.home-section');
+  document.querySelectorAll('.cards-scroll, .top-obras-scroll, .fav-scroll, .gallery-scroll').forEach(function (container) {
+    var section = container.closest('.home-section');
     if (!section) return;
-    const dots = section.querySelectorAll('.dot');
+    var dots = section.querySelectorAll('.dot');
     if (!dots.length) return;
-    container.addEventListener('scroll', () => {
-      const maxScroll = container.scrollWidth - container.clientWidth;
-      const progress = maxScroll > 0 ? container.scrollLeft / maxScroll : 0;
-      const activeIndex = Math.round(progress * (dots.length - 1));
-      dots.forEach((dot, i) => dot.classList.toggle('active', i === activeIndex));
+    container.addEventListener('scroll', function () {
+      var maxScroll = container.scrollWidth - container.clientWidth;
+      var progress = maxScroll > 0 ? container.scrollLeft / maxScroll : 0;
+      var activeIndex = Math.round(progress * (dots.length - 1));
+      dots.forEach(function (dot, i) { dot.classList.toggle('active', i === activeIndex); });
     }, { passive: true });
   });
 }
 
-let toastTimeout = null;
+/* ── TOAST ──────────────────────────────────────────── */
+
+var toastTimeout = null;
 function showToast(message) {
-  const toast = document.getElementById('toast');
+  var toast = document.getElementById('toast');
   toast.textContent = message;
   toast.classList.add('show');
   clearTimeout(toastTimeout);
-  toastTimeout = setTimeout(() => toast.classList.remove('show'), 2600);
+  toastTimeout = setTimeout(function () { toast.classList.remove('show'); }, 2600);
 }
+window.showToast = showToast;
+
+/* ── STARTUP FLOW (with moderation) ─────────────────── */
 
 function showStartupFlow() {
-  const overlay = document.getElementById('startup-overlay');
-  const splash = document.getElementById('startup-splash');
-  const entry = document.getElementById('name-entry');
+  var overlay = document.getElementById('startup-overlay');
+  var splash = document.getElementById('startup-splash');
+  var entry = document.getElementById('name-entry');
   overlay.classList.remove('hidden');
   splash.classList.remove('hidden');
   entry.classList.add('hidden');
 
-  setTimeout(() => {
-    document.querySelector('.loading-bar')
-    .style.display = 'none';
+  setTimeout(function () {
+    var loadBar = document.querySelector('.loading-bar');
+    if (loadBar) loadBar.style.display = 'none';
     splash.classList.add('hidden');
     entry.classList.remove('hidden');
-    document.getElementById('visitor-name')?.focus();
-
+    var nameInput = document.getElementById('visitor-name');
+    if (nameInput) nameInput.focus();
   }, 2000);
-  
 }
 
 function completeStartup(name) {
+  // Validate with moderation
+  var validator = window.UsernameModeration;
+  if (validator) {
+    var result = validator.validateUsername(name, {
+      minLength: 2, maxLength: 40, blacklist: validator.DEFAULT_BLACKLIST
+    });
+    if (!result.valid) {
+      showToast(result.reason);
+      return;
+    }
+    name = result.value;
+  }
+
   document.querySelector('.perfil-user-name').textContent = name.toUpperCase();
-  const fullNameRow = document.querySelector('.perfil-data-row span:last-child');
+  var fullNameRow = document.querySelector('.perfil-data-row span:last-child');
   if (fullNameRow) fullNameRow.textContent = name;
   document.getElementById('startup-overlay').classList.add('hidden');
   navigate('screen-inicio', document.querySelector('[data-screen="screen-inicio"]'));
 }
 
-let touchStartX = 0;
-let touchStartY = 0;
-document.addEventListener('touchstart', (e) => {
+/* ── AUTO-HIDE BOTTOM NAV ON SCROLL ─────────────────── */
+
+function initAutoHideNav() {
+  var nav = document.getElementById('bottom-nav');
+  if (!nav) return;
+  var lastY = 0, direction = 0, moved = 0, threshold = 40;
+
+  function canScroll() {
+    return document.documentElement.scrollHeight - window.innerHeight > 2;
+  }
+
+  // Attach to each screen-scroll
+  document.querySelectorAll('.screen-scroll').forEach(function (scroller) {
+    var scrollLastY = 0;
+    scroller.addEventListener('scroll', function () {
+      if (!canScroll.call(null) && scroller.scrollHeight - scroller.clientHeight < 3) {
+        nav.classList.remove('nav-hidden');
+        return;
+      }
+      var y = scroller.scrollTop;
+      var delta = y - scrollLastY;
+      var newDir = delta === 0 ? 0 : (delta > 0 ? 1 : -1);
+      if (newDir !== 0) {
+        if (newDir === direction) { moved += Math.abs(delta); }
+        else { direction = newDir; moved = Math.abs(delta); }
+        if (moved >= threshold) {
+          if (direction > 0) nav.classList.add('nav-hidden');
+          else nav.classList.remove('nav-hidden');
+          moved = 0;
+        }
+      }
+      scrollLastY = y;
+    }, { passive: true });
+  });
+}
+
+/* ── PWA INSTALL BANNER ─────────────────────────────── */
+
+var deferredPrompt = null;
+var INSTALL_DISMISSED_KEY = 'mamb_install_dismissed';
+
+function injectInstallBanner() {
+  if (localStorage.getItem(INSTALL_DISMISSED_KEY) === '1') return;
+  if (document.getElementById('install-banner')) return;
+
+  var div = document.createElement('div');
+  div.innerHTML =
+    '<div class="install-banner" id="install-banner">' +
+      '<div class="install-banner-row">' +
+        '<p>Instala MAMB!</p>' +
+        '<button class="install-btn-no" id="install-no">✕</button>' +
+      '</div>' +
+      '<small>Agrega la app a tu pantalla de inicio para usarla en cualquier momento</small>' +
+      '<button class="install-btn-yes" id="install-yes">Instalar ahora</button>' +
+    '</div>';
+  document.body.appendChild(div.firstElementChild);
+
+  document.getElementById('install-no').addEventListener('click', function () {
+    localStorage.setItem(INSTALL_DISMISSED_KEY, '1');
+    var b = document.getElementById('install-banner');
+    if (b) b.classList.remove('show');
+  });
+  document.getElementById('install-yes').addEventListener('click', function () {
+    if (!deferredPrompt) return;
+    deferredPrompt.prompt();
+    deferredPrompt.userChoice.then(function () {
+      deferredPrompt = null;
+      var b = document.getElementById('install-banner');
+      if (b) b.classList.remove('show');
+    });
+  });
+}
+
+window.addEventListener('beforeinstallprompt', function (e) {
+  e.preventDefault();
+  if (localStorage.getItem(INSTALL_DISMISSED_KEY) === '1') return;
+  deferredPrompt = e;
+  setTimeout(function () {
+    var b = document.getElementById('install-banner');
+    if (b) b.classList.add('show');
+  }, 2000);
+});
+
+/* ── TOUCH GESTURES ─────────────────────────────────── */
+
+var touchStartX = 0, touchStartY = 0;
+document.addEventListener('touchstart', function (e) {
   touchStartX = e.touches[0].clientX;
   touchStartY = e.touches[0].clientY;
 }, { passive: true });
 
-document.addEventListener('touchend', (e) => {
-  if (!['screen-artwork', 'screen-collection'].includes(state.currentScreen)) return;
-  const deltaX = e.changedTouches[0].clientX - touchStartX;
-  const deltaY = Math.abs(e.changedTouches[0].clientY - touchStartY);
+document.addEventListener('touchend', function (e) {
+  if (['screen-artwork', 'screen-collection'].indexOf(state.currentScreen) === -1) return;
+  var deltaX = e.changedTouches[0].clientX - touchStartX;
+  var deltaY = Math.abs(e.changedTouches[0].clientY - touchStartY);
   if (deltaX > 60 && deltaY < 50) goBack();
 }, { passive: true });
 
-const IA_MODEL_URL = 'https://teachablemachine.withgoogle.com/models/dyyi3qHP7/';
-const IA_LABEL_MAP = { 'class 7': 'pensando', 'class 8': 'sorprendido' };
-const iaState = { model: null, webcam: null, ctx: null, maxPredictions: 0, running: false };
+/* ── IA POSES ───────────────────────────────────────── */
+
+var IA_MODEL_URL = 'https://teachablemachine.withgoogle.com/models/dyyi3qHP7/';
+var IA_LABEL_MAP = { 'class 7': 'pensando', 'class 8': 'sorprendido' };
+var iaState = { model: null, webcam: null, ctx: null, maxPredictions: 0, running: false };
 
 function iaGetDisplayName(rawName) {
-  const name = (rawName || '').trim().toLowerCase();
+  var name = (rawName || '').trim().toLowerCase();
   if (name === 'class 7' || name === '7') return 'pensando';
   if (name === 'class 8' || name === '8') return 'sorprendido';
   return IA_LABEL_MAP[rawName] || rawName;
 }
 
-async function iaInit() {
+function iaInit() {
   if (iaState.running) return;
-  const btnStart = document.getElementById('ia-btn-start');
-  const canvasWrap = document.getElementById('ia-canvas-wrap');
-  const placeholder = document.getElementById('ia-placeholder');
-  const topCard = document.getElementById('ia-top-card');
-  const labelContainer = document.getElementById('ia-label-container');
+  var btnStart = document.getElementById('ia-btn-start');
+  var canvasWrap = document.getElementById('ia-canvas-wrap');
+  var placeholder = document.getElementById('ia-placeholder');
+  var topCard = document.getElementById('ia-top-card');
+  var labelContainer = document.getElementById('ia-label-container');
   btnStart.disabled = true;
-  iaSetStatus('loading', '● Cargando modelo...');
+  iaSetStatus('loading', 'Cargando modelo...');
 
-  try {
-    iaState.model = await tmPose.load(IA_MODEL_URL + 'model.json', IA_MODEL_URL + 'metadata.json');
-    iaState.maxPredictions = iaState.model.getTotalClasses();
+  tmPose.load(IA_MODEL_URL + 'model.json', IA_MODEL_URL + 'metadata.json').then(function (model) {
+    iaState.model = model;
+    iaState.maxPredictions = model.getTotalClasses();
     iaState.webcam = new tmPose.Webcam(260, 260, true);
-    await iaState.webcam.setup();
-    await iaState.webcam.play();
-    const canvas = document.getElementById('ia-canvas');
-    canvas.width = 260;
-    canvas.height = 260;
+    return iaState.webcam.setup().then(function () { return iaState.webcam.play(); });
+  }).then(function () {
+    var canvas = document.getElementById('ia-canvas');
+    canvas.width = 260; canvas.height = 260;
     iaState.ctx = canvas.getContext('2d');
     iaBuildBars(labelContainer);
     iaState.running = true;
     placeholder.classList.add('hidden');
     canvasWrap.classList.add('active');
     topCard.classList.add('visible');
-    iaSetStatus('online', '● Detección activa');
+    iaSetStatus('online', 'Deteccion activa');
     window.requestAnimationFrame(iaLoop);
-  } catch (error) {
+  }).catch(function (error) {
     console.error(error);
-    iaSetStatus('', '● No se pudo iniciar');
+    iaSetStatus('', 'No se pudo iniciar');
     btnStart.disabled = false;
-    showToast('No se pudo iniciar la cámara');
-  }
+    showToast('No se pudo iniciar la camara');
+  });
 }
+window.iaInit = iaInit;
 
-async function iaLoop() {
+function iaLoop() {
   if (!iaState.running) return;
   iaState.webcam.update();
-  await iaPredict();
-  window.requestAnimationFrame(iaLoop);
+  iaPredict().then(function () { window.requestAnimationFrame(iaLoop); });
 }
 
-async function iaPredict() {
-  const { pose, posenetOutput } = await iaState.model.estimatePose(iaState.webcam.canvas);
-  const predictions = await iaState.model.predict(posenetOutput);
-  const best = predictions.reduce((a, b) => (a.probability > b.probability ? a : b));
-
-  predictions.forEach((prediction, i) => {
-    const pct = (prediction.probability * 100).toFixed(1);
-    const dominant = prediction.className === best.className;
-    document.getElementById(`ia-name-${i}`).textContent = iaGetDisplayName(prediction.className);
-    const pctEl = document.getElementById(`ia-pct-${i}`);
-    const fillEl = document.getElementById(`ia-fill-${i}`);
-    pctEl.textContent = `${pct}%`;
-    pctEl.classList.toggle('high', dominant);
-    fillEl.style.width = `${pct}%`;
-    fillEl.classList.toggle('dominant', dominant);
+function iaPredict() {
+  return iaState.model.estimatePose(iaState.webcam.canvas).then(function (result) {
+    return iaState.model.predict(result.posenetOutput).then(function (predictions) {
+      var best = predictions.reduce(function (a, b) { return a.probability > b.probability ? a : b; });
+      predictions.forEach(function (prediction, i) {
+        var pct = (prediction.probability * 100).toFixed(1);
+        var dominant = prediction.className === best.className;
+        document.getElementById('ia-name-' + i).textContent = iaGetDisplayName(prediction.className);
+        var pctEl = document.getElementById('ia-pct-' + i);
+        var fillEl = document.getElementById('ia-fill-' + i);
+        pctEl.textContent = pct + '%';
+        pctEl.classList.toggle('high', dominant);
+        fillEl.style.width = pct + '%';
+        fillEl.classList.toggle('dominant', dominant);
+      });
+      document.getElementById('ia-top-name').textContent = iaGetDisplayName(best.className);
+      document.getElementById('ia-top-pct').textContent = (best.probability * 100).toFixed(0) + '%';
+      iaDraw(result.pose);
+    });
   });
-
-  document.getElementById('ia-top-name').textContent = iaGetDisplayName(best.className);
-  document.getElementById('ia-top-pct').textContent = `${(best.probability * 100).toFixed(0)}%`;
-  iaDraw(pose);
 }
 
 function iaDraw(pose) {
@@ -504,301 +854,259 @@ function iaDraw(pose) {
 
 function iaBuildBars(container) {
   container.innerHTML = '';
-  for (let i = 0; i < iaState.maxPredictions; i += 1) {
-    const item = document.createElement('div');
+  for (var i = 0; i < iaState.maxPredictions; i++) {
+    var item = document.createElement('div');
     item.className = 'ia-bar-item';
-    item.innerHTML = `
-      <div class="ia-bar-header">
-        <span class="ia-bar-name" id="ia-name-${i}">Clase ${i + 1}</span>
-        <span class="ia-bar-pct" id="ia-pct-${i}">0%</span>
-      </div>
-      <div class="ia-bar-track">
-        <div class="ia-bar-fill" id="ia-fill-${i}"></div>
-      </div>`;
+    item.innerHTML = '<div class="ia-bar-header"><span class="ia-bar-name" id="ia-name-' + i + '">Clase ' + (i + 1) + '</span><span class="ia-bar-pct" id="ia-pct-' + i + '">0%</span></div><div class="ia-bar-track"><div class="ia-bar-fill" id="ia-fill-' + i + '"></div></div>';
     container.appendChild(item);
   }
 }
 
 function iaSetStatus(cls, text) {
-  const el = document.getElementById('ia-status');
-  el.className = `ia-status-badge${cls ? ` ${cls}` : ''}`;
+  var el = document.getElementById('ia-status');
+  el.className = 'ia-status-badge' + (cls ? ' ' + cls : '');
   el.textContent = text;
 }
 
-document.addEventListener('DOMContentLoaded', () => {
-  
+/* ── DOMContentLoaded ───────────────────────────────── */
 
-  document.querySelectorAll('.filter-chips .chip').forEach((chip) => {
-    chip.addEventListener('click', () => {
-      document.querySelectorAll('.filter-chips .chip').forEach((c) => c.classList.remove('active'));
+document.addEventListener('DOMContentLoaded', function () {
+
+  document.querySelectorAll('.filter-chips .chip').forEach(function (chip) {
+    chip.addEventListener('click', function () {
+      document.querySelectorAll('.filter-chips .chip').forEach(function (c) { c.classList.remove('active'); });
       chip.classList.add('active');
       state.activeFilter = chip.dataset.filter || 'all';
       applyGalleryFilter();
     });
-    
   });
 
-  document.querySelectorAll('.artist-chip').forEach((chip) => {
-    chip.addEventListener('click', () => {
-      const wasActive = chip.classList.contains('active');
-      document.querySelectorAll('.artist-chip').forEach((c) => c.classList.remove('active'));
+  document.querySelectorAll('.artist-chip').forEach(function (chip) {
+    chip.addEventListener('click', function () {
+      var wasActive = chip.classList.contains('active');
+      document.querySelectorAll('.artist-chip').forEach(function (c) { c.classList.remove('active'); });
       if (!wasActive) chip.classList.add('active');
     });
   });
 
-  document.getElementById('gallery-search')?.addEventListener('input', applyGalleryFilter);
-  document.getElementById('avatar-overlay')?.addEventListener('click', (e) => {
-    if (e.target.id === 'avatar-overlay') closeAvatarModal();
-  });
+  var gallerySearch = document.getElementById('gallery-search');
+  if (gallerySearch) gallerySearch.addEventListener('input', applyGalleryFilter);
 
-  document.querySelectorAll('.ver-todo').forEach((link, index) => {
-    const mappings = [
-      ['curatorial', 'Selección curatorial'],
-      ['publicaciones', 'Últimas publicaciones'],
+  var avatarOverlay = document.getElementById('avatar-overlay');
+  if (avatarOverlay) {
+    avatarOverlay.addEventListener('click', function (e) {
+      if (e.target.id === 'avatar-overlay') closeAvatarModal();
+    });
+  }
+
+  document.querySelectorAll('.ver-todo').forEach(function (link, index) {
+    var mappings = [
+      ['curatorial', 'Seleccion curatorial'],
+      ['publicaciones', 'Ultimas publicaciones'],
       ['artista', 'Obras por artista'],
       ['favoritas', 'Tus favoritas'],
-      ['galeria', 'Tu galería'],
-      ['galeria', 'Colección completa']
+      ['galeria', 'Tu galeria'],
+      ['galeria', 'Coleccion completa']
     ];
-    const config = mappings[index];
+    var config = mappings[index];
     if (!config) return;
-    link.addEventListener('click', (e) => {
+    link.addEventListener('click', function (e) {
       e.preventDefault();
       openCollectionView(config[0], config[1]);
     });
   });
 
-  const uploadZone = document.getElementById('upload-zone');
+  var uploadZone = document.getElementById('upload-zone');
   if (uploadZone) {
-    uploadZone.addEventListener('dragover', (e) => {
+    uploadZone.addEventListener('dragover', function (e) {
       e.preventDefault();
       uploadZone.style.background = 'rgba(160,82,45,0.12)';
     });
-    uploadZone.addEventListener('dragleave', () => {
+    uploadZone.addEventListener('dragleave', function () {
       uploadZone.style.background = '';
     });
-    uploadZone.addEventListener('drop', (e) => {
+    uploadZone.addEventListener('drop', function (e) {
       e.preventDefault();
       uploadZone.style.background = '';
-      const file = e.dataTransfer.files?.[0];
+      var file = e.dataTransfer.files ? e.dataTransfer.files[0] : null;
       if (!file || !file.type.startsWith('image/')) return;
-      handleFileSelect({ files: [file] });
+      selectedFile = file;
+      var preview = document.getElementById('upload-preview');
+      var inner = document.getElementById('upload-zone-inner');
+      var reader = new FileReader();
+      reader.onload = function (ev) {
+        preview.src = ev.target.result;
+        preview.classList.remove('hidden');
+        inner.classList.add('hidden');
+      };
+      reader.readAsDataURL(file);
     });
   }
 
-  const nameForm = document.getElementById('name-form');
-  nameForm?.addEventListener('submit', (e) => {
-    e.preventDefault();
-    const name = document.getElementById('visitor-name').value.trim();
-    if (!name) return;
-    completeStartup(name);
-  });
+  var nameForm = document.getElementById('name-form');
+  if (nameForm) {
+    nameForm.addEventListener('submit', function (e) {
+      e.preventDefault();
+      var name = document.getElementById('visitor-name').value.trim();
+      if (!name) return;
+      completeStartup(name);
+    });
+  }
 
-  document.querySelector('.logout-btn')?.remove();
+  var logoutBtn = document.querySelector('.logout-btn');
+  if (logoutBtn) logoutBtn.remove();
+
   applyRealArtworkImages();
   applyGalleryFilter();
   initDotsAnimation();
+  initAutoHideNav();
+  injectInstallBanner();
   showStartupFlow();
-  function navigate(screenId, btn) {
-  const current = document.getElementById(state.currentScreen);
-  if (current) current.classList.remove('active');
-
-  const next = document.getElementById(screenId);
-  if (next) next.classList.add('active');
-
-  state.previousScreen = state.currentScreen;
-  state.currentScreen = screenId;
-
-  document.querySelectorAll('.nav-btn').forEach((b) => b.classList.remove('active'));
-  if (btn) btn.classList.add('active');
-
-  const scroll = next?.querySelector('.screen-scroll');
-  if (scroll) scroll.scrollTop = 0;
-
-  // Inicia el juego cuando se navega a la pantalla de memoria
-  if (screenId === 'screen-memoria') {
-    setTimeout(mgRestart, 100);
-  }
-}
+  loadObrasForInicio();
 });
-
 
 /* ── DATO CURIOSO ─────────────────────────────────────── */
 
-const datosCuriosos = [
-  {
-    icon: '💡',
-    question: 'Los artistas mezclan colores para crear emociones',
-    body: 'El azul evoca calma y tristeza, el rojo pasión o peligro, y el amarillo alegría. Esto se llama psicología del color.',
-    tag: 'Color'
-  },
-  {
-    icon: '🏛️',
-    question: '¿Por qué los museos tienen luz tenue?',
-    body: 'La luz ultravioleta daña los pigmentos con el tiempo. Los museos usan LED especial sin UV para proteger el color original de cada obra.',
-    tag: 'Conservación'
-  },
-  {
-    icon: '🖌️',
-    question: 'El óleo tarda semanas en secarse completamente',
-    body: 'A diferencia del acrílico que seca en minutos, el óleo puede tardar meses. Eso permitía a los maestros corregir y mezclar directamente sobre el lienzo.',
-    tag: 'Técnica'
-  },
-  {
-    icon: '🗺️',
-    question: 'El Caribe colombiano tiene su propio lenguaje visual',
-    body: 'Artistas como Alejandro Obregón desarrollaron un estilo único que mezcla colores tropicales, fauna local y la luz característica del Caribe.',
-    tag: 'Caribe'
-  },
-  {
-    icon: '✨',
-    question: '¿Qué es el sfumato, la técnica secreta de Da Vinci?',
-    body: 'Leonardo aplicaba capas de pintura tan finas que no dejaba trazos. El resultado son transiciones suaves entre luz y sombra, como si los bordes se disolvieran en humo.',
-    tag: 'Técnica'
-  },
-  {
-    icon: '🎨',
-    question: 'La acuarela es la técnica más difícil de corregir',
-    body: 'Una vez que el pigmento toca el papel húmedo, se expande solo y casi no se puede borrar. Por eso los acuarelistas planifican cada pincelada antes de darla.',
-    tag: 'Acuarela'
-  }
+var datosCuriosos = [
+  { icon: '💡', question: 'Los artistas mezclan colores para crear emociones', body: 'El azul evoca calma y tristeza, el rojo pasion o peligro, y el amarillo alegria. Esto se llama psicologia del color.', tag: 'Color' },
+  { icon: '🏛️', question: 'Por que los museos tienen luz tenue?', body: 'La luz ultravioleta dana los pigmentos con el tiempo. Los museos usan LED especial sin UV para proteger el color original de cada obra.', tag: 'Conservacion' },
+  { icon: '🖌️', question: 'El oleo tarda semanas en secarse completamente', body: 'A diferencia del acrilico que seca en minutos, el oleo puede tardar meses. Eso permitia a los maestros corregir y mezclar directamente sobre el lienzo.', tag: 'Tecnica' },
+  { icon: '🗺️', question: 'El Caribe colombiano tiene su propio lenguaje visual', body: 'Artistas como Alejandro Obregon desarrollaron un estilo unico que mezcla colores tropicales, fauna local y la luz caracteristica del Caribe.', tag: 'Caribe' },
+  { icon: '✨', question: 'Que es el sfumato, la tecnica secreta de Da Vinci?', body: 'Leonardo aplicaba capas de pintura tan finas que no dejaba trazos. El resultado son transiciones suaves entre luz y sombra, como si los bordes se disolvieran en humo.', tag: 'Tecnica' },
+  { icon: '🎨', question: 'La acuarela es la tecnica mas dificil de corregir', body: 'Una vez que el pigmento toca el papel humedo, se expande solo y casi no se puede borrar. Por eso los acuarelistas planifican cada pincelada antes de darla.', tag: 'Acuarela' }
 ];
-
-let dcCurrent = 0;
+var dcCurrent = 0;
 
 function dcBuildDots() {
-  const container = document.getElementById('dc-dots');
+  var container = document.getElementById('dc-dots');
   if (!container) return;
   container.innerHTML = '';
-  datosCuriosos.forEach((_, i) => {
-    const d = document.createElement('span');
+  datosCuriosos.forEach(function (_, i) {
+    var d = document.createElement('span');
     d.className = 'dc-dot' + (i === dcCurrent ? ' active' : '');
     container.appendChild(d);
   });
 }
 
 function dcUpdateDots() {
-  document.querySelectorAll('.dc-dot').forEach((d, i) => {
+  document.querySelectorAll('.dc-dot').forEach(function (d, i) {
     d.classList.toggle('active', i === dcCurrent);
   });
 }
 
 function verMas() {
   dcCurrent = (dcCurrent + 1) % datosCuriosos.length;
-  const dato = datosCuriosos[dcCurrent];
-  const card = document.getElementById('dc-card');
-
+  var dato = datosCuriosos[dcCurrent];
+  var card = document.getElementById('dc-card');
   card.classList.remove('dc-fade');
-  void card.offsetWidth; // fuerza reflow para reiniciar animación
+  void card.offsetWidth;
   card.classList.add('dc-fade');
-
-  document.getElementById('dc-icon').textContent    = dato.icon;
+  document.getElementById('dc-icon').textContent = dato.icon;
   document.getElementById('dc-question').textContent = dato.question;
-  document.getElementById('dc-body').textContent     = dato.body;
-  document.getElementById('dc-tag').textContent      = dato.tag;
-
+  document.getElementById('dc-body').textContent = dato.body;
+  document.getElementById('dc-tag').textContent = dato.tag;
   dcUpdateDots();
 }
+window.verMas = verMas;
 
-/* ── MEMORIA ARTÍSTICA ───────────────────────────────── */
+/* ── MEMORIA ARTISTICA ───────────────────────────────── */
 
-const MG_CARDS = [
-  { id:'ml', emoji:'🖼️', name:'Mona Lisa',        dato:'La Mona Lisa no tiene cejas — era moda en Italia depilarlas completamente.' },
-  { id:'ng', emoji:'🌙', name:'Noche estrellada',  dato:'Van Gogh pintó la Noche Estrellada desde la ventana de un manicomio.' },
-  { id:'gr', emoji:'😱', name:'El grito',          dato:'Munch se inspiró en un cielo rojo — posiblemente ceniza del volcán Krakatoa.' },
-  { id:'gi', emoji:'🌻', name:'Girasoles',         dato:'Van Gogh pintó sus Girasoles para decorar el cuarto de su amigo Gauguin.' },
-  { id:'pe', emoji:'🎭', name:'Picasso',           dato:'Picasso fue pionero del collage: pegar objetos reales sobre el lienzo.' },
-  { id:'da', emoji:'🔵', name:'Punto azul',        dato:'Kandinsky creía que el azul era el color más espiritual: representaba el infinito.' },
+var MG_CARDS = [
+  { id:'ml', emoji:'🖼️', name:'Mona Lisa', dato:'La Mona Lisa no tiene cejas — era moda en Italia depilarlas completamente.' },
+  { id:'ng', emoji:'🌙', name:'Noche estrellada', dato:'Van Gogh pinto la Noche Estrellada desde la ventana de un manicomio.' },
+  { id:'gr', emoji:'😱', name:'El grito', dato:'Munch se inspiro en un cielo rojo — posiblemente ceniza del volcan Krakatoa.' },
+  { id:'gi', emoji:'🌻', name:'Girasoles', dato:'Van Gogh pinto sus Girasoles para decorar el cuarto de su amigo Gauguin.' },
+  { id:'pe', emoji:'🎭', name:'Picasso', dato:'Picasso fue pionero del collage: pegar objetos reales sobre el lienzo.' },
+  { id:'da', emoji:'🔵', name:'Punto azul', dato:'Kandinsky creia que el azul era el color mas espiritual: representaba el infinito.' }
 ];
-
-const MG_LEVELS = [
+var MG_LEVELS = [
   { pairs:2, cols:'cols4' },
   { pairs:4, cols:'cols4' },
-  { pairs:6, cols:'cols3' },
+  { pairs:6, cols:'cols3' }
 ];
+var mgLevel=0, mgFlipped=[], mgMatched=[], mgLocked=false, mgTries=0, mgTimer=0, mgTimerID=null, mgStarted=false;
 
-let mgLevel=0, mgFlipped=[], mgMatched=[], mgLocked=false, mgTries=0, mgTimer=0, mgTimerID=null, mgStarted=false;
+function mgShuffle(arr) { return arr.slice().sort(function () { return Math.random() - 0.5; }); }
 
-function mgShuffle(arr){ return arr.slice().sort(()=>Math.random()-.5); }
-
-function mgSetLevel(lvl, btn){
+function mgSetLevel(lvl, btn) {
   mgLevel = lvl;
-  document.querySelectorAll('.mg-lvl-btn').forEach(b=>b.classList.remove('active'));
+  document.querySelectorAll('.mg-lvl-btn').forEach(function (b) { b.classList.remove('active'); });
   btn.classList.add('active');
   mgRestart();
 }
+window.mgSetLevel = mgSetLevel;
 
-function mgRestart(){
+function mgRestart() {
   clearInterval(mgTimerID);
   mgFlipped=[]; mgMatched=[]; mgLocked=false; mgTries=0; mgTimer=0; mgStarted=false;
-  document.getElementById('mg-timer').textContent = '0s';
-  document.getElementById('mg-win').classList.add('hidden');
+  var timerEl = document.getElementById('mg-timer');
+  if (timerEl) timerEl.textContent = '0s';
+  var winEl = document.getElementById('mg-win');
+  if (winEl) winEl.classList.add('hidden');
   mgSetDato('Encuentra una pareja para descubrir un dato curioso.');
   mgRender();
 }
+window.mgRestart = mgRestart;
 
-function mgRender(){
-  const board = document.getElementById('mg-board');
-  if (!board) return;  // ← guarda contra DOM no listo
-  const { pairs, cols } = MG_LEVELS[mgLevel];
-  const pool  = mgShuffle(MG_CARDS).slice(0, pairs);
-  const cards = mgShuffle([...pool, ...pool].map((c,i)=>({...c, uid:i})));
-  board.className = 'mg-board ' + cols;
-  document.getElementById('mg-pairs').textContent = '0/'+pairs+' pares';
-  board.innerHTML = cards.map(c=>`
-    <div class="mg-card" id="mgc-${c.uid}" data-id="${c.id}" data-uid="${c.uid}" data-dato="${c.dato}" onclick="mgFlip(this)">
-      <div class="mg-card-inner">
-        <div class="mg-card-front">🎴</div>
-        <div class="mg-card-back">
-          <span class="mg-emoji">${c.emoji}</span>
-          <span class="mg-name">${c.name}</span>
-        </div>
-      </div>
-    </div>`).join('');
+function mgRender() {
+  var board = document.getElementById('mg-board');
+  if (!board) return;
+  var level = MG_LEVELS[mgLevel];
+  var pool = mgShuffle(MG_CARDS).slice(0, level.pairs);
+  var cards = mgShuffle([].concat(pool, pool).map(function (c, i) { return Object.assign({}, c, { uid: i }); }));
+  board.className = 'mg-board ' + level.cols;
+  document.getElementById('mg-pairs').textContent = '0/' + level.pairs + ' pares';
+  board.innerHTML = cards.map(function (c) {
+    return '<div class="mg-card" id="mgc-' + c.uid + '" data-id="' + c.id + '" data-uid="' + c.uid + '" data-dato="' + c.dato + '" onclick="mgFlip(this)">' +
+      '<div class="mg-card-inner"><div class="mg-card-front">🎴</div><div class="mg-card-back"><span class="mg-emoji">' + c.emoji + '</span><span class="mg-name">' + c.name + '</span></div></div></div>';
+  }).join('');
 }
 
-function mgFlip(el){
-  if(mgLocked || el.classList.contains('flipped') || el.classList.contains('matched')) return;
-  if(!mgStarted){
+function mgFlip(el) {
+  if (mgLocked || el.classList.contains('flipped') || el.classList.contains('matched')) return;
+  if (!mgStarted) {
     mgStarted = true;
-    mgTimerID = setInterval(()=>{ mgTimer++; document.getElementById('mg-timer').textContent = mgTimer+'s'; }, 1000);
+    mgTimerID = setInterval(function () { mgTimer++; document.getElementById('mg-timer').textContent = mgTimer + 's'; }, 1000);
   }
   el.classList.add('flipped');
   mgFlipped.push(el);
-  if(mgFlipped.length === 2) mgCheck();
+  if (mgFlipped.length === 2) mgCheck();
 }
+window.mgFlip = mgFlip;
 
-function mgCheck(){
+function mgCheck() {
   mgLocked = true; mgTries++;
-  const [a, b] = mgFlipped;
-  if(a.dataset.id === b.dataset.id){
+  var a = mgFlipped[0], b = mgFlipped[1];
+  if (a.dataset.id === b.dataset.id) {
     a.classList.add('matched'); b.classList.add('matched');
     mgMatched.push(a.dataset.id);
     mgSetDato(a.dataset.dato);
-    const pairs = MG_LEVELS[mgLevel].pairs;
-    document.getElementById('mg-pairs').textContent = mgMatched.length+'/'+pairs+' pares';
+    var pairs = MG_LEVELS[mgLevel].pairs;
+    document.getElementById('mg-pairs').textContent = mgMatched.length + '/' + pairs + ' pares';
     mgFlipped = []; mgLocked = false;
-    if(mgMatched.length === pairs) setTimeout(mgWin, 500);
+    if (mgMatched.length === pairs) setTimeout(mgWin, 500);
   } else {
     a.classList.add('wrong'); b.classList.add('wrong');
-    setTimeout(()=>{
-      a.classList.remove('flipped','wrong');
-      b.classList.remove('flipped','wrong');
+    setTimeout(function () {
+      a.classList.remove('flipped', 'wrong');
+      b.classList.remove('flipped', 'wrong');
       mgFlipped = []; mgLocked = false;
     }, 900);
   }
 }
 
-function mgSetDato(text){
-  const el = document.getElementById('mg-dato');
+function mgSetDato(text) {
+  var el = document.getElementById('mg-dato');
   el.style.opacity = 0;
-  setTimeout(()=>{ document.getElementById('mg-dato-msg').textContent = text; el.style.opacity = 1; }, 200);
+  setTimeout(function () { document.getElementById('mg-dato-msg').textContent = text; el.style.opacity = 1; }, 200);
 }
 
-function mgWin(){
+function mgWin() {
   clearInterval(mgTimerID);
-  document.getElementById('mg-win-time').textContent  = mgTimer + 's';
+  document.getElementById('mg-win-time').textContent = mgTimer + 's';
   document.getElementById('mg-win-tries').textContent = mgTries;
   document.getElementById('mg-win').classList.remove('hidden');
-  showToast('¡Encontraste todas las parejas!');
+  showToast('Encontraste todas las parejas!');
 }
+
+})();

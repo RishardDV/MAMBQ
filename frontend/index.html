@@ -6,13 +6,17 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>MAMB – Museo de Arte Moderno de Barranquilla</title>
-  <link rel="manifest" href="./manifest.json">
-  <link rel="stylesheet" href="/Frontend/style.css" />
+  <meta name="description" content="Explora el arte moderno del Caribe colombiano. Galeria virtual, IA de poses y juegos interactivos.">
+  <meta name="theme-color" content="#C1440E">
+  <link rel="manifest" href="/frontend/manifest.json">
+  <link rel="icon" href="/frontend/icons/icon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="/frontend/icons/icon.svg">
+  <link rel="stylesheet" href="/frontend/style.css" />
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
 </head>
 <script>
   if ("serviceWorker" in navigator) {
-    navigator.serviceWorker.register("./sw.js")
+    navigator.serviceWorker.register("/frontend/sw.js", { scope: "/" })
       .then(() => console.log("SW registrado"))
       .catch((err) => console.error("SW error:", err));
   }
@@ -340,6 +344,19 @@
           <button class="artist-chip"><span class="artist-dot" style="background:#7B2D8B"></span>A. Pérez</button>
         </div>
       </section>
+
+      <!-- OBRAS DE VISITANTES (from API) -->
+      <section class="home-section">
+        <div class="section-header">
+          <div>
+            <p class="section-label">COMUNIDAD</p>
+            <h2 class="section-title">Obras de Visitantes</h2>
+          </div>
+        </div>
+        <div class="cards-scroll" id="api-obras-container">
+          <p class="api-empty-msg">Cargando obras...</p>
+        </div>
+      </section>
     </div>
   </div>
 
@@ -439,6 +456,19 @@
             <span class="dc-tag" id="dc-tag">Color</span>
             <button class="dc-ver-mas-btn" onclick="verMas()">Ver más →</button>
           </div>
+        </div>
+      </section>
+
+      <!-- OBRAS DE VISITANTES en Inicio -->
+      <section class="home-section">
+        <div class="section-header">
+          <div>
+            <p class="section-label">COMUNIDAD</p>
+            <h2 class="section-title">Obras de Visitantes</h2>
+          </div>
+          <a href="#" class="ver-todo" onclick="event.preventDefault(); navigate('screen-galeria', document.querySelector('[data-screen=screen-galeria]'))">Ver todo →</a>
+        </div>
+        <div class="top-obras-scroll" id="api-inicio-obras">
         </div>
       </section>
 
@@ -949,6 +979,8 @@
   <!-- Toast -->
   <div class="toast" id="toast"></div>
 
+  <script src="/frontend/usernameModeration.js"></script>
+  <script src="/frontend/api.js"></script>
   <script src="/Backend/app.js"></script>
 </body>
 </html>

@@ -3408,3 +3408,210 @@ em{
     margin: 0 1rem;
   }
 }
+
+/* ── API OBRAS STYLES ───────────────────────────────── */
+
+.api-empty-msg {
+  font-size: 13px;
+  color: var(--text-light);
+  text-align: center;
+  padding: 24px 18px;
+  font-weight: 500;
+  line-height: 1.5;
+}
+
+/* Ensure API cards in cards-scroll look consistent */
+#api-obras-container .art-card {
+  flex-shrink: 0;
+  width: 250px;
+}
+
+#api-obras-container .art-card-img {
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+}
+
+/* API obras in inicio — top card style */
+#api-inicio-obras .top-card {
+  flex-shrink: 0;
+}
+
+#api-inicio-obras .top-card-img {
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+}
+
+/* Upload form improvements */
+.submit-obra-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* Connection status indicator */
+.api-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  color: var(--text-light);
+  padding: 4px 10px;
+  background: var(--cream2);
+  border-radius: 12px;
+  margin: 4px 18px;
+}
+
+.api-status-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #2D6A4F;
+  animation: statusPulse 2s ease-in-out infinite;
+}
+
+.api-status-dot.offline {
+  background: var(--rust);
+  animation: none;
+}
+
+@keyframes statusPulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.4; }
+}
+
+/* Rating display on API obra cards */
+.obra-rating-display {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin: 4px 0 2px;
+}
+
+.obra-rating-stars {
+  color: #E6A817;
+  font-size: 13px;
+  letter-spacing: 1px;
+}
+
+.obra-rating-text {
+  font-size: 11px;
+  color: var(--text-light);
+  font-weight: 500;
+}
+
+.obra-rating-actions {
+  display: flex;
+  gap: 2px;
+  margin-bottom: 4px;
+}
+
+.rating-star {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 18px;
+  color: #ccc;
+  padding: 2px;
+  transition: color 0.15s, transform 0.15s;
+  line-height: 1;
+}
+
+.rating-star:hover,
+.rating-star:hover ~ .rating-star {
+  color: #E6A817;
+  transform: scale(1.2);
+}
+
+/* Reverse order hover: highlight from left to hovered star */
+.obra-rating-actions:hover .rating-star {
+  color: #E6A817;
+}
+.obra-rating-actions .rating-star:hover ~ .rating-star {
+  color: #ccc;
+}
+
+/* Auto-hide bottom nav on scroll */
+.bottom-nav.nav-hidden {
+  transform: translateY(100%);
+  pointer-events: none;
+}
+.bottom-nav {
+  transition: transform 0.3s ease;
+}
+
+/* PWA install banner */
+.install-banner {
+  position: fixed;
+  bottom: 72px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: calc(100% - 32px);
+  max-width: 400px;
+  background: var(--white);
+  border-radius: 16px;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.15);
+  padding: 16px;
+  z-index: 200;
+  animation: bannerSlideUp 0.4s ease;
+}
+
+.install-banner-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.install-banner-icon {
+  font-size: 28px;
+  flex-shrink: 0;
+}
+
+.install-banner-text {
+  flex: 1;
+}
+
+.install-banner-text strong {
+  display: block;
+  font-size: 14px;
+  color: var(--dark);
+  margin-bottom: 2px;
+}
+
+.install-banner-text small {
+  font-size: 12px;
+  color: var(--text-light);
+}
+
+.install-banner-actions {
+  display: flex;
+  gap: 8px;
+  margin-top: 12px;
+  justify-content: flex-end;
+}
+
+.install-banner-actions button {
+  border: none;
+  border-radius: 8px;
+  padding: 8px 16px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.install-btn-dismiss {
+  background: var(--cream2);
+  color: var(--text-light);
+}
+
+.install-btn-install {
+  background: var(--rust);
+  color: var(--white);
+}
+
+@keyframes bannerSlideUp {
+  from { transform: translateX(-50%) translateY(30px); opacity: 0; }
+  to { transform: translateX(-50%) translateY(0); opacity: 1; }
+}
