@@ -224,8 +224,8 @@ class ArtworkDetailScreen extends StatelessWidget {
                   children: [
                     GestureDetector(
                       onTap: () {
-                        obrasProvider.incrementLike(obra.id);
-                        profile.addLike(obra.id);
+                        obrasProvider.incrementLike(liveObra.id);
+                        profile.addLike(liveObra.id);
                       },
                       child: Container(
                         padding: const EdgeInsets.all(10),
