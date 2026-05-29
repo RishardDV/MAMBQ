@@ -1,0 +1,954 @@
+<!DOCTYPE html>
+<html lang="es">
+  <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@1.3.1/dist/tf.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@teachablemachine/pose@0.8/dist/teachablemachine-pose.min.js"></script>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MAMB – Museo de Arte Moderno de Barranquilla</title>
+  <link rel="manifest" href="./manifest.json">
+  <link rel="stylesheet" href="/Frontend/style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
+</head>
+<script>
+  if ("serviceWorker" in navigator) {
+    navigator.serviceWorker.register("./sw.js")
+      .then(() => console.log("SW registrado"))
+      .catch((err) => console.error("SW error:", err));
+  }
+</script>
+<body>
+
+  <!-- ═══════════════════════════════════════════
+       STARTUP OVERLAY
+  ═══════════════════════════════════════════ -->
+  <div class="startup-overlay" id="startup-overlay">
+    <div class="startup-splash" id="startup-splash">
+      <div class="logo-block center splash-logo-block">
+        <span class="logo-mamb">MAMB</span>
+        <span class="logo-sub">Museo de Arte Moderno de Barranquilla</span>
+      </div>
+    </div>
+    <div class="loading-bar">
+      <div class="loading-fill"></div>
+    </div>
+    <div class="name-entry hidden" id="name-entry">
+      <div class="name-entry-card intro-card">
+        <p class="name-entry-label">BIENVENIDO AL RECORRIDO DIGITAL</p>
+        <h2>Registra tu nombre y empieza</h2>
+        <ul class="intro-points">
+          <li>Mira muchos dibujos y obras de arte súper bonitas.</li>
+          <li>Busca fácilmente artistas y cosas que te gusten usando filtros simples.</li>
+          <li>Entra rápido y empieza a explorar sin complicaciones.</li>
+        </ul>
+        <form id="name-form">
+          <input type="text" id="visitor-name" maxlength="40" placeholder="Tu nombre" required />
+          <button type="submit">Empezar</button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════
+       SCREEN: GALERÍA
+  ═══════════════════════════════════════════ -->
+  <div class="screen" id="screen-galeria">
+    <div class="screen-scroll">
+      <header class="app-header">
+        <div class="logo-block">
+          <span class="logo-mamb">MAMB</span>
+          <span class="logo-sub">Museo de Arte Moderno de Barranquilla</span>
+        </div>
+        <div class="header-actions">
+          <button class="icon-btn" id="bell-btn" aria-label="Notificaciones">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+            <span class="notif-dot"></span>
+          </button>
+          <button class="avatar-btn" onclick="navigate('screen-perfil', document.querySelector('[data-screen=screen-perfil]'))">
+            <img src="https://i.pravatar.cc/40?img=5" alt="Avatar" id="header-avatar" />
+          </button>
+        </div>
+      </header>
+
+      <div class="search-bar">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
+        <input type="text" id="gallery-search" placeholder="Buscar título de la obra de arte o artista" />
+      </div>
+
+      <div class="filter-chips">
+        <button class="chip active" data-filter="all">Todas</button>
+        <button class="chip" data-filter="Óleo">Óleo</button>
+        <button class="chip" data-filter="Acuarela">Acuarela</button>
+        <button class="chip" data-filter="Acrílico">Acrílico</button>
+        <button class="chip" data-filter="Mixta">Mixta</button>
+        <button class="chip" data-filter="Escultura">Escultura</button>
+      </div>
+
+      <section class="home-section">
+        <div class="section-header">
+          <div>
+            <p class="section-label">Favoritas del Museo</p>
+            <h2 class="section-title">Obras Destacadas</h2>
+          </div>
+          <a href="#" class="ver-todo">Ver todo →</a>
+        </div>
+        <div class="cards-scroll">
+          <div class="art-card gallery-item" data-title="Crepúsculo Caribe" data-artist="Álvaro Cepeda Samudio" data-medium="Óleo" onclick="openArtwork('crepusculo')">
+            <div class="art-card-img bg-rust">
+              <span class="badge-dest">DESTACADA</span>
+              <button class="like-btn" onclick="event.stopPropagation(); toggleLike(this)">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+                <span>248</span>
+              </button>
+              <div class="art-bg-shape shape-rust"></div>
+            </div>
+            <div class="art-card-info">
+              <h3>Crepúsculo Caribe</h3>
+              <p>Álvaro Cepeda Samudio</p>
+              <div class="art-card-footer">
+                <span class="tag">Óleo · 2019</span>
+                <button class="arrow-btn">→</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="art-card gallery-item" data-title="Sierra Nevada" data-artist="Álvaro Cepeda Samudio" data-medium="Acuarela" onclick="openArtwork('sierra')">
+            <div class="art-card-img bg-green">
+              <span class="badge-dest">DESTACADA</span>
+              <button class="like-btn liked" onclick="event.stopPropagation(); toggleLike(this)">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+                <span>104</span>
+              </button>
+              <div class="art-bg-shape shape-green"></div>
+            </div>
+            <div class="art-card-info">
+              <h3>Sierra Nevada</h3>
+              <p>Álvaro Cepeda Samudio</p>
+              <div class="art-card-footer">
+                <span class="tag">Acuarela · 2021</span>
+                <button class="arrow-btn">→</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="art-card gallery-item" data-title="Noche Azul" data-artist="M. Álvarez" data-medium="Acrílico" onclick="openArtwork('noche')">
+            <div class="art-card-img bg-navy-soft">
+              <span class="badge-dest">DESTACADA</span>
+              <button class="like-btn" onclick="event.stopPropagation(); toggleLike(this)">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+                <span>189</span>
+              </button>
+            </div>
+            <div class="art-card-info">
+              <h3>Noche Azul</h3>
+              <p>M. Álvarez</p>
+              <div class="art-card-footer">
+                <span class="tag">Acrílico · 2020</span>
+                <button class="arrow-btn">→</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="art-card gallery-item" data-title="Fuego Vivo" data-artist="L. Torres" data-medium="Mixta" onclick="openArtwork('fuego')">
+            <div class="art-card-img bg-rust-soft">
+              <button class="like-btn liked" onclick="event.stopPropagation(); toggleLike(this)">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+                <span>76</span>
+              </button>
+            </div>
+            <div class="art-card-info">
+              <h3>Fuego Vivo</h3>
+              <p>L. Torres</p>
+              <div class="art-card-footer">
+                <span class="tag">Mixta · 2018</span>
+                <button class="arrow-btn">→</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="art-card gallery-item" data-title="Selva Viva" data-artist="R. Guerrero" data-medium="Óleo" onclick="openArtwork('selva')">
+            <div class="art-card-img bg-green-soft">
+              <span class="badge-dest">DESTACADA</span>
+              <button class="like-btn" onclick="event.stopPropagation(); toggleLike(this)">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+                <span>312</span>
+              </button>
+              <div class="art-bg-shape shape-green small"></div>
+            </div>
+            <div class="art-card-info">
+              <h3>Selva Viva</h3>
+              <p>R. Guerrero</p>
+              <div class="art-card-footer">
+                <span class="tag">Óleo · 2023</span>
+                <button class="arrow-btn">→</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="art-card gallery-item" data-title="Misterio" data-artist="A. Pérez" data-medium="Escultura" onclick="openArtwork('misterio')">
+            <div class="art-card-img bg-purple">
+              <button class="like-btn" onclick="event.stopPropagation(); toggleLike(this)">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+                <span>95</span>
+              </button>
+            </div>
+            <div class="art-card-info">
+              <h3>Misterio</h3>
+              <p>A. Pérez</p>
+              <div class="art-card-footer">
+                <span class="tag">Escultura · 2022</span>
+                <button class="arrow-btn">→</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="dots"><span class="dot active"></span><span class="dot"></span><span class="dot"></span></div>
+      </section>
+
+      <section class="home-section">
+        <div class="section-header">
+          <div>
+            <p class="section-label">Últimas publicaciones</p>
+            <h2 class="section-title">Arte para Explorar</h2>
+          </div>
+          <a href="#" class="ver-todo">Ver todo →</a>
+        </div>
+        <div class="cards-scroll">
+          <div class="art-card gallery-item" data-title="Crepúsculo Caribe" data-artist="Álvaro Cepeda Samudio" data-medium="Óleo" onclick="openArtwork('crepusculo')">
+            <div class="art-card-img bg-rust">
+              <span class="badge-dest">DESTACADA</span>
+              <button class="like-btn liked" onclick="event.stopPropagation(); toggleLike(this)">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+                <span>248</span>
+              </button>
+              <div class="art-bg-shape shape-rust"></div>
+            </div>
+            <div class="art-card-info">
+              <h3>Crepúsculo Caribe</h3>
+              <p>Álvaro Cepeda Samudio</p>
+              <div class="art-card-footer">
+                <span class="tag">Óleo · 2019</span>
+                <button class="arrow-btn">→</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="art-card gallery-item" data-title="Sierra Nevada" data-artist="Álvaro Cepeda Samudio" data-medium="Acuarela" onclick="openArtwork('sierra')">
+            <div class="art-card-img bg-green">
+              <span class="badge-dest">DESTACADA</span>
+              <button class="like-btn" onclick="event.stopPropagation(); toggleLike(this)">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+                <span>194</span>
+              </button>
+              <div class="art-bg-shape shape-green"></div>
+            </div>
+            <div class="art-card-info">
+              <h3>Sierra Nevada</h3>
+              <p>Álvaro Cepeda Samudio</p>
+              <div class="art-card-footer">
+                <span class="tag">Acuarela · 2021</span>
+                <button class="arrow-btn">→</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="art-card" onclick="openArtwork('rio')">
+            <div class="art-card-img bg-navy">
+              <button class="like-btn liked" onclick="event.stopPropagation(); toggleLike(this)">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+                <span>143</span>
+              </button>
+            </div>
+            <div class="art-card-info">
+              <h3>Río Magdalena</h3>
+              <p>R. Guerrero</p>
+              <div class="art-card-footer">
+                <span class="tag">Acrílico · 2022</span>
+                <button class="arrow-btn">→</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="art-card gallery-item" data-title="Misterio" data-artist="A. Pérez" data-medium="Escultura" onclick="openArtwork('misterio')">
+            <div class="art-card-img bg-magenta">
+              <button class="like-btn" onclick="event.stopPropagation(); toggleLike(this)">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+                <span>67</span>
+              </button>
+            </div>
+            <div class="art-card-info">
+              <h3>Rosa del Tiempo</h3>
+              <p>M. Álvarez</p>
+              <div class="art-card-footer">
+                <span class="tag">Mixta · 2021</span>
+                <button class="arrow-btn">→</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="art-card gallery-item" data-title="Selva Viva" data-artist="R. Guerrero" data-medium="Óleo" onclick="openArtwork('selva')">
+            <div class="art-card-img bg-slate">
+              <button class="like-btn liked" onclick="event.stopPropagation(); toggleLike(this)">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+                <span>231</span>
+              </button>
+            </div>
+            <div class="art-card-info">
+              <h3>Abstracción I</h3>
+              <p>A. Pérez</p>
+              <div class="art-card-footer">
+                <span class="tag">Escultura · 2014</span>
+                <button class="arrow-btn">→</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="art-card gallery-item" data-title="Noche Azul" data-artist="M. Álvarez" data-medium="Acrílico" onclick="openArtwork('noche')">
+            <div class="art-card-img bg-teal">
+              <span class="badge-dest">NUEVA</span>
+              <button class="like-btn" onclick="event.stopPropagation(); toggleLike(this)">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+                <span>88</span>
+              </button>
+            </div>
+            <div class="art-card-info">
+              <h3>Mar de Coral</h3>
+              <p>L. Torres</p>
+              <div class="art-card-footer">
+                <span class="tag">Acuarela · 2023</span>
+                <button class="arrow-btn">→</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="dots"><span class="dot active"></span><span class="dot"></span><span class="dot"></span></div>
+      </section>
+
+      <section class="home-section">
+        <div class="section-header">
+          <div>
+            <p class="section-label">COLECCIÓN</p>
+            <h2 class="section-title">Por Artista</h2>
+          </div>
+          <a href="#" class="ver-todo">Ver todo →</a>
+        </div>
+        <div class="artist-chips-scroll">
+          <button class="artist-chip"><span class="artist-dot" style="background:#C1440E"></span>J. Cepeda</button>
+          <button class="artist-chip"><span class="artist-dot" style="background:#2D6A4F"></span>M. Álvarez</button>
+          <button class="artist-chip"><span class="artist-dot" style="background:#E9C46A"></span>L. Torres</button>
+          <button class="artist-chip"><span class="artist-dot" style="background:#264653"></span>R. Guerrero</button>
+          <button class="artist-chip"><span class="artist-dot" style="background:#7B2D8B"></span>A. Pérez</button>
+        </div>
+      </section>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════
+       SCREEN: INICIO
+  ═══════════════════════════════════════════ -->
+  <div class="screen active" id="screen-inicio">
+    <div class="screen-scroll">
+      <header class="app-header">
+        <div class="logo-block">
+          <span class="logo-mamb">MAMB</span>
+          <span class="logo-sub">Museo de Arte Moderno de Barranquilla</span>
+        </div>
+        <div class="header-actions">
+          <button class="icon-btn"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg></button>
+          <button class="avatar-btn"><img src="https://i.pravatar.cc/40?img=5" alt="Avatar" /></button>
+        </div>
+      </header>
+
+      <div class="explore-hero">
+        <h1 class="explore-title">EXPLORA EL ARTE</h1>
+        <p class="explore-sub">Conecta con el arte, encuentra tu obra favorita y compártela</p>
+      </div>
+
+      <section class="home-section">
+        <div class="section-header">
+          <div>
+            <p class="section-label">TOP OBRAS</p>
+            <h2 class="section-title">Álvaro Cepeda Samudio</h2>
+          </div>
+          <a href="#" class="ver-todo">Ver todo →</a>
+        </div>
+        <div class="top-obras-scroll">
+          <div class="top-card" onclick="openArtwork('crepusculo')">
+            <div class="top-card-img bg-rust"><span class="rank-num">1</span><div class="art-bg-shape shape-rust small"></div></div>
+            <p class="top-card-name">Crepúsculo Caribe</p>
+            <p class="top-card-meta">Óleo · 2019</p>
+          </div>
+          <div class="top-card" onclick="openArtwork('sierra')">
+            <div class="top-card-img bg-green"><span class="rank-num">2</span><div class="art-bg-shape shape-green small"></div></div>
+            <p class="top-card-name">Sierra Nevada</p>
+            <p class="top-card-meta">Acuarela · 2021</p>
+          </div>
+          <div class="top-card" onclick="openArtwork('rio')">
+            <div class="top-card-img bg-navy"><span class="rank-num">3</span></div>
+            <p class="top-card-name">Río Magdalena</p>
+            <p class="top-card-meta">Acrílico · 2022</p>
+          </div>
+          <div class="top-card" onclick="openArtwork('noche')">
+            <div class="top-card-img bg-navy-soft"><span class="rank-num">4</span></div>
+            <p class="top-card-name">Noche Azul</p>
+            <p class="top-card-meta">Mixta · 2020</p>
+          </div>
+          <div class="top-card" onclick="openArtwork('fuego')">
+            <div class="top-card-img bg-rust-soft"><span class="rank-num">5</span></div>
+            <p class="top-card-name">Fuego Vivo</p>
+            <p class="top-card-meta">Óleo · 2018</p>
+          </div>
+          <div class="top-card" onclick="openArtwork('misterio')">
+            <div class="top-card-img bg-magenta"><span class="rank-num">6</span></div>
+            <p class="top-card-name">Rosa del Tiempo</p>
+            <p class="top-card-meta">Acuarela · 2021</p>
+          </div>
+          <div class="top-card" onclick="openArtwork('selva')">
+            <div class="top-card-img bg-teal"><span class="rank-num">7</span></div>
+            <p class="top-card-name">Mar de Coral</p>
+            <p class="top-card-meta">Acrílico · 2023</p>
+          </div>
+          <div class="top-card" onclick="openArtwork('misterio')">
+            <div class="top-card-img bg-purple"><span class="rank-num">8</span></div>
+            <p class="top-card-name">Misterio</p>
+            <p class="top-card-meta">Escultura · 2022</p>
+          </div>
+        </div>
+        <div class="dots"><span class="dot active"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span></div>
+      </section>
+
+      <!-- DATO CURIOSO -->
+      <section class="home-section">
+        <div class="section-header">
+          <div>
+            <p class="section-label">Dato curioso</p>
+            <h2 class="section-title">¿Sabías que...?</h2>
+          </div>
+        </div>
+        <div class="dc-card" id="dc-card">
+          <div class="dc-accent-bar"></div>
+          <div class="dc-card-top">
+            <div class="dc-icon" id="dc-icon">💡</div>
+            <div>
+              <p class="dc-card-label">Dato del día</p>
+              <p class="dc-card-question" id="dc-question">Los artistas mezclan colores para crear emociones</p>
+            </div>
+          </div>
+          <p class="dc-card-body" id="dc-body">El azul evoca calma, el rojo pasión...</p>
+          <div class="dc-card-footer">
+            <span class="dc-tag" id="dc-tag">Color</span>
+            <button class="dc-ver-mas-btn" onclick="verMas()">Ver más →</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- MEMORIA ARTÍSTICA — tarjeta promo -->
+      <section class="home-section" id="section-memoria">
+        <div class="section-header">
+          <div>
+            <p class="section-label">Minijuego</p>
+            <h2 class="section-title">Memoria artística</h2>
+          </div>
+        </div>
+        <div class="memoria-promo-card" onclick="navigate('screen-memoria', null)">
+          <div class="memoria-promo-left">
+            <div class="memoria-emoji-grid">
+              <span>🖼️</span><span>🌙</span>
+              <span>😱</span><span>🌻</span>
+            </div>
+          </div>
+          <div class="memoria-promo-right">
+            <p class="memoria-promo-label">EJERCICIO MENTAL</p>
+            <h3 class="memoria-promo-title">¿Puedes encontrar todas las parejas?</h3>
+            <p class="memoria-promo-sub">3 niveles de dificultad · Datos curiosos del arte</p>
+            <button class="memoria-promo-btn">Explorar juego →</button>
+          </div>
+        </div>
+      </section>
+
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════
+       SCREEN: ARTWORK DETAIL
+  ═══════════════════════════════════════════ -->
+  <div class="screen no-nav" id="screen-artwork">
+    <div class="artwork-hero" id="artwork-hero-bg">
+      <div class="blob blob1"></div>
+      <div class="blob blob2"></div>
+      <div class="blob blob3"></div>
+      <div class="artwork-topbar">
+        <button class="back-pill" onclick="goBack()">← Atrás</button>
+        <div class="artwork-topbar-right">
+          <button class="icon-pill" id="art-heart-btn" onclick="toggleArtLike()">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+          </button>
+          <button class="icon-pill">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>
+          </button>
+        </div>
+      </div>
+      <div class="artwork-type-tag">PINTURA · ACUARELA</div>
+    </div>
+    <div class="artwork-body">
+      <div class="artwork-title-row">
+        <h1 id="artwork-title">Tortuga Naranja</h1>
+        <button class="share-icon" onclick="shareArtwork()">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>
+        </button>
+      </div>
+      <div class="artist-info-row">
+        <div class="artist-mini-block">
+          <div class="artist-initials" id="artist-initials">V</div>
+          <div>
+            <p class="artist-mini-name" id="artwork-artist">Vincent van Gogh</p>
+            <p class="artist-mini-meta">Artista · <span id="artwork-count">148</span> obras</p>
+          </div>
+        </div>
+        <button class="follow-btn" id="follow-btn" onclick="toggleFollow(this)">Seguir</button>
+      </div>
+      <div class="artwork-ctas">
+        <button class="cta-like" id="cta-like" onclick="toggleCTALike(this)">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+          Me gusta <span id="cta-like-count">12</span>
+        </button>
+        <button class="cta-fav" id="cta-fav" onclick="addToFavs(this)">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+          Agregar a favoritos
+        </button>
+      </div>
+      <div class="artwork-desc-block">
+        <p class="desc-heading">DESCRIPCIÓN DE LA OBRA</p>
+        <p id="artwork-desc">Una exploración poética de formas orgánicas y colores vibrantes.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════
+       SCREEN: SUBIR
+  ═══════════════════════════════════════════ -->
+  <div class="screen" id="screen-subir">
+    <div class="screen-scroll">
+      <header class="app-header">
+        <div class="logo-block">
+          <span class="logo-mamb">MAMB</span>
+          <span class="logo-sub">Museo de Arte Moderno de Barranquilla</span>
+        </div>
+        <div class="header-actions">
+          <button class="icon-btn"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg></button>
+          <button class="avatar-btn"><img src="https://i.pravatar.cc/40?img=5" alt="Avatar" /></button>
+        </div>
+      </header>
+      <div class="subir-intro">
+        <p class="subir-tagline">EL MUSEO VIVE GRACIAS A ARTISTAS COMO TÚ. CAPTURA TU OBRA Y SÉ PARTE DE NUESTRA GALERÍA VIRTUAL.</p>
+      </div>
+      <div class="upload-zone" id="upload-zone" onclick="triggerFileInput()">
+        <input type="file" id="file-input" accept="image/*" hidden onchange="handleFileSelect(this)" />
+        <div class="upload-zone-inner" id="upload-zone-inner">
+          <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="var(--copper)" stroke-width="1.5"><polyline points="16 16 12 12 8 16"/><line x1="12" y1="12" x2="12" y2="21"/><path d="M20.39 18.39A5 5 0 0 0 18 9h-1.26A8 8 0 1 0 3 16.3"/></svg>
+          <p class="upload-zone-text">Toca para añadir tu obra</p>
+          <p class="upload-zone-sub">JPEG, PNG, PDG, y MP4 formatos, hasta 20MB</p>
+        </div>
+        <img id="upload-preview" class="upload-preview-img hidden" alt="Preview" />
+      </div>
+      <button class="photo-btn" onclick="triggerFileInput()">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg>
+        TOMAR FOTO
+      </button>
+      <div class="upload-form">
+        <div class="form-des">
+          <p class="form-title">DETALLES:</p>
+          <div class="form-row">
+            <label>TÍTULO:</label>
+            <input type="text" id="obra-titulo" />
+          </div>
+          <div class="form-row">
+            <label>AUTOR:</label>
+            <input type="text" id="obra-describe" />
+          </div>
+        </div>
+        <textarea id="obra-desc" placeholder="Agrega una descripción o nota sobre esta obra..."></textarea>
+        <button class="submit-obra-btn" onclick="submitObra()">PUBLICAR OBRA</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════
+       SCREEN: PERFIL
+  ═══════════════════════════════════════════ -->
+  <div class="screen" id="screen-perfil">
+    <div class="screen-scroll">
+      <header class="app-header">
+        <div class="logo-block">
+          <span class="logo-mamb">MAMB</span>
+          <span class="logo-sub">Museo de Arte Moderno de Barranquilla</span>
+        </div>
+        <div class="header-actions">
+          <button class="icon-btn"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg></button>
+        </div>
+      </header>
+      <div class="perfil-top">
+        <div class="perfil-avatar-wrap">
+          <img src="https://i.pravatar.cc/80?img=5" id="perfil-main-avatar" class="perfil-avatar" alt="Avatar" />
+          <button class="edit-av-btn" onclick="openAvatarModal()">✏️</button>
+        </div>
+        <h2 class="perfil-user-name">VISITANTE DEL MUSEO</h2>
+        <p class="perfil-user-role">Artista · Barranquilla, CO</p>
+      </div>
+      <div class="perfil-data-card">
+        <div class="perfil-data-row"><span>Nombre completo:</span><span>Ana María Gómez</span></div>
+        <div class="perfil-data-row"><span>Correo electrónico:</span><span>ana@gmail.com</span></div>
+        <div class="perfil-data-row"><span>Fecha de registro:</span><span>15/02/2026</span></div>
+      </div>
+      <div class="perfil-list-block">
+        <h3>FAVORITOS (3)</h3>
+        <ul>
+          <li><a href="#" onclick="openArtwork('noche')">La noche estrellada</a></li>
+          <li><a href="#" onclick="openArtwork('sierra')">La Monalisa</a></li>
+          <li><a href="#" onclick="openArtwork('fuego')">El grito</a></li>
+        </ul>
+      </div>
+      <div class="perfil-list-block">
+        <h3>MIS OBRAS (2)</h3>
+        <ul>
+          <li><a href="#" onclick="openArtwork('crepusculo')">Mi paisaje favorito</a></li>
+          <li><a href="#" onclick="openArtwork('rio')">Retrato abstracto</a></li>
+        </ul>
+      </div>
+      <button class="logout-btn" onclick="confirmLogout()">CERRAR SESIÓN ➜</button>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════
+       SCREEN: SOBRE NOSOTROS
+  ═══════════════════════════════════════════ -->
+  <div class="screen" id="screen-about">
+    <div class="screen-scroll">
+      <header class="app-header">
+        <div class="logo-block">
+          <span class="logo-mamb">MAMB</span>
+          <span class="logo-sub">Museo de Arte Moderno de Barranquilla</span>
+        </div>
+        <div class="header-actions">
+          <button class="icon-btn"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg></button>
+          <button class="avatar-btn"><img src="https://i.pravatar.cc/40?img=5" alt="Avatar" /></button>
+        </div>
+      </header>
+      <div class="about-hero">
+        <div class="about-hero-text">
+          <p class="about-hero-label">SOBRE NOSOTROS</p>
+          <h1 class="about-big-title">Arte vivo<br>en el<br><em style="color: #8B7355;">Caribe</em></h1>
+          <p class="about-hero-sub">Un espacio cultural dedicado a la preservación, difusión y celebración del arte moderno en Colombia.</p>
+        </div>
+        <div class="about-hero-deco">
+          <span class="about-deco-label">MUSEO DE ARTE MODERNO</span>
+          <span class="about-deco-mamb">MAMB</span>
+          <span class="about-deco-city">Barranquilla · Colombia</span>
+        </div>
+      </div>
+      <div class="about-row-grid">
+        <div class="about-card">
+          <p class="about-card-label">EL MUSEO</p>
+          <h3 class="about-card-title">MUSEO DE ARTE MODERNO DE BARRANQUILLA</h3>
+          <ul class="about-list">
+            <li>UNA CASA PARA LA CREATIVIDAD CARIBEÑA</li>
+            <li>PROMOVEMOS LA CREATIVIDAD Y EL ACCESO LIBRE AL ARTE PARA TODOS</li>
+            <li>PRESERVAMOS EL PATRIMONIO VISUAL DE LA REGIÓN CARIBE COLOMBIANA CON EXPOSICIONES PERMANENTES Y TEMPORALES</li>
+          </ul>
+        </div>
+        <div class="about-quote">
+          <blockquote>"Promovemos la creatividad y el acceso libre al arte para todos."</blockquote>
+          <p class="quote-attr">— Misión Institucional</p>
+        </div>
+      </div>
+      <div class="about-row-grid">
+        <div class="about-card artista-card">
+          <div class="artista-ava">Á</div>
+          <div class="artista-info">
+            <h3>Álvaro Cepeda Samudio</h3>
+            <p class="artista-subtitle">Escritor · Periodista · Figura Caribeña</p>
+            <p class="artista-body">Referente indiscutible de la cultura caribeña colombiana, su obra une literatura y arte con una visión propia del Caribe.</p>
+            <div class="artista-tags">
+              <span>Barranquilla</span><span>Literatura</span><span>Arte</span>
+            </div>
+          </div>
+        </div>
+        <div class="about-card">
+          <p class="about-card-label">ALIANZAS ACADÉMICAS · PRESENCIA</p>
+          <div class="alianzas">
+            <span class="alianza-chip">Promigas</span>
+            <span class="alianza-chip">Universidad del Norte</span>
+          </div>
+        </div>
+      </div>
+      <div class="about-card about-team-card">
+        <p class="about-card-label">NUESTRO EQUIPO <span style="font-weight:400;opacity:.6">3 personas</span></p>
+        <div class="team-row">
+          <div class="team-item"><div class="team-av c1">SP</div><p>Ronald<br>Pradilla</p></div>
+          <div class="team-item"><div class="team-av c2">RM</div><p>Richard<br>Montes</p></div>
+          <div class="team-item"><div class="team-av c3">DB</div><p>Diego<br>Barrios</p></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════
+       SCREEN: COLLECTION VIEW
+  ═══════════════════════════════════════════ -->
+  <div class="screen" id="screen-collection">
+    <div class="screen-scroll">
+      <header class="app-header">
+        <div class="logo-block">
+          <span class="logo-mamb">MAMB</span>
+          <span class="logo-sub">Museo de Arte Moderno de Barranquilla</span>
+        </div>
+        <div class="header-actions">
+          <button class="icon-btn" onclick="goBack()" aria-label="Volver">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5"/><path d="M12 19l-7-7 7-7"/></svg>
+          </button>
+        </div>
+      </header>
+      <section class="home-section collection-screen-section">
+        <div class="section-header">
+          <div>
+            <p class="section-label">VER TODO</p>
+            <h2 class="section-title" id="collection-title">Colección completa</h2>
+          </div>
+        </div>
+        <div class="collection-grid" id="collection-grid"></div>
+      </section>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════
+       SCREEN: IA POSES
+  ═══════════════════════════════════════════ -->
+  <div class="screen" id="screen-ia">
+    <div class="screen-scroll">
+      <header class="app-header">
+        <div class="logo-block">
+          <span class="logo-mamb">MAMB</span>
+          <span class="logo-sub">Museo de Arte Moderno de Barranquilla</span>
+        </div>
+        <div class="header-actions">
+          <button class="icon-btn">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/>
+              <path d="M13.73 21a2 2 0 0 1-3.46 0"/>
+            </svg>
+          </button>
+          <button class="avatar-btn">
+            <img src="https://i.pravatar.cc/40?img=5" alt="Avatar" />
+          </button>
+        </div>
+      </header>
+      <div class="ia-hero">
+        <p class="ia-hero-label">INTELIGENCIA ARTIFICIAL</p>
+        <h2 class="ia-hero-title">Detector de Poses</h2>
+        <p class="ia-hero-sub">Muéstrale al museo cómo te sientes frente al arte. Activa la cámara y el modelo detectará tu pose en tiempo real.</p>
+      </div>
+      <div class="ia-camera-block">
+        <div class="ia-canvas-wrap" id="ia-canvas-wrap">
+          <canvas id="ia-canvas"></canvas>
+          <div class="ia-scan-line"></div>
+          <div class="ia-corner tl"></div>
+          <div class="ia-corner tr"></div>
+          <div class="ia-corner bl"></div>
+          <div class="ia-corner br"></div>
+          <div class="ia-placeholder" id="ia-placeholder">
+            <span class="ia-placeholder-icon">🤸</span>
+            <span>Cámara inactiva</span>
+          </div>
+          <div class="ia-status-badge" id="ia-status">● Esperando inicio</div>
+        </div>
+      </div>
+      <button class="ia-start-btn" id="ia-btn-start" onclick="iaInit()">▶&nbsp; Iniciar detección</button>
+      <div class="ia-top-card" id="ia-top-card">
+        <div class="ia-top-left">
+          <p class="ia-top-badge">▲ Mayor confianza</p>
+          <p class="ia-top-name" id="ia-top-name">—</p>
+        </div>
+        <div class="ia-top-pct" id="ia-top-pct">0%</div>
+      </div>
+      <div class="ia-bars-block" id="ia-label-container"></div>
+      <div class="ia-info-pill">
+        Modelo entrenado con <strong>Teachable Machine</strong> · Poses detectadas:
+        <strong>pensando</strong> y <strong>sorprendido</strong>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════
+       SCREEN: MEMORIA ARTÍSTICA
+  ═══════════════════════════════════════════ -->
+  <div class="screen" id="screen-memoria">
+    <div class="screen-scroll">
+      <header class="app-header">
+        <div class="logo-block">
+          <span class="logo-mamb">MAMB</span>
+          <span class="logo-sub">Museo de Arte Moderno de Barranquilla</span>
+        </div>
+        <div class="header-actions">
+          <button class="icon-btn" onclick="goBack()" aria-label="Volver">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M19 12H5"/><path d="M12 19l-7-7 7-7"/>
+            </svg>
+          </button>
+        </div>
+      </header>
+
+      <section class="home-section collection-screen-section">
+        <div class="section-header">
+          <div>
+            <p class="section-label">Minijuego</p>
+            <h2 class="section-title">Memoria artística</h2>
+          </div>
+          <button class="back-pill-desk" onclick="goBack()">← Volver</button>
+        </div>
+
+        <div class="mg-desktop-layout">
+
+          <!-- Columna izquierda: controles + tablero -->
+          <div class="mg-left-col">
+            <div class="mg-level-row">
+              <button class="mg-lvl-btn active" onclick="mgSetLevel(0,this)">Fácil · 4</button>
+              <button class="mg-lvl-btn" onclick="mgSetLevel(1,this)">Medio · 8</button>
+              <button class="mg-lvl-btn" onclick="mgSetLevel(2,this)">Difícil · 12</button>
+            </div>
+            <div class="mg-stats-row">
+              <span id="mg-pairs">0/2 pares</span>
+              <span id="mg-timer">0s</span>
+            </div>
+            <div class="mg-board cols4" id="mg-board"></div>
+          </div>
+
+          <!-- Columna derecha: dato + victoria + info -->
+          <div class="mg-right-col">
+
+            <div class="mg-dato" id="mg-dato">
+              <div class="mg-dato-icon">💡</div>
+              <div class="mg-dato-text">
+                <p class="mg-dato-label">Dato del juego</p>
+                <p id="mg-dato-msg">Encuentra una pareja para descubrir un dato curioso.</p>
+              </div>
+            </div>
+
+            <div class="mg-win hidden" id="mg-win">
+              <p>🎉</p>
+              <h3>¡Excelente explorador del arte!</h3>
+              <p>Tiempo: <span id="mg-win-time"></span> · Intentos: <span id="mg-win-tries"></span></p>
+              <button onclick="mgRestart()">Jugar otra vez</button>
+            </div>
+
+            <div class="mg-info-panel">
+              <p class="mg-info-label">CÓMO JUGAR</p>
+              <ul class="mg-how-list">
+                <li><span class="mg-how-icon">👁️</span> Voltea dos cartas buscando parejas iguales</li>
+                <li><span class="mg-how-icon">🎯</span> Encuentra todas las parejas para ganar</li>
+                <li><span class="mg-how-icon">💡</span> Cada pareja revela un dato curioso del arte</li>
+                <li><span class="mg-how-icon">⏱️</span> Intenta batir tu mejor tiempo</li>
+              </ul>
+            </div>
+
+            <div class="mg-levels-info">
+              <p class="mg-info-label">NIVELES</p>
+              <div class="mg-lvl-info-row">
+                <div class="mg-lvl-info-card">
+                  <span class="mg-lvl-dot easy"></span>
+                  <div>
+                    <p class="mg-lvl-info-name">Fácil</p>
+                    <p class="mg-lvl-info-sub">4 pares · Ideal para comenzar</p>
+                  </div>
+                </div>
+                <div class="mg-lvl-info-card">
+                  <span class="mg-lvl-dot mid"></span>
+                  <div>
+                    <p class="mg-lvl-info-name">Medio</p>
+                    <p class="mg-lvl-info-sub">8 pares · Pon a prueba tu memoria</p>
+                  </div>
+                </div>
+                <div class="mg-lvl-info-card">
+                  <span class="mg-lvl-dot hard"></span>
+                  <div>
+                    <p class="mg-lvl-info-name">Difícil</p>
+                    <p class="mg-lvl-info-sub">12 pares · Solo para expertos</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </section>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════
+       BOTTOM NAV
+  ═══════════════════════════════════════════ -->
+  <nav class="bottom-nav" id="bottom-nav">
+    <div class="desktop-logo" aria-hidden="true">
+      <span class="logo-mamb">MAMB</span>
+      <span class="logo-sub">Museo de Arte Moderno de Barranquilla</span>
+    </div>
+    <button class="nav-btn active" data-screen="screen-inicio" onclick="navigate('screen-inicio', this)">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+      <span>Inicio</span>
+    </button>
+    <button class="nav-btn" data-screen="screen-galeria" onclick="navigate('screen-galeria', this)">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+      <span>Galería</span>
+    </button>
+    <button class="nav-btn nav-upload-btn" data-screen="screen-subir" onclick="navigate('screen-subir', this)">
+      <div class="upload-circle">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5"><polyline points="16 16 12 12 8 16"/><line x1="12" y1="12" x2="12" y2="21"/><path d="M20.39 18.39A5 5 0 0 0 18 9h-1.26A8 8 0 1 0 3 16.3"/></svg>
+      </div>
+      <span>Subir</span>
+    </button>
+    <button class="nav-btn" data-screen="screen-perfil" onclick="navigate('screen-perfil', this)">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+      <span>Perfil</span>
+    </button>
+    <button class="nav-btn" data-screen="screen-about" onclick="navigate('screen-about', this)">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+      <span>Sobre Nosotros</span>
+    </button>
+    <button class="nav-btn" data-screen="screen-ia" onclick="navigate('screen-ia', this)">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <circle cx="12" cy="12" r="3"/>
+        <path d="M12 2v3M12 19v3M4.22 4.22l2.12 2.12M17.66 17.66l2.12 2.12M2 12h3M19 12h3M4.22 19.78l2.12-2.12M17.66 6.34l2.12-2.12"/>
+      </svg>
+      <span>IA Poses</span>
+    </button>
+  </nav>
+
+  <!-- ═══════════════════════════════════════════
+       AVATAR MODAL
+  ═══════════════════════════════════════════ -->
+  <div class="overlay hidden" id="avatar-overlay">
+    <div class="modal-sheet">
+      <div class="modal-head">
+        <h3>Seleccionar Avatar</h3>
+        <button onclick="closeAvatarModal()">✕</button>
+      </div>
+      <div class="avatar-grid">
+        <img src="https://i.pravatar.cc/60?img=1" class="av-opt" onclick="selectAvatar(this)" />
+        <img src="https://i.pravatar.cc/60?img=3" class="av-opt" onclick="selectAvatar(this)" />
+        <img src="https://i.pravatar.cc/60?img=8" class="av-opt" onclick="selectAvatar(this)" />
+        <img src="https://i.pravatar.cc/60?img=11" class="av-opt" onclick="selectAvatar(this)" />
+        <img src="https://i.pravatar.cc/60?img=15" class="av-opt" onclick="selectAvatar(this)" />
+        <img src="https://i.pravatar.cc/60?img=20" class="av-opt" onclick="selectAvatar(this)" />
+      </div>
+      <div class="modal-btns">
+        <button class="btn-cancel" onclick="closeAvatarModal()">Cancelar</button>
+        <button class="btn-confirm" onclick="confirmAvatar()">Confirmar</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast -->
+  <div class="toast" id="toast"></div>
+
+  <script src="/Backend/app.js"></script>
+</body>
+</html>
