@@ -1,410 +1,487 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MAMB — Museo de Arte Moderno de Barranquilla</title>
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@200;300;400;500&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="styles.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Museo de Arte Moderno de Barranquilla - Colección de arte latinoamericano y caribeño">
+  <title>Museo de Arte Moderno de Barranquilla - MAMB</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Jost:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-
-<nav id="navbar">
+<!-- NAVBAR FIJA -->
+<nav class="navbar">
+  <div class="navbar-container">
     <a href="#inicio" class="nav-logo">
-        MAMB <span class="badge">Barranquilla</span>
+      <img src="img/mamb-logo.png" alt="Museo de Arte Moderno de Barranquilla" class="nav-logo-img">
+      <span class="badge">Barranquilla</span>
     </a>
-    <ul class="nav-links">
-        <li><a href="#inicio">Inicio</a></li>
-        <li><a href="#artista">Artistas</a></li>
-        <li><a href="#about">Sobre Nosotros</a></li>
-    </ul>
-    <a href="../Frontend/index.html" class="nav-cta">Descargar App</a>
-    <button class="nav-hamburger" id="hamburger" aria-label="Menú">
-        <span></span><span></span><span></span>
+
+    <!-- Hamburger Menu Toggle -->
+    <button class="hamburger" id="hamburger-btn" aria-label="Abrir menú">
+      <span></span>
+      <span></span>
+      <span></span>
     </button>
+
+    <!-- Navigation Menu -->
+    <ul class="nav-menu" id="nav-menu">
+      <li><a href="#inicio" class="nav-link">Inicio</a></li>
+      <li><a href="#artistas" class="nav-link">Artistas</a></li>
+      <li><a href="#coleccion" class="nav-link">Colección</a></li>
+      <li><a href="#visita" class="nav-link">Visita</a></li>
+      <li><a href="#sobre" class="nav-link">Sobre el Museo</a></li>
+    </ul>
+
+    <a href="#" class="nav-btn-download" id="nav-download-btn">Descargar app</a>
+  </div>
 </nav>
 
-<div class="mobile-menu" id="mobileMenu">
-    <a href="#inicio" class="mobile-link">Inicio</a>
-    <a href="#artista" class="mobile-link">Artistas</a>
-    <a href="#servicios" class="mobile-link">Servicios</a>
-    <a href="#about" class="mobile-link">Sobre Nosotros</a>
-    <a href="../Frontend/index.html" class="nav-cta">Descargar App</a>
-</div>
+<!-- SECCIÓN HERO -->
+<section id="inicio" class="hero">
+  <div class="hero-content">
+    <h1 class="hero-title">Museo de Arte Moderno de Barranquilla</h1>
+    <p class="hero-subtitle">Acercando el arte moderno y contemporáneo al Caribe colombiano y al mundo</p>
+    <p class="hero-description">
+      Desde su creación en 1996, el MAMB se ha convertido en un espacio vital para la preservación, investigación y difusión del arte latinoamericano y caribeño. Nuestra colección de más de 350 obras reúne las voces más importantes del arte moderno y contemporáneo, surgidas a partir de las históricas Bienales Interamericanas de Arte de Barranquilla.
+    </p>
+    <button class="btn btn-primary" id="hero-download-btn">Descargar app</button>
+  </div>
+</section>
 
-<section id="inicio">
-    <div class="hero-left fade-up">
-        <span class="hero-eyebrow">Museo de Arte Moderno</span>
-        <h1 class="hero-title">
-            Arte que<br><em>transforma</em><br>el espíritu
-        </h1>
-        <p class="hero-desc">
-            Un espacio donde la cultura caribeña dialoga con el arte contemporáneo global. Colecciones únicas, exposiciones temporales y experiencias que perduran.
+<!-- SECCIÓN ARTISTAS DESTACADOS -->
+<section id="artistas" class="artistas">
+  <div class="container">
+    <h2 class="section-title">La Voz del Caribe en el Arte</h2>
+    <p class="section-subtitle">Artistas que han marcado la historia del arte latinoamericano</p>
+
+    <div class="artistas-grid">
+      <!-- ARTISTA DESTACADO 2026: Álvaro Cepeda Samudio -->
+      <article class="artista-card">
+       <img src="img/alvaro.png" alt="Álvaro Cepeda Samudio - Escritor y cineasta" class="artista-image">
+       <h3>Álvaro Cepeda Samudio</h3>
+        <p class="artista-periodo">(1926-1972)</p>
+        <p class="artista-destacado-label">🌟 Artista Destacado del MAMB 2026</p>
+        <p class="artista-description">
+          Uno de los narradores más innovadores de Colombia y figura clave del Grupo de Barranquilla, el legendario círculo intelectual que transformó las letras latinoamericanas junto a Gabriel García Márquez. Influenciado por Faulkner y Hemingway, Cepeda Samudio forjó un estilo directo, sin concesiones, profundamente caribeño. Su novela "La casa grande" (1962) narra la masacre de las bananeras desde una multiplicidad de voces, siendo considerada una obra maestra de la literatura colombiana. Además de escritor y periodista, fue cineasta y coleccionista de arte; su casa era un punto de encuentro para artistas, escritores y pensadores del Caribe.
         </p>
-        <div class="hero-stats">
-            <div class="stat">
-                <span class="stat-num">1.200+</span>
-                <span class="stat-label">Obras</span>
-            </div>
-            <div class="stat">
-                <span class="stat-num">38</span>
-                <span class="stat-label">Artistas</span>
-            </div>
-            <div class="stat">
-                <span class="stat-num">1969</span>
-                <span class="stat-label">Fundado</span>
-            </div>
-        </div>
+      </article>
+
+      <!-- ARTISTA 2: Alejandro Obregón -->
+      <article class="artista-card">
+       <img src="img/alejandro.jpg" alt="Alejandro Obregón - Pintor colombiano" class="artista-image">
+       <h3>Alejandro Obregón</h3>
+       <p class="artista-periodo">(1920-1992)</p>
+       <p class="artista-description">
+         Reconocido como una de las figuras más importantes del arte colombiano moderno, Obregón fue pionero en la integración de la poética del Caribe con las técnicas del arte moderno. Su obra explora la naturaleza, la violencia política y la identidad cultural del territorio caribeño, influyendo decisivamente en el movimiento artístico latinoamericano.
+       </p>
+      </article>
+
+      <!-- ARTISTA 3: Enrique Grau -->
+      <article class="artista-card">
+       <img src="img/enrique.jpg" alt="Enrique Grau - Pintor e ilustrador" class="artista-image">
+       <h3>Enrique Grau</h3>
+       <p class="artista-periodo">(1920-2004)</p>
+       <p class="artista-description">
+         Pintor e ilustrador colombiano cuya obra combinó figuración con elementos surrealistas. Grau capturó la identidad cultural del Caribe a través de personajes cotidianos, desarrollando un lenguaje visual único que conecta la tradición artística europea con la realidad latinoamericana.
+       </p>
+      </article>
+
+      <!-- ARTISTA 4: Álvaro Barrios -->
+      <article class="artista-card">
+       <img src="img/alvarob.jpg" alt="Álvaro Barrios - Artista conceptual" class="artista-image">
+       <h3>Álvaro Barrios</h3>
+       <p class="artista-periodo">(1945-)</p>
+       <p class="artista-description">
+         Artista multimedia cuya práctica ha abarcado pintura, video, instalación y arte conceptual. Barrios es reconocido por sus investigaciones críticas sobre la memoria, el territorio y la identidad caribeña, siendo una voz fundamental en el arte contemporáneo colombiano.
+       </p>
+      </article>
+
+      <!-- ARTISTA 5: Marco Mojica -->
+      <article class="artista-card">
+       <img src="img/marco.jpg" alt="Marco Mojica - Pintor barranquillero" class="artista-image">
+       <h3>Marco Mojica</h3>
+       <p class="artista-periodo">(1956-)</p>
+       <p class="artista-description">
+         Pintor y dibujante barranquillero cuya obra se centra en la exploración del paisaje y la figura humana. Mojica desarrolló un lenguaje visual que dialoga entre la abstracción y la representación, consolidándose como un referente del arte moderno caribeño.
+       </p>
+      </article>
+
+      <!-- ARTISTA 7: Omar Mendoza -->
+      <article class="artista-card">
+       <img src="img/omar.png" alt="Omar Mendoza - Artista visual" class="artista-image">
+       <h3>Omar Mendoza</h3>
+       <p class="artista-periodo">(1989-)</p>
+       <p class="artista-description">
+         Artista visual barranquillero cuya obra explora las relaciones entre forma, color y espacio. Mendoza es reconocido por su contribución al arte abstracto latinoamericano y su investigación continua sobre los lenguajes visuales del arte moderno.
+       </p>
+      </article>
+
+      <!-- ARTISTA 8: Patricia Quevedo -->
+      <article class="artista-card">
+       <img src="img/patti.jpg" alt="Patricia Quevedo - Artista multidisciplinaria" class="artista-image">
+       <h3>Patricia Quevedo</h3>
+       <p class="artista-periodo">(1965-)</p>
+       <p class="artista-description">
+         Artista multidisciplinaria cuyas prácticas abarcan pintura, textil y performance. Quevedo es reconocida por su exploración de la identidad de género, la memoria y la corporalidad, contribuyendo significativamente al arte contemporáneo del Caribe colombiano. Su trabajo con superficies cromáticas y geométricas refleja influencias de artistas cinéticos latinoamericanos.
+       </p>
+      </article>
     </div>
 
-    <div class="hero-right">
-        <div class="hero-art-grid">
-            <div class="art-panel art-p1">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/3/30/%22Violence%22_.webp" alt="Violencia · Alejandro Obregón" onerror="this.style.display='none'">
-            </div>
-            <div class="art-panel art-p2">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/8/82/Don_Sim%C3%B3n_en_San_Pedro_Alejandrino._Alejandro_Obreg%C3%B3n.Quinta_de_San_Pedro_Alejandrino.JPG" alt="Don Simón · Alejandro Obregón" onerror="this.style.display='none'">
-            </div>
-        </div>
-    </div>
+    <!-- COMENTARIO: Para agregar más artistas, replica la estructura de "artista-card" con su respectivo espacio para imagen y actualiza los datos -->
+  </div>
 </section>
 
-<section id="artista">
-    <div class="section-label fade-up">Artistas</div>
-    <h2 class="section-title fade-up">La voz del Caribe<br>en la literatura</h2>
+<!-- SECCIÓN COLECCIÓN / OBRAS -->
+<section id="coleccion" class="coleccion">
+  <div class="container">
+    <h2 class="section-title">Colección</h2>
+    <p class="section-subtitle">Obras maestras del arte latinoamericano y caribeño</p>
 
-    <div class="artist-layout fade-up">
-        <div class="artist-portrait">
-            <div class="portrait-frame">
-                <img
-                        src="https://fileswp.canalcapital.gov.co/wp-content/uploads/2026/04/08171839/alvaro-cepeda-samudio-vida-obra-influencia.webp"
-                        alt="Álvaro Cepeda Samudio"
-                        class="portrait-img"
-                        onerror="this.style.opacity='0'"
-                >
-            </div>
-            <div class="portrait-name-overlay">
-                <h3>Álvaro Cepeda Samudio</h3>
-                <span>Literatura · Cine · Barranquilla</span>
-            </div>
-            <div class="accent-block"></div>
-        </div>
-
-        <div class="artist-info">
-            <blockquote class="artist-quote">
-                "El Caribe no se puede inventar — apenas se puede recordar con la exactitud de quien lo ha vivido desde adentro."
-            </blockquote>
-            <p class="artist-bio">
-                Álvaro Cepeda Samudio (1926–1972) fue uno de los narradores más innovadores de Colombia y figura clave del Grupo de Barranquilla, el círculo intelectual que transformó las letras latinoamericanas junto a Gabriel García Márquez. Influenciado por Faulkner y Hemingway, forjó un estilo directo, sin concesiones, profundamente caribeño.
-            </p>
-            <p class="artist-bio">
-                Su novela <em>La casa grande</em> (1962), que narra la masacre de las bananeras desde una multiplicidad de voces, es considerada una de las obras maestras de la literatura colombiana. En 1954 codirigió <em>La langosta azul</em>, el primer cortometraje de vanguardia del Caribe colombiano, junto a García Márquez y Enrique Grau.
-            </p>
-            <div class="artist-tags">
-                <span class="tag">Literatura</span>
-                <span class="tag">Arte Caribeño</span>
-                <span class="tag">Cine</span>
-                <span class="tag">Periodismo</span>
-                <span class="tag">1926–1972</span>
-            </div>
-        </div>
+    <div class="coleccion-intro">
+      <p>
+        La colección del MAMB reúne más de 350 obras de arte moderno y contemporáneo colombiano y latinoamericano, con énfasis especial en artistas del Caribe surgidos a partir de las históricas Bienales Interamericanas de Arte. Nuestra colección se encuentra en continua expansión, integrando tanto a maestros nacionales e internacionales como a propuestas emergentes de nuevas generaciones de artistas que redefinen el panorama del arte caribeño.
+      </p>
     </div>
+
+    <div class="obras-grid">
+      <!-- OBRA 1 -->
+      <article class="obra-card">
+        <div class="obra-placeholder">
+          <!-- ESPACIO PARA IMAGEN: Inserta aquí una imagen de la obra -->
+          Imagen de la obra
+        </div>
+        <h3>Título de la Obra</h3>
+        <p class="obra-artista">Nombre del Artista</p>
+        <p class="obra-info">Año • Técnica / Soporte</p>
+        <p class="obra-description">
+          Descripción de la obra: su contexto histórico, técnica, relevancia dentro de la colección del MAMB y su importancia en el movimiento artístico latinoamericano.
+        </p>
+      </article>
+
+      <!-- OBRA 2 -->
+      <article class="obra-card">
+        <div class="obra-placeholder">
+          <!-- ESPACIO PARA IMAGEN: Inserta aquí una imagen de la obra -->
+          Imagen de la obra
+        </div>
+        <h3>Título de la Obra</h3>
+        <p class="obra-artista">Nombre del Artista</p>
+        <p class="obra-info">Año • Técnica / Soporte</p>
+        <p class="obra-description">
+          Descripción de la obra: su contexto histórico, técnica, relevancia dentro de la colección del MAMB y su importancia en el movimiento artístico latinoamericano.
+        </p>
+      </article>
+
+      <!-- OBRA 3 -->
+      <article class="obra-card">
+        <div class="obra-placeholder">
+          <!-- ESPACIO PARA IMAGEN: Inserta aquí una imagen de la obra -->
+          Imagen de la obra
+        </div>
+        <h3>Título de la Obra</h3>
+        <p class="obra-artista">Nombre del Artista</p>
+        <p class="obra-info">Año • Técnica / Soporte</p>
+        <p class="obra-description">
+          Descripción de la obra: su contexto histórico, técnica, relevancia dentro de la colección del MAMB y su importancia en el movimiento artístico latinoamericano.
+        </p>
+      </article>
+
+      <!-- OBRA 4 -->
+      <article class="obra-card">
+        <div class="obra-placeholder">
+          <!-- ESPACIO PARA IMAGEN: Inserta aquí una imagen de la obra -->
+          Imagen de la obra
+        </div>
+        <h3>Título de la Obra</h3>
+        <p class="obra-artista">Nombre del Artista</p>
+        <p class="obra-info">Año • Técnica / Soporte</p>
+        <p class="obra-description">
+          Descripción de la obra: su contexto histórico, técnica, relevancia dentro de la colección del MAMB y su importancia en el movimiento artístico latinoamericano.
+        </p>
+      </article>
+
+      <!-- OBRA 5 -->
+      <article class="obra-card">
+        <div class="obra-placeholder">
+          <!-- ESPACIO PARA IMAGEN: Inserta aquí una imagen de la obra -->
+          Imagen de la obra
+        </div>
+        <h3>Título de la Obra</h3>
+    </div>
+
+    <!-- COMENTARIO: Para agregar nuevas obras, replica la estructura de "obra-card" con su respectivo espacio para imagen y actualiza: Título, Artista, Año, Técnica/Soporte y descripción -->
+  </div>
 </section>
 
-<section id="servicios">
-    <div class="section-label fade-up">Servicios</div>
-    <h2 class="section-title fade-up">Lo que ofrecemos</h2>
-    <div class="services-carousel fade-up">
-        <div class="services-track-wrap">
-            <div class="services-track">
-                <div class="service-card">
-                    <div class="service-card-img art-p1">
-                        <img src="https://upload.wikimedia.org/wikipedia/commons/c/c5/MuralObregon.JPG" alt="Museo MAMB" onerror="this.style.display='none'">
-                    </div>
-                    <div class="service-card-body">
-                        <span class="service-icon">🕐</span>
-                        <h3 class="service-title">Horarios</h3>
-                        <div class="service-schedule">
-                            <div class="service-schedule-row">
-                                <span class="service-day">Martes — Viernes</span>
-                                <span class="service-time">10:00 am — 7:00 pm</span>
-                            </div>
-                            <div class="service-schedule-row">
-                                <span class="service-day">Sábados</span>
-                                <span class="service-time">10:00 am — 1:00 pm</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="service-card">
-                    <div class="service-card-img art-p2">
-                        <img src="https://upload.wikimedia.org/wikipedia/commons/8/82/Don_Sim%C3%B3n_en_San_Pedro_Alejandrino._Alejandro_Obreg%C3%B3n.Quinta_de_San_Pedro_Alejandrino.JPG" alt="Visitas guiadas" onerror="this.style.display='none'">
-                    </div>
-                    <div class="service-card-body">
-                        <span class="service-icon">◎</span>
-                        <h3 class="service-title">Visitas Guiadas</h3>
-                        <p class="service-desc">Recorre nuestras salas con guías especializados que te introducen al universo del arte moderno y contemporáneo del Caribe colombiano.</p>
-                    </div>
-                </div>
-                <div class="service-card">
-                    <div class="service-card-img art-p3">
-                        <img src="https://www.entrerios.gov.ar/cultura/wp-content/uploads/2026/05/artes-visuales-1080x675.jpg" alt="Encuentros culturales" onerror="this.style.display='none'">
-                    </div>
-                    <div class="service-card-body">
-                        <span class="service-icon">✦</span>
-                        <h3 class="service-title">Encuentros</h3>
-                        <p class="service-desc">Espacios de diálogo y reflexión entre artistas, académicos y el público general en torno al arte y la cultura contemporánea.</p>
-                    </div>
-                </div>
-                <div class="service-card">
-                    <div class="service-card-img art-p4">
-                        <img src="https://www.fundacionmapfre.org/media/arte-cultura/arte-digital/encuentros/encuentros-1194x585-1.jpg" alt="Talleres artísticos" onerror="this.style.display='none'">
-                    </div>
-                    <div class="service-card-body">
-                        <span class="service-icon">⬡</span>
-                        <h3 class="service-title">Talleres</h3>
-                        <p class="service-desc">Actividades prácticas para niños, jóvenes y adultos. Aprende técnicas artísticas y conecta con el arte desde la experiencia creativa.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="carousel-controls">
-            <button class="carousel-btn" id="prevBtn">&#8592;</button>
-            <div class="carousel-dots">
-                <span class="dot active"></span>
-                <span class="dot"></span>
-                <span class="dot"></span>
-                <span class="dot"></span>
-            </div>
-            <button class="carousel-btn" id="nextBtn">&#8594;</button>
-        </div>
+<!-- SECCIÓN VISITA / SERVICIOS -->
+<section id="visita" class="visita">
+  <div class="container">
+    <h2 class="section-title">Visita al Museo</h2>
+    <p class="section-subtitle">Información y servicios para tu experiencia en el MAMB</p>
+
+    <div class="servicios-grid">
+      <!-- HORARIOS Y BOLETERÍA -->
+      <div class="servicio-card">
+        <h3>Horarios y Boletería</h3>
+        <ul class="horarios-list">
+          <li>
+            <strong>Martes a viernes:</strong><br>
+            10:00am - 19:00pm
+          </li>
+          <li>
+            <strong>Sábados:</strong><br>
+            10:00am - 13:00pm
+          </li>
+          <li>
+            <strong>Domingos </strong><br>
+            Cerrado
+          </li>
+        </ul>
+        <p class="servicio-nota">Consulta en línea para tarifas especiales y promociones</p>
+      </div>
+
+      <!-- VISITAS GUIADAS -->
+      <div class="servicio-card">
+        <h3>Visitas Guiadas</h3>
+        <p>
+          Nuestros expertos en arte ofrecen recorridos especializados a través de la colección del MAMB. Las visitas guiadas proporcionan contexto histórico y cultural sobre las obras maestras del arte latinoamericano y caribeño.
+        </p>
+        <p class="servicio-nota">Reserva con anticipación contactando al museo</p>
+      </div>
+
+      <!-- PROGRAMAS EDUCATIVOS -->
+      <div class="servicio-card">
+        <h3>Programas Educativos</h3>
+        <p>
+          Talleres, seminarios y actividades culturales para todas las edades. Aprende sobre arte moderno y contemporáneo a través de experiencias interactivas y enriquecedoras.
+        </p>
+        <p class="servicio-nota">Consulta nuestro calendario de actividades</p>
+      </div>
+
+      <!-- INFORMACIÓN DE CONTACTO -->
+      <div class="servicio-card">
+        <h3>Ubicación y Contacto</h3>
+        <address>
+          <p><strong>Dirección:</strong><br>
+            Calle 76#54-01 <br>
+            Ed. World Trade Center. L B3<br>
+            Barranquilla, Colombia</p>
+          <p><strong>Teléfono:</strong><br>
+            +57 32252275408</p>
+        </address>
+      </div>
     </div>
+  </div>
 </section>
 
-<section id="about">
-    <div class="section-label fade-up">Sobre Nosotros · Nosotros</div>
-    <h2 class="section-title fade-up">Un siglo de arte<br>y cultura viva</h2>
+<!-- SECCIÓN SOBRE EL MUSEO -->
+<section id="sobre" class="sobre">
+  <div class="container">
+    <h2 class="section-title">Sobre el Museo</h2>
 
-    <div class="about-grid fade-up">
-        <div class="about-text">
-            <p>
-                El Museo de Arte Moderno de Barranquilla nació en 1969 con una misión clara: ser el hogar del arte moderno y contemporáneo en la Costa Caribe colombiana. Desde sus salas conviven obras de maestros nacionales e internacionales con propuestas emergentes de nuevas generaciones de artistas.
-            </p>
-            <p>
-                Ubicados en el corazón cultural de Barranquilla, somos un punto de encuentro entre la tradición y la vanguardia, entre lo local y lo universal. Cada visita es una invitación a reimaginar el mundo desde la perspectiva del arte.
-            </p>
-            <p>
-                Nuestros programas educativos, talleres y eventos conectan a más de 80.000 personas al año con el arte como herramienta de transformación social y cultural.
-            </p>
+    <div class="sobre-content">
+      <div class="sobre-text">
+        <h3>Nuestra Historia</h3>
+        <p>
+          El Museo de Arte Moderno de Barranquilla nace del legado de las Bienales Interamericanas de Arte, las históricas exposiciones que transformaron a Barranquilla en epicentro cultural del Caribe en los años 60 y 70. Aunque el museo comenzó a funcionar desde 1974, fue institucionalmente creado en 1996 e inaugurado en 1994, consolidándose como el principal espacio dedicado a la preservación y difusión del arte latinoamericano y caribeño.
+        </p>
 
-        </div>
+        <h3>Nuestra Misión</h3>
+        <p>
+          Conservar, investigar y difundir el arte moderno y contemporáneo con especial énfasis en la producción artística del Caribe colombiano. El MAMB se compromete a ser un puente entre el patrimonio cultural del Caribe y el arte contemporáneo, promoviendo la comprensión y apreciación del arte latinoamericano en toda su diversidad y profundidad.
+        </p>
 
-        <div class="about-cards">
-            <div class="about-card">
-                <span class="about-card-icon">🖼</span>
-                <h4>Colecciones Permanentes</h4>
-                <p>Más de 1.200 obras que abarcan pintura, escultura, fotografía y arte digital colombiano.</p>
-            </div>
-            <div class="about-card">
-                <span class="about-card-icon">✦</span>
-                <h4>Exposiciones Temporales</h4>
-                <p>Un programa dinámico con 8 exposiciones rotativas al año, nacionales e internacionales.</p>
-            </div>
-            <div class="about-card">
-                <span class="about-card-icon">◎</span>
-                <h4>Educación y Talleres</h4>
-                <p>Programas para niños, jóvenes y adultos. Arte como puerta de entrada al pensamiento crítico.</p>
-            </div>
-            <div class="about-card">
-                <span class="about-card-icon">⬡</span>
-                <h4>Residencias Artísticas</h4>
-                <p>Apoyamos artistas emergentes con nuestro programa de residencias en Barranquilla.</p>
-            </div>
-        </div>
+        <h3>Presente y Futuro</h3>
+        <p>
+          Actualmente funcionamos en una sede transitoria mientras avanzamos en la construcción de nuestra sede definitiva en el Parque Cultural del Caribe. Continuamos expandiendo nuestra colección de más de 350 obras de arte latinoamericano, fortaleciendo nuestros programas educativos y consolidándonos como un centro fundamental de investigación y promoción del arte moderno y contemporáneo del Caribe.
+        </p>
+      </div>
     </div>
+  </div>
 </section>
 
-<section id="descargar">
-    <div class="app-section-inner">
-        <div class="app-mockup fade-up">
-            <div class="phone-back"></div>
-            <div class="phone-back-2"></div>
-            <div class="phone-frame">
-                <div class="phone-notch"></div>
-                <div class="phone-screen">
-                    <div class="phone-logo">Museo<br>MAMB</div>
-                    <div class="phone-logo-sub">Arte Moderno · Barranquilla</div>
-                    <div class="phone-divider"></div>
-                    <div class="phone-ui-elem"></div>
-                    <div class="phone-ui-elem" style="height:80px;"></div>
-                    <div class="phone-ui-sm"></div>
-                    <div class="phone-ui-elem" style="height:44px;"></div>
-                </div>
-            </div>
-        </div>
-
-        <div class="app-info fade-up">
-            <div class="section-label">Descarga la App</div>
-            <h2 class="section-title">El museo en<br>la palma de<br><em style="font-family:'Cormorant Garamond',serif;font-style:italic;color:var(--accent);">tu mano</em></h2>
-            <p class="app-desc">
-                Lleva el MAMB contigo a todas partes. Explora la colección completa, lee sobre cada obra, escucha audioguías de los artistas y planifica tu próxima visita desde tu teléfono.
-            </p>
-            <div class="store-buttons">
-                <a href="#" class="store-btn">
-                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98l-.09.06c-.22.14-2.18 1.27-2.16 3.8.02 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/>
-                    </svg>
-                    <div class="store-btn-text">
-                        <small>Descargar en</small>
-                        <strong>App Store</strong>
-                    </div>
-                </a>
-
-                <a href="#" class="store-btn">
-                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M3.18 23.76c.3.17.66.2 1 .08l12.1-6.97-2.56-2.56zm15.9-10.64L16.44 11.5 13.6 14.33l2.79 2.79 2.7-1.55a1.5 1.5 0 0 0 0-2.45zM3 1.15A1.5 1.5 0 0 0 2.5 2.4v19.2a1.5 1.5 0 0 0 .5 1.15l.09.08 10.76-10.76v-.24zm10.56 9.42L3.09.48A1.5 1.5 0 0 0 3 .57l.06.06 10.5 10.5z" fill-rule="evenodd"/>
-                    </svg>
-                    <div class="store-btn-text">
-                        <small>Disponible en</small>
-                        <strong>Google Play</strong>
-                    </div>
-                </a>
-            </div>
-        </div>
-    </div>
+<!-- SECCIÓN DESCARGA DE APP -->
+<section id="app" class="app-section">
+  <div class="container">
+    <h2>Descarga Nuestra Aplicación</h2>
+    <p>Accede a la colección del MAMB desde tu dispositivo móvil</p>
+    <button class="btn btn-primary btn-large" id="app-download-btn">Descargar app</button>
+  </div>
 </section>
 
-<footer>
-    <div class="footer-top">
-        <div class="footer-brand">
-            <a href="#inicio" class="nav-logo">MAMB <span class="badge" style="border-color:rgba(196,168,130,0.35);color:var(--brown-light);">Barranquilla</span></a>
-            <p>Calle 34 #43-31, El Prado<br>Barranquilla, Colombia<br>+57 (5) 379-3888</p>
-        </div>
-        <div class="footer-col">
-            <h5>Museo</h5>
-            <ul>
-                <li><a href="#inicio">Inicio</a></li>
-                <li><a href="#artista">Artistas</a></li>
-                <li><a href="#servicios">Servicios</a></li>
-                <li><a href="#about">Sobre Nosotros</a></li>
-            </ul>
-        </div>
-        <div class="footer-col">
-            <h5>Visita</h5>
-            <ul>
-                <li><a href="#">Entradas</a></li>
-                <li><a href="#">Grupos</a></li>
-                <li><a href="#">Educación</a></li>
-                <li><a href="#">Tienda</a></li>
-            </ul>
-        </div>
-        <div class="footer-col">
-            <h5>App</h5>
-            <ul>
-                <li><a href="../Frontend/index.html">Descargar App</a></li>
-                <li><a href="#">Audioguías</a></li>
-                <li><a href="#">Colección Digital</a></li>
-                <li><a href="#">Contáctenos</a></li>
-            </ul>
-        </div>
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <!-- Información del museo -->
+      <div class="footer-section">
+        <a href="#inicio" class="footer-logo">
+          <img src="img/mamb-logo.png" alt="Museo de Arte Moderno de Barranquilla" class="nav-logo-img">
+          <span class="badge">Barranquilla</span>
+        </a>
+        <p class="footer-museum-name">Museo de Arte Moderno de Barranquilla</p>
+      </div>
+
+      <!-- Enlaces rápidos -->
+      <div class="footer-section">
+        <h4>Enlaces Rápidos</h4>
+        <ul class="footer-links">
+          <li><a href="#inicio">Inicio</a></li>
+          <li><a href="#artistas">Artistas</a></li>
+          <li><a href="#coleccion">Colección</a></li>
+          <li><a href="#visita">Visita</a></li>
+          <li><a href="#sobre">Sobre el Museo</a></li>
+        </ul>
+      </div>
+
+      <!-- Contacto -->
+      <div class="footer-section">
+        <h3>Contacto</h3>
+        <address>
+          <p>Calle 76#54-01 Ed. World Trade Center. L B3<br>
+            Barranquilla, Colombia</p>
+          <p>Tel: +57 3225275408</p>
+        </address>
+      </div>
+
+      <!-- Descarga -->
+      <div class="footer-section">
+        <h4>Descarga</h4>
+        <button class="btn btn-secondary" id="footer-download-btn">Descargar app</button>
+      </div>
     </div>
+
+    <!-- Copyright -->
     <div class="footer-bottom">
-        <span>© 2025 Museo de Arte Moderno de Barranquilla. Todos los derechos reservados.</span>
-        <span>Barranquilla, Colombia · Arte · Cultura · Identidad</span>
+      <div class="footer-socials">
+        <p>Síguenos en redes sociales:</p>
+        <ul class="social-links">
+          <li>
+            <a href="https://www.instagram.com/mambq_museo/" target="_blank" rel="noopener noreferrer" title="Instagram del MAMB">
+              <span class="social-icon">📷</span> Instagram
+            </a>
+          </li>
+          <li>
+            <a href="https://www.facebook.com/Museo-de-Arte-Moderno-de-Barranquilla/" target="_blank" rel="noopener noreferrer" title="Facebook del MAMB">
+              <span class="social-icon">👥</span> Facebook
+            </a>
+          </li>
+        </ul>
+      </div>
+      <p>&copy; 2026 Museo de Arte Moderno de Barranquilla. Todos los derechos reservados.</p>
     </div>
+  </div>
 </footer>
 
+<!-- MODAL DE CONFIRMACIÓN PARA DESCARGAR APP -->
+<div id="app-modal" class="modal">
+  <div class="modal-content">
+    <button class="modal-close" id="modal-close">&times;</button>
+    <h2>Descargar Aplicación</h2>
+    <p>¿Estás seguro de que quieres descargar la aplicación del MAMB?</p>
+    <div class="modal-buttons">
+      <button class="btn btn-secondary" id="modal-cancel">Cancelar</button>
+      <button class="btn btn-primary" id="modal-install">Instalar</button>
+    </div>
+  </div>
+</div>
+
 <script>
-    const nav = document.getElementById('navbar');
-    const hamburger = document.getElementById('hamburger');
-    const mobileMenu = document.getElementById('mobileMenu');
+  // CONFIGURACIÓN: URL de descarga de la aplicación
+  const APP_DOWNLOAD_URL = '../Frontend/index.html';
 
-    window.addEventListener('scroll', () => {
-        nav.classList.toggle('scrolled', window.scrollY > 40);
+  // Obtener elementos del DOM
+  const hamburgerBtn = document.getElementById('hamburger-btn');
+  const navMenu = document.getElementById('nav-menu');
+  const navLinks = document.querySelectorAll('.nav-link');
+  const appModal = document.getElementById('app-modal');
+  const modalCancel = document.getElementById('modal-cancel');
+  const modalClose = document.getElementById('modal-close');
+  const modalInstall = document.getElementById('modal-install');
+
+  // Botones de descarga (hay múltiples en la página)
+  const downloadBtns = document.querySelectorAll(
+          '#nav-download-btn, #hero-download-btn, #app-download-btn, #footer-download-btn'
+  );
+
+  // FUNCIONALIDAD: Hamburger menu toggle
+  hamburgerBtn.addEventListener('click', () => {
+    hamburgerBtn.classList.toggle('active');
+    navMenu.classList.toggle('active');
+  });
+
+  // Cerrar menú cuando se hace clic en un link
+  navLinks.forEach(link => {
+    link.addEventListener('click', () => {
+      hamburgerBtn.classList.remove('active');
+      navMenu.classList.remove('active');
     });
+  });
 
-    hamburger.addEventListener('click', () => {
-        hamburger.classList.toggle('active');
-        mobileMenu.classList.toggle('open');
-        document.body.style.overflow = mobileMenu.classList.contains('open') ? 'hidden' : '';
+  // FUNCIONALIDAD: Modal de descarga de app
+  function openAppModal() {
+    appModal.style.display = 'flex';
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeAppModal() {
+    appModal.style.display = 'none';
+    document.body.style.overflow = 'auto';
+  }
+
+  // Event listeners para abrir modal
+  downloadBtns.forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      e.preventDefault();
+      openAppModal();
     });
+  });
 
-    mobileMenu.querySelectorAll('a').forEach(link => {
-        link.addEventListener('click', () => {
-            hamburger.classList.remove('active');
-            mobileMenu.classList.remove('open');
-            document.body.style.overflow = '';
-        });
-    });
+  // Event listeners para cerrar modal
+  modalCancel.addEventListener('click', closeAppModal);
+  modalClose.addEventListener('click', closeAppModal);
 
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(e => {
-            if (e.isIntersecting) {
-                e.target.classList.add('visible');
-                const siblings = e.target.parentElement?.querySelectorAll('.fade-up');
-                if (siblings) {
-                    siblings.forEach((el, i) => {
-                        setTimeout(() => el.classList.add('visible'), i * 120);
-                    });
-                }
-            }
-        });
-    }, { threshold: 0.12 });
+  // Instalar aplicación
+  modalInstall.addEventListener('click', () => {
+    window.location.href = APP_DOWNLOAD_URL;
+  });
 
-    document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
-
-    // Carousel
-    const track = document.querySelector('.services-track');
-    const dots = document.querySelectorAll('.dot');
-    const prevBtn = document.getElementById('prevBtn');
-    const nextBtn = document.getElementById('nextBtn');
-    const trackWrap = document.querySelector('.services-track-wrap');
-    let current = 0;
-    const total = 4;
-    const gapPx = 16; // 1rem en píxeles
-
-    function updateCarousel() {
-        const cardWidth = trackWrap.offsetWidth;
-        const offset = current * (cardWidth + gapPx);
-        track.style.transform = `translateX(-${offset}px)`;
-        dots.forEach((d, i) => d.classList.toggle('active', i === current));
+  // Cerrar modal al hacer clic fuera
+  appModal.addEventListener('click', (e) => {
+    if (e.target === appModal) {
+      closeAppModal();
     }
+  });
 
-    prevBtn.addEventListener('click', () => {
-        current = (current - 1 + total) % total;
-        updateCarousel();
+  // FUNCIONALIDAD: Animación de fade-up en scroll
+  const observerOptions = {
+    threshold: 0.1,
+    rootMargin: '0px 0px -100px 0px'
+  };
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('fade-up');
+        observer.unobserve(entry.target);
+      }
     });
+  }, observerOptions);
 
-    nextBtn.addEventListener('click', () => {
-        current = (current + 1) % total;
-        updateCarousel();
-    });
+  // Observar todas las tarjetas y secciones
+  document.querySelectorAll(
+          '.artista-card, .obra-card, .servicio-card, section'
+  ).forEach(el => {
+    observer.observe(el);
+  });
 
-    dots.forEach((d, i) => d.addEventListener('click', () => {
-        current = i;
-        updateCarousel();
-    }));
-
-    // Touch swipe for carousel
-    let touchStartX = 0;
-    trackWrap.addEventListener('touchstart', (e) => {
-        touchStartX = e.touches[0].clientX;
-    }, { passive: true });
-    trackWrap.addEventListener('touchend', (e) => {
-        const diff = touchStartX - e.changedTouches[0].clientX;
-        if (Math.abs(diff) > 50) {
-            if (diff > 0) { current = (current + 1) % total; }
-            else { current = (current - 1 + total) % total; }
-            updateCarousel();
-        }
-    });
-
-    window.addEventListener('resize', () => {
-        current = 0;
-        updateCarousel();
-    });
-
-    updateCarousel();
+  // Cerrar modal con tecla Escape
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && appModal.style.display === 'flex') {
+      closeAppModal();
+    }
+  });
 </script>
 </body>
 </html>
