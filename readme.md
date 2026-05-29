@@ -1,171 +1,137 @@
-# 🎨 MAMB - Museo de Arte Moderno de Barranquilla
+# MAMBQ
 
-Plataforma digital integral para la gestión, visualización y administración del Museo de Arte Moderno de Barranquilla. Sistema completo con backend, frontend web y aplicación móvil.
+[![HTML5](https://img.shields.io/badge/HTML5-E34C26?style=flat&logo=html5&logoColor=white)](https://html.spec.whatwg.org/)
+[![CSS3](https://img.shields.io/badge/CSS3-1572B6?style=flat&logo=css3&logoColor=white)](https://www.w3.org/Style/CSS/)
+[![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=flat&logo=javascript&logoColor=black)](https://developer.mozilla.org/es/docs/Web/JavaScript)
+[![Node.js](https://img.shields.io/badge/Node.js-339933?style=flat&logo=node.js&logoColor=white)](https://nodejs.org/)
+[![Express](https://img.shields.io/badge/Express-000000?style=flat&logo=express&logoColor=white)](https://expressjs.com/)
+[![PostgreSQL](https://img.shields.io/badge/PostgreSQL-4169E1?style=flat&logo=postgresql&logoColor=white)](https://www.postgresql.org/)
+[![TensorFlow](https://img.shields.io/badge/TensorFlow-FF6F00?style=flat&logo=tensorflow&logoColor=white)](https://www.tensorflow.org/)
+[![PWA](https://img.shields.io/badge/PWA-5A0FC8?style=flat&logo=pwa&logoColor=white)](https://web.dev/progressive-web-apps/)
+[![License](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
----
+Plataforma digital del Museo de Arte Moderno de Barranquilla. MAMBQ combina una interfaz web PWA con un backend en Node.js + PostgreSQL, integrando IA para deteccion de poses con Teachable Machine y TensorFlow.js, juegos interactivos y una galeria virtual donde los visitantes pueden explorar y subir obras.
 
-## 📋 Tabla de Contenidos
+## Que incluye
 
-- [Descripción](#descripción)
-- [Características](#características)
-- [Tecnologías](#tecnologías)
-- [Instalación](#instalación)
-- [Estructura del Proyecto](#estructura-del-proyecto)
-- [Uso](#uso)
-- [Configuración](#configuración)
-- [API REST](#api-rest)
-- [Contribución](#contribución)
-- [Licencia](#licencia)
+- `frontend/index.html`: aplicacion principal single-page con 9 pantallas (inicio, galeria, subir obra, juego de memoria, IA de poses, perfil, colecciones, about, detalle de obra).
+- `frontend/`: recursos de la app (CSS, JS, Service Worker, manifest PWA, iconos).
+- `backend/`: API REST con Express, PostgreSQL, JWT, Multer para carga de imagenes.
+- `Landing MAMB/`: landing page estatica del museo con informacion de artistas destacados.
 
----
+## Caracteristicas clave
 
-## 📝 Descripción
+- 🏛️ Galeria virtual con obras del museo y obras subidas por visitantes.
+- 🎨 Subida de obras por visitantes con moderacion de contenido.
+- 🤖 Deteccion de poses en tiempo real con Teachable Machine + TensorFlow.js.
+- 🧠 Juego de memoria con datos curiosos sobre pinturas famosas.
+- ❤️ Sistema de likes y ratings (1-5 estrellas) para obras.
+- 🔍 Busqueda y filtros por tecnica (Oleo, Acuarela, Acrilico, Mixta, Escultura).
+- 📱 PWA instalable con Service Worker y soporte offline parcial.
+- 🔐 Autenticacion JWT y headers de seguridad con Helmet.
+- 👤 Sistema de avatares y perfiles de visitante.
 
-MAMB es una plataforma web y móvil diseñada para modernizar la gestión del Museo de Arte Moderno de Barranquilla. Permite a los administradores gestionar obras de arte, usuarios y contenido del museo, mientras que los visitantes pueden explorar el catálogo en la web o a través de una aplicación móvil.
-
----
-
-## ✨ Características
-
-### Backend
-- ✅ API REST robusta con Express.js
-- ✅ Autenticación y autorización con JWT
-- ✅ Base de datos PostgreSQL
-- ✅ Gestión segura de contraseñas con bcrypt
-- ✅ Carga de archivos (imágenes, documentos)
-- ✅ CORS habilitado para múltiples clientes
-- ✅ Health check endpoint
-
-### Frontend Web
-- ✅ Interfaz moderna y responsive
-- ✅ Integración con API REST
-- ✅ Gestión de obras de arte
-- ✅ Autenticación de usuarios
-
-### Aplicación Móvil (Flutter)
-- ✅ Experiencia nativa en iOS y Android
-- ✅ Navegación intuitiva
-- ✅ Sincronización con backend
-
----
-
-## 🛠 Tecnologías
-
-| Componente | Tecnología |
-|-----------|-----------|
-| **Backend** | Node.js, Express.js, PostgreSQL |
-| **Frontend Web** | HTML5, CSS3, JavaScript Vanilla |
-| **Móvil** | Flutter, Dart |
-| **Autenticación** | JWT, bcryptjs |
-| **Subida de Archivos** | Multer |
-| **CORS** | Habilitado |
-
----
-
-## 📦 Instalación
-
-### Requisitos Previos
-- Node.js (v14 o superior)
-- npm o yarn
-- PostgreSQL (v12 o superior)
-- Flutter (para la app móvil)
-
-### Instalación del Backend
-
-```bash
-# Clonar el repositorio
-git clone https://github.com/RishardDV/MAMBQ.git
-cd MAMBQ/backend
-
-# Instalar dependencias
-npm install
-
-# Configurar variables de entorno
-cp .env.example .env
-# Editar .env con tus configuraciones
-
-# Iniciar servidor en desarrollo
-npm run dev
-
-# O en producción
-npm start
-```
-
-### Instalación del Frontend Web
-
-```bash
-cd frontend
-
-# Abrir index.html en un navegador
-# O usar un servidor local (recomendado)
-# Con Python:
-python -m http.server 8000
-
-# Con Node.js:
-npx http-server
-```
-
-### Instalación de la App Móvil
-
-```bash
-cd mamb_app
-
-# Obtener dependencias
-flutter pub get
-
-# Ejecutar en emulador o dispositivo
-flutter run
-```
-
----
-
-## 📁 Estructura del Proyecto
+## Estructura del proyecto
 
 ```
 MAMBQ/
-├── backend/                 # API REST (Express.js)
-│   ├── models/             # Modelos de datos
-│   ├── routes/             # Rutas de API
-│   ├── middleware/         # Middlewares (autenticación, etc.)
-│   ├── uploads/            # Directorio para archivos subidos
-│   ├── db.js               # Configuración de base de datos
-│   ├── server.js           # Punto de entrada
-│   ├── app.js              # Configuración de Express
-│   ├── package.json        # Dependencias
-│   ├── .env.example        # Variables de entorno (ejemplo)
-│   └── .env                # Variables de entorno (local)
-│
-├── frontend/               # Interfaz web
-│   ├── index.html         # Página principal
-│   └── style.css          # Estilos
-│
-├── mamb_app/              # Aplicación móvil (Flutter)
-│
-├── Landing MAMB/          # Landing page estática
-│
-└── readme.md              # Este archivo
+├── frontend/                           # Aplicacion web (SPA)
+│   ├── index.html                      # Pagina principal (9 pantallas)
+│   ├── style.css                       # Estilos
+│   ├── api.js                          # Cliente API
+│   ├── usernameModeration.js           # Filtro de contenido
+│   ├── sw.js                           # Service Worker
+│   ├── manifest.json                   # Configuracion PWA
+│   └── icons/                          # Iconos SVG
+├── backend/                            # API REST
+│   ├── server.js                       # Punto de entrada
+│   ├── app.js                          # Configuracion Express
+│   ├── db.js                           # Conexion PostgreSQL
+│   ├── package.json                    # Dependencias
+│   ├── .env.example                    # Variables de entorno ejemplo
+│   ├── routes/
+│   │   ├── index.js                    # Router principal
+│   │   └── obras.js                    # CRUD de obras + likes + ratings
+│   ├── models/
+│   │   ├── Obra.js                     # Modelo de obra
+│   │   └── User.js                     # Modelo de usuario
+│   ├── middleware/
+│   │   ├── auth.js                     # Autenticacion JWT
+│   │   ├── error.js                    # Manejo de errores
+│   │   └── notFound.js                 # 404 handler
+│   ├── utils/
+│   │   ├── AppError.js                 # Clase de error personalizada
+│   │   ├── artworkValidation.js        # Validacion de obras
+│   │   ├── asyncHandler.js             # Wrapper async
+│   │   └── env.js                      # Configuracion de entorno
+│   └── uploads/                        # Imagenes subidas
+├── Landing MAMB/                       # Landing page estatica
+│   ├── landing.html
+│   ├── styles.css
+│   └── img/                            # Assets de artistas
+└── README.md
 ```
 
----
+## Ejecucion local
 
-## 🚀 Uso
+### Frontend
 
-### Iniciar el Servidor Backend
+- Abre `frontend/index.html` directamente en el navegador, o usa un servidor local:
+
+```bash
+cd frontend
+npx http-server
+```
+
+### Backend
 
 ```bash
 cd backend
+npm install
 npm run dev
 ```
 
-El servidor estará disponible en `http://localhost:3000`
+El servidor estara disponible en `http://localhost:3000`.
 
-### Verificar Estado
+### Landing Page
+
+- Abre `Landing MAMB/landing.html` directamente en el navegador.
+
+## Configuracion de entorno
+
+Crea un archivo `.env` en `backend/` basado en `.env.example`:
 
 ```bash
-curl http://localhost:3000/api/health
+cp backend/.env.example backend/.env
 ```
 
-Respuesta esperada:
+Variables requeridas:
+
+```env
+PORT=3000
+DATABASE_URL=postgresql://usuario:contraseña@localhost:5432/mamb
+JWT_SECRET=tu_clave_secreta_muy_larga_aqui
+```
+
+Opcional:
+
+```env
+CLIENT_ORIGIN=http://localhost:8080
+NODE_ENV=development
+```
+
+## API REST
+
+### Base URL
+- Local: `http://localhost:3000/api`
+
+### Endpoints
+
+#### Health Check
+```http
+GET /api/health
+```
+Respuesta:
 ```json
 {
   "status": "ok",
@@ -174,80 +140,117 @@ Respuesta esperada:
 }
 ```
 
----
+#### Listar todas las obras
+```http
+GET /api/obras
+```
+Parametros opcionales: `search`, `autorApodo`, `page`, `limit`
 
-## ⚙️ Configuración
-
-### Variables de Entorno (.env)
-
-```env
-PORT=3000
-DATABASE_URL=postgresql://usuario:contraseña@localhost:5432/mamb
-JWT_SECRET=tu_clave_secreta_aqui
-NODE_ENV=development
+Respuesta:
+```json
+[
+  {
+    "id": 1,
+    "titulo": "Paisaje Costero",
+    "descripcion": "Vista del Caribe",
+    "image_url": "/uploads/obra_123.jpg",
+    "autor_apodo": "Carlos",
+    "avatar_index": 0,
+    "likes_count": 5,
+    "rating_total": 12,
+    "rating_count": 3,
+    "created_at": "2026-05-29T..."
+  }
+]
 ```
 
-Crear el archivo `.env` basado en `.env.example`:
-
-```bash
-cp .env.example .env
+#### Obtener obra por ID
+```http
+GET /api/obras/:id
 ```
 
-Editar el archivo `.env` con tus valores específicos.
+#### Crear nueva obra
+```http
+POST /api/obras
+Content-Type: multipart/form-data
 
----
+image: [archivo]
+titulo: "Paisaje Costero"
+descripcion: "Vista del Caribe"
+autorApodo: "Carlos"
+avatarIndex: 0
+```
+Tamano maximo de imagen: 20MB. Formatos: `.jpg, .jpeg, .png, .webp, .gif`
 
-## 🔌 API REST
+#### Actualizar obra
+```http
+PATCH /api/obras/:id
+Content-Type: application/json
 
-### Endpoints Principales
+{
+  "titulo": "Nuevo titulo",
+  "descripcion": "Nueva descripcion"
+}
+```
 
-#### Obras de Arte
+#### Eliminar obra
+```http
+DELETE /api/obras/:id
+```
 
-- **GET** `/api/obras` - Obtener todas las obras
-- **GET** `/api/obras/:id` - Obtener obra por ID
-- **POST** `/api/obras` - Crear nueva obra (requiere autenticación)
-- **PUT** `/api/obras/:id` - Actualizar obra (requiere autenticación)
-- **DELETE** `/api/obras/:id` - Eliminar obra (requiere autenticación)
+#### Dar like a una obra
+```http
+POST /api/obras/:id/like
+```
 
-#### Salud del Sistema
+#### Calificar una obra
+```http
+POST /api/obras/:id/rate
+Content-Type: application/json
 
-- **GET** `/api/health` - Verificar estado del servidor
+{
+  "rating": 4
+}
+```
 
-### Autenticación
+### Autenticacion
 
-La mayoría de endpoints protegidos requieren un JWT token en el header:
+Los endpoints protegidos requieren JWT token en el header:
 
 ```
 Authorization: Bearer <token>
 ```
 
+## Tecnologias Principales
+
+| Componente | Tecnologia |
+|-----------|-----------|
+| **Frontend** | HTML5, CSS3, JavaScript vanilla, PWA |
+| **Backend** | Node.js, Express.js |
+| **Base de datos** | PostgreSQL |
+| **Autenticacion** | JWT, bcryptjs |
+| **IA** | TensorFlow.js, Teachable Machine (deteccion de poses) |
+| **Seguridad** | Helmet, CORS |
+| **Subida de archivos** | Multer |
+| **Logging** | Morgan |
+
+## Paleta de Colores
+
+- **Primario (Terracota/Oxido)**: `#C1440E`
+- **Fondo (Marfil)**: `#F5F0E8`
+- **Texto (Negro Carbon)**: `#1E1E1E`
+
+## Contribuir
+
+1. Haz fork del repositorio.
+2. Crea una rama nueva: `git checkout -b feature/mi-feature`.
+3. Haz commit de tus cambios.
+4. Envia un pull request.
+
+## Licencia
+
+MIT - Ver [LICENSE](LICENSE) para mas detalles.
+
 ---
 
-## 🤝 Contribución
-
-Las contribuciones son bienvenidas. Por favor:
-
-1. Fork el proyecto
-2. Crea una rama para tu característica (`git checkout -b feature/AmazingFeature`)
-3. Commit tus cambios (`git commit -m 'Add some AmazingFeature'`)
-4. Push a la rama (`git push origin feature/AmazingFeature`)
-5. Abre un Pull Request
-
----
-
-## 📄 Licencia
-
-Este proyecto está bajo la Licencia MIT. Ver `LICENSE` para más detalles.
-
----
-
-## 📧 Contacto
-
-Para dudas o sugerencias, contacta al equipo de desarrollo.
-
-**Repositorio:** https://github.com/RishardDV/MAMBQ
-
----
-
-**Última actualización:** Mayo 2026
-🎨 *Modernizando la experiencia cultural del Museo de Arte Moderno de Barranquilla*
+Hecho con foco en experiencia cultural y arte moderno del Caribe colombiano. 🎨✨
