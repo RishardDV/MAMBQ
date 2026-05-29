@@ -15,6 +15,36 @@
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
 </head>
 <script>
+  function markPwaInstalled() {
+    document.documentElement.classList.add('pwa-installed');
+  }
+
+  // Detecta si la app se abrió como PWA (standalone) — Android, iOS y otros
+  if (window.matchMedia && window.matchMedia('(display-mode: standalone)').matches) {
+    markPwaInstalled();
+  }
+  if (window.navigator.standalone === true) { // iOS Safari
+    markPwaInstalled();
+  }
+
+  // Evento cuando la PWA es instalada
+  window.addEventListener('appinstalled', function () {
+    markPwaInstalled();
+    console.log('PWA instalada');
+  });
+
+  // Escucha cambios en display-mode (p. ej. después de instalar)
+  if (window.matchMedia) {
+    try {
+      window.matchMedia('(display-mode: standalone)').addEventListener('change', (e) => {
+        if (e.matches) markPwaInstalled();
+      });
+    } catch (err) {
+      // algunos browsers usan addListener
+      window.matchMedia('(display-mode: standalone)').addListener((mq) => { if (mq.matches) markPwaInstalled(); });
+    }
+  }
+
   if ("serviceWorker" in navigator) {
     navigator.serviceWorker.register("/frontend/sw.js", { scope: "/" })
       .then(() => console.log("SW registrado"))
@@ -979,8 +1009,53 @@
   <!-- Toast -->
   <div class="toast" id="toast"></div>
 
+  <script>
+    // Mostrar toast moderno cuando el service worker envíe un mensaje
+    function showToast(opts) {
+      const container = document.getElementById('toast');
+      if (!container) return;
+      container.innerHTML = '';
+
+      const card = document.createElement('div');
+      card.className = 'toast-card';
+      card.innerHTML = `
+        <div class="toast-left">
+          <img src="/frontend/icons/icon.svg" alt="MAMB" class="toast-icon" />
+        </div>
+        <div class="toast-body">
+          <strong class="toast-title">${opts.title || 'Notificación'}</strong>
+          <p class="toast-msg">${opts.body || ''}</p>
+        </div>
+        <button class="toast-close" aria-label="Cerrar">✕</button>
+      `;
+
+      container.appendChild(card);
+      // show
+      requestAnimationFrame(() => container.classList.add('show'));
+
+      const close = () => {
+        container.classList.remove('show');
+        setTimeout(() => (container.innerHTML = ''), 400);
+      };
+
+      card.querySelector('.toast-close').addEventListener('click', close);
+      // auto close
+      setTimeout(close, 6000);
+    }
+
+    if (navigator.serviceWorker) {
+      navigator.serviceWorker.addEventListener('message', (event) => {
+        const data = event.data || {};
+        if (data.type === 'SW_ACTIVE') {
+          showToast({ title: data.title, body: data.body });
+          document.documentElement.classList.add('pwa-installed');
+        }
+      });
+    }
+  </script>
+
   <script src="/frontend/usernameModeration.js"></script>
   <script src="/frontend/api.js"></script>
-  <script src="/Backend/app.js"></script>
+  <script src="/backend/app.js"></script>
 </body>
 </html>
