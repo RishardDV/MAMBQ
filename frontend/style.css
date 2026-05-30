@@ -418,6 +418,72 @@ body {
 }
 .pwa-installed .startup-overlay { display: none !important; }
 
+/* ---------- PWA Install Banner ---------- */
+.install-banner {
+  position: fixed;
+  bottom: 80px;
+  left: 50%;
+  transform: translateX(-50%) translateY(100%);
+  width: calc(100% - 32px);
+  max-width: 420px;
+  background: linear-gradient(135deg, rgba(255,255,255,0.97), rgba(250,248,244,0.99));
+  border-radius: 16px;
+  box-shadow: 0 8px 32px rgba(16,24,40,0.14), 0 0 0 1px rgba(16,24,40,0.05);
+  padding: 16px 18px;
+  z-index: 9000;
+  opacity: 0;
+  transition: transform 0.4s cubic-bezier(.2,.9,.2,1), opacity 0.35s;
+  pointer-events: none;
+}
+.install-banner.show {
+  transform: translateX(-50%) translateY(0);
+  opacity: 1;
+  pointer-events: auto;
+}
+.install-banner-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.install-banner-row p {
+  margin: 0;
+  font-family: 'Playfair Display', serif;
+  font-weight: 700;
+  font-size: 16px;
+  color: var(--text-dark);
+}
+.install-banner small {
+  display: block;
+  margin: 4px 0 12px;
+  font-size: 12.5px;
+  color: var(--text-mid);
+  line-height: 1.4;
+}
+.install-btn-no {
+  background: none;
+  border: none;
+  font-size: 18px;
+  color: var(--text-mid);
+  cursor: pointer;
+  padding: 4px 8px;
+  border-radius: 8px;
+  transition: background 0.2s;
+}
+.install-btn-no:hover { background: rgba(0,0,0,0.05); }
+.install-btn-yes {
+  width: 100%;
+  padding: 11px 0;
+  border: none;
+  border-radius: 10px;
+  background: var(--copper);
+  color: #fff;
+  font-weight: 600;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.install-btn-yes:hover { background: #a33a0c; }
+
 /* Toast / in-app install message */
 .toast {
   position: fixed;
