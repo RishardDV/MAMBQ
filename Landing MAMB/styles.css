@@ -131,6 +131,14 @@ section.fade-up {
     display: block;
 }
 
+.nav-logo-img.is-fallback {
+    height: auto;
+    width: 140px;
+    max-width: 100%;
+    max-height: 40px;
+    object-fit: contain;
+}
+
 .badge {
     font-size: 0.75rem;
     font-weight: 600;
@@ -815,8 +823,12 @@ address p {
 
 @media (max-width: 768px) {
     .navbar-container {
-        height: 60px;
+        height: auto;
+        min-height: 60px;
         padding: 0 15px;
+        flex-wrap: wrap;
+        align-items: flex-start;
+        gap: 0.75rem;
     }
 
     .nav-menu {
@@ -842,14 +854,13 @@ address p {
     .nav-menu.active {
         display: flex;
         flex-direction: column;
-        position: absolute;
-        top: 60px;
-        left: 0;
-        right: 0;
+        position: static;
+        width: 100%;
         background-color: #ffffff;
-        padding: 1.5rem;
+        padding: 1.25rem 0 0;
         gap: 1rem;
-        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+        box-shadow: none;
+        order: 3;
     }
 
     .nav-btn-download {
@@ -858,8 +869,10 @@ address p {
 
     .nav-menu.active ~ .nav-btn-download {
         display: block;
-        width: calc(100% - 3rem);
+        width: 100%;
         text-align: center;
+        order: 4;
+        margin-top: 0.25rem;
     }
 
     body {
@@ -917,6 +930,11 @@ address p {
 
     .nav-logo-img {
         height: 20px;
+    }
+
+    .nav-logo-img.is-fallback {
+        width: 120px;
+        max-height: 34px;
     }
 
     .hero-title {
