@@ -238,7 +238,9 @@ function openArtwork(id) {
   document.getElementById('follow-btn').classList.remove('following');
 
   var favBtn = document.getElementById('cta-fav');
-  favBtn.classList.remove('added');
+  if (favBtn) {
+    favBtn.classList.remove('added');
+  }
 
   var current = document.getElementById(state.currentScreen);
   if (current) current.classList.remove('active');
