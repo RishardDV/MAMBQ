@@ -15,101 +15,115 @@ const state = {
   apiObras: [],
   artworks: {
     crepusculo: {
-      title: 'Crepusculo Caribe',
-      artist: 'Alvaro Cepeda Samudio',
-      initials: 'A',
-      count: 48,
+      title: 'La noche estrellada',
+      artist: 'Vincent van Gogh',
+      initials: 'V',
+      count: 75,
       type: 'PINTURA . OLEO',
       likes: 248,
-      desc: 'Una obra que captura la atmosfera calida del Caribe con enfasis en luz, horizonte y memoria visual.',
+      desc: 'Una escena nocturna vibrante donde el cielo parece ondular en espirales de luz y color.',
       bg: 'bg-rust',
-      year: '2019',
+      year: '1889',
       medium: 'Oleo',
-      image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/3/30/%22Violence%22_.webp/1200px-%22Violence%22_.webp.png',
+      image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/e/ea/Van_Gogh_-_Starry_Night_-_Google_Art_Project.jpg/1280px-Van_Gogh_-_Starry_Night_-_Google_Art_Project.jpg',
       imagePosition: 'center center'
     },
     sierra: {
-      title: 'Sierra Nevada',
-      artist: 'Alvaro Cepeda Samudio',
-      initials: 'A',
-      count: 48,
-      type: 'PINTURA . ACUARELA',
+      title: 'El grito',
+      artist: 'Edvard Munch',
+      initials: 'E',
+      count: 32,
+      type: 'PINTURA . TEMPERA',
       likes: 104,
-      desc: 'Interpretacion del paisaje desde capas suaves de color y profundidad atmosferica.',
+      desc: 'Una figura angustiada bajo un cielo rojo incandescente, icono del expresionismo moderno.',
       bg: 'bg-green',
-      year: '2021',
-      medium: 'Acuarela',
-      image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/8/82/Don_Sim%C3%B3n_en_San_Pedro_Alejandrino._Alejandro_Obreg%C3%B3n.Quinta_de_San_Pedro_Alejandrino.JPG/1280px-Don_Sim%C3%B3n_en_San_Pedro_Alejandrino._Alejandro_Obreg%C3%B3n.Quinta_de_San_Pedro_Alejandrino.JPG',
+      year: '1893',
+      medium: 'Tempera',
+      image: 'https://www.todocuadros.com.co/cdn/shop/files/munch-el-grito-ver4.jpg?v=1753186131&width=812',
       imagePosition: 'center center'
     },
     rio: {
-      title: 'Rio Magdalena',
-      artist: 'R. Guerrero',
-      initials: 'R',
-      count: 24,
-      type: 'PINTURA . ACRILICO',
+      title: 'La joven de la perla',
+      artist: 'Johannes Vermeer',
+      initials: 'J',
+      count: 19,
+      type: 'PINTURA . OLEO',
       likes: 143,
-      desc: 'Paisaje fluvial de lectura contemporanea, con direccion cromatica controlada y ritmo horizontal.',
+      desc: 'El retrato íntimo de una joven con un pendiente de perla, famoso por su luz y su misterio.',
       bg: 'bg-navy',
-      year: '2022',
-      medium: 'Acrilico',
-      image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/c/c5/MuralObregon.JPG/1280px-MuralObregon.JPG',
+      year: '1665',
+      medium: 'Oleo',
+      image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/d/d7/Meisje_met_de_parel.jpg/500px-Meisje_met_de_parel.jpg',
       imagePosition: 'center center'
     },
     noche: {
-      title: 'Noche Azul',
-      artist: 'M. Alvarez',
-      initials: 'M',
-      count: 22,
-      type: 'PINTURA . ACRILICO',
+      title: 'Las señoritas de Avignon',
+      artist: 'Pablo Picasso',
+      initials: 'P',
+      count: 27,
+      type: 'PINTURA . OLEO',
       likes: 189,
-      desc: 'Composicion nocturna apoyada en azules profundos y silencios visuales.',
+      desc: 'Una obra revolucionaria del cubismo donde tres figuras femeninas retan la geometría y la perspectiva.',
       bg: 'bg-navy-soft',
-      year: '2020',
-      medium: 'Acrilico',
-      image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/0/0d/Museo_de_Arte_Moderno_de_Barranquilla.jpg/1200px-Museo_de_Arte_Moderno_de_Barranquilla.jpg',
+      year: '1907',
+      medium: 'Oleo',
+      image: 'https://historia-arte.com/_/eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpbSI6WyJcL2FydHdvcmtcL2ltYWdlRmlsZVwvbGVzLWRlbW9pc2VsbGVzLWQtYXZpZ25vbi5qcGciLCJyZXNpemUsMTUwMHxmb3JtYXQsd2VicCJdfQ.FMxSGG8oEgVFUT0nk8kJm2IK82wjFhYNrnPiqG_ofSc.webp',
       imagePosition: 'center center'
     },
     fuego: {
-      title: 'Fuego Vivo',
-      artist: 'L. Torres',
-      initials: 'L',
-      count: 31,
-      type: 'PINTURA . MIXTA',
+      title: 'El beso',
+      artist: 'Gustav Klimt',
+      initials: 'G',
+      count: 41,
+      type: 'PINTURA . ORO',
       likes: 76,
-      desc: 'Trabajo visual de alta energia, con color saturado y sensacion de movimiento interno.',
+      desc: 'Una pareja envuelta en un abrazo dorado, símbolo del amor y la decoración modernista.',
       bg: 'bg-rust-soft',
-      year: '2018',
-      medium: 'Mixta',
-      image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/aa/La_langosta_azul.jpg/800px-La_langosta_azul.jpg',
+      year: '1907',
+      medium: 'Oleo',
+      image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/4/40/The_Kiss_-_Gustav_Klimt_-_Google_Cultural_Institute.jpg/960px-The_Kiss_-_Gustav_Klimt_-_Google_Cultural_Institute.jpg',
+      imagePosition: 'center center'
+    },
+    misterio: {
+      title: 'La persistencia de la memoria',
+      artist: 'Salvador Dalí',
+      initials: 'S',
+      count: 22,
+      type: 'PINTURA . OLEO',
+      likes: 95,
+      desc: 'Relojes derretidos en un paisaje onírico, una metáfora del tiempo en el surrealismo.',
+      bg: 'bg-purple',
+      year: '1931',
+      medium: 'Oleo',
+      image: 'https://historia-arte.com/_/eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpbSI6WyJcL2FydHdvcmtcL2ltYWdlRmlsZVwvbnljLTItMjY4LmpwZyIsInJlc2l6ZSwxNTAwfGZvcm1hdCx3ZWJwIl19.QS0RudqedbRUixY0Z0mD5kka__rAwLVT2U4XTH-dgFk.webp',
       imagePosition: 'center center'
     },
     selva: {
-      title: 'Selva Viva',
-      artist: 'R. Guerrero',
-      initials: 'R',
-      count: 19,
+      title: 'La libertad guiando al pueblo',
+      artist: 'Eugène Delacroix',
+      initials: 'E',
+      count: 18,
       type: 'PINTURA . OLEO',
       likes: 312,
-      desc: 'Paisaje de densidad vegetal con predominio de masa cromatica y profundidad organica.',
+      desc: 'Una mujer personificando la libertad lidera a la multitud revolucionaria bajo la bandera tricolor.',
       bg: 'bg-green-soft',
-      year: '2023',
+      year: '1830',
       medium: 'Oleo',
-      image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/c/c8/Alvaro_Cepeda_Samudio.jpg/800px-Alvaro_Cepeda_Samudio.jpg',
-      imagePosition: 'top center'
+      image: 'https://historia-arte.com/_/eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpbSI6WyJcL2FydHdvcmtcL2ltYWdlRmlsZVwvbGF2YW5ndWFyZGlhLWctMTc2NDc0NjA5MTkuanBnIiwicmVzaXplLDE1MDB8Zm9ybWF0LHdlYnAiXX0.QHN_tSslKa_aZVLQTzTkhn9HSZ52SEaAMzw7fwvqm5w.webp',
+      imagePosition: 'center center'
     },
-    misterio: {
-      title: 'Misterio',
-      artist: 'A. Perez',
-      initials: 'A',
-      count: 14,
-      type: 'ESCULTURA . MIXTA',
-      likes: 95,
-      desc: 'Pieza de lenguaje abstracto que enfatiza tension espacial, volumen y pausa visual.',
-      bg: 'bg-purple',
-      year: '2022',
-      medium: 'Escultura',
-      image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/5/51/La_casa_grande%2C_primera_edici%C3%B3n.jpg/800px-La_casa_grande%2C_primera_edici%C3%B3n.jpg',
+    monalisa: {
+      title: 'Mona Lisa',
+      artist: 'Leonardo da Vinci',
+      initials: 'L',
+      count: 40,
+      type: 'PINTURA . OLEO',
+      likes: 198,
+      desc: 'El retrato de sonrisa enigmática que se convirtió en uno de los cuadros más célebres del Renacimiento.',
+      bg: 'bg-teal',
+      year: '1503',
+      medium: 'Oleo',
+      image: 'https://m.media-amazon.com/images/I/7119saZHzLL._AC_SY879_.jpg',
       imagePosition: 'center center'
     }
   },
@@ -225,7 +239,6 @@ function openArtwork(id) {
 
   var favBtn = document.getElementById('cta-fav');
   favBtn.classList.remove('added');
-  favBtn.innerHTML = '<svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>Agregar a favoritos';
 
   var current = document.getElementById(state.currentScreen);
   if (current) current.classList.remove('active');
@@ -510,6 +523,50 @@ function loadObrasForInicio() {
   }).catch(function () {});
 }
 
+const topObrasFamosos = [
+  {
+    titulo: "La Noche Estrellada",
+    artista: "Vincent van Gogh",
+    imagen: "https://upload.wikimedia.org/wikipedia/commons/e/ea/The_Starry_Night.jpg"
+  },
+  {
+    titulo: "La Mona Lisa",
+    artista: "Leonardo da Vinci",
+    imagen: "https://upload.wikimedia.org/wikipedia/commons/e/ec/Mona_Lisa.jpg"
+  },
+  {
+    titulo: "Guernica",
+    artista: "Pablo Picasso",
+    imagen: "https://upload.wikimedia.org/wikipedia/en/7/74/PicassoGuernica.jpg"
+  },
+  {
+    titulo: "La Persistencia de la Memoria",
+    artista: "Salvador Dalí",
+    imagen: "https://upload.wikimedia.org/wikipedia/en/d/dd/The_Persistence_of_Memory.jpg"
+  }
+];
+function loadObrasFamosas() {
+
+  const container = document.getElementById('api-inicio-obras');
+
+  container.innerHTML = topObrasFamosos.map((obra, i) => `
+    <div class="top-card">
+      <div class="top-card-img"
+           style="
+             background-image:url('${obra.imagen}');
+             background-size:cover;
+             background-position:center;
+           ">
+        <span class="rank-num">${i + 1}</span>
+      </div>
+
+      <p class="top-card-name">${obra.titulo}</p>
+      <p class="top-card-meta">${obra.artista}</p>
+    </div>
+  `).join('');
+}
+
+
 /* ── AVATAR ─────────────────────────────────────────── */
 
 function openAvatarModal() { document.getElementById('avatar-overlay').classList.remove('hidden'); }
@@ -639,14 +696,21 @@ function showStartupFlow() {
   splash.classList.remove('hidden');
   entry.classList.add('hidden');
 
-  setTimeout(function () {
+  function showNameEntry() {
     var loadBar = document.querySelector('.loading-bar');
     if (loadBar) loadBar.style.display = 'none';
-    splash.classList.add('hidden');
-    entry.classList.remove('hidden');
+    if (splash) splash.classList.add('hidden');
+    if (entry) entry.classList.remove('hidden');
     var nameInput = document.getElementById('visitor-name');
     if (nameInput) nameInput.focus();
-  }, 2000);
+  }
+
+  setTimeout(showNameEntry, 2000);
+  setTimeout(function () {
+    if (entry && entry.classList.contains('hidden')) {
+      showNameEntry();
+    }
+  }, 2600);
 }
 
 function completeStartup(name) {
@@ -732,11 +796,15 @@ function injectInstallBanner() {
     var b = document.getElementById('install-banner');
     if (b) b.classList.remove('show');
   });
+  
   document.getElementById('install-yes').addEventListener('click', function () {
     if (!deferredPrompt) return;
+
     deferredPrompt.prompt();
+
     deferredPrompt.userChoice.then(function () {
       deferredPrompt = null;
+
       var b = document.getElementById('install-banner');
       if (b) b.classList.remove('show');
     });
@@ -962,7 +1030,7 @@ document.addEventListener('DOMContentLoaded', function () {
   initAutoHideNav();
   injectInstallBanner();
   showStartupFlow();
-  loadObrasForInicio();
+  loadObrasFamosas();
 });
 
 /* ── DATO CURIOSO ─────────────────────────────────────── */

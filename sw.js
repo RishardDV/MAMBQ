@@ -5,6 +5,7 @@ const CORE_ASSETS = [
   "./frontend/style.css",
   "./frontend/api.js",
   "./frontend/manifest.json",
+  "./frontend/landing.html",
   "./frontend/icons/icon.svg",
 ];
 

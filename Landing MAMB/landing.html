@@ -7,6 +7,8 @@
   <title>Museo de Arte Moderno de Barranquilla - MAMB</title>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Jost:wght@400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
+  <link rel="manifest" href="/frontend/manifest.json">
+  <meta name="theme-color" content="#C1440E">
 </head>
 <body>
 <!-- NAVBAR FIJA -->
@@ -389,7 +391,14 @@
 
 <script>
   // CONFIGURACIÓN: URL de descarga de la aplicación
-  const APP_DOWNLOAD_URL = '../Frontend/index.html';
+  const APP_DOWNLOAD_URL = '/frontend/index.html';
+
+  // Registrar service worker para habilitar instalación PWA
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('/frontend/sw.js', { scope: '/' })
+      .then(() => console.log('Service Worker registrado en landing.'))
+      .catch((err) => console.error('Error registrando SW en landing:', err));
+  }
 
   // Obtener elementos del DOM
   const hamburgerBtn = document.getElementById('hamburger-btn');
@@ -398,7 +407,6 @@
   const appModal = document.getElementById('app-modal');
   const modalCancel = document.getElementById('modal-cancel');
   const modalClose = document.getElementById('modal-close');
-  const modalInstall = document.getElementById('modal-install');
 
   // Botones de descarga (hay múltiples en la página)
   const downloadBtns = document.querySelectorAll(
@@ -442,9 +450,56 @@
   modalCancel.addEventListener('click', closeAppModal);
   modalClose.addEventListener('click', closeAppModal);
 
-  // Instalar aplicación
-  modalInstall.addEventListener('click', () => {
+  // Instalación PWA
+  let deferredPrompt = null;
+  let awaitingInstall = false;
+
+  function isAppInstalled() {
+    return window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone === true || localStorage.getItem('mamb_pwa_installed') === '1';
+  }
+
+  function redirectToApp() {
     window.location.href = APP_DOWNLOAD_URL;
+  }
+
+  window.addEventListener('beforeinstallprompt', (e) => {
+    e.preventDefault();
+    deferredPrompt = e;
+  });
+
+  window.addEventListener('appinstalled', () => {
+    localStorage.setItem('mamb_pwa_installed', '1');
+    awaitingInstall = false;
+    closeAppModal();
+    redirectToApp();
+  });
+
+  document.getElementById('modal-install').addEventListener('click', (e) => {
+    e.preventDefault();
+    if (isAppInstalled()) {
+      redirectToApp();
+      return;
+    }
+
+    if (deferredPrompt) {
+      deferredPrompt.prompt();
+      deferredPrompt.userChoice.then((choiceResult) => {
+        if (choiceResult.outcome === 'accepted') {
+          awaitingInstall = true;
+          closeAppModal();
+          console.log('Prompt aceptado, esperando instalación...');
+        } else {
+          awaitingInstall = false;
+          console.log('Usuario rechazó la instalación');
+        }
+        deferredPrompt = null;
+      });
+      return;
+    }
+
+    // Si no hay prompt disponible y la app no está instalada, no redirigir hasta la instalación.
+    closeAppModal();
+    console.log('No hay prompt PWA disponible. Esperando instalación manual.');
   });
 
   // Cerrar modal al hacer clic fuera
@@ -483,5 +538,5 @@
     }
   });
 </script>
-</body>
+
 </html>

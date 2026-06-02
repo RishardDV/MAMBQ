@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="192" height="192" viewBox="0 0 512 512">
+  <rect width="512" height="512" rx="80" fill="#C1440E"/>
+  <text x="256" y="190" text-anchor="middle" font-family="serif" font-weight="900" font-size="134" fill="#F5F0E8" letter-spacing="6">MAMB</text>
+  <text x="256" y="300" text-anchor="middle" font-family="sans-serif" font-weight="400" font-size="20" fill="rgba(245,240,232,0.8)">Museo de Arte Moderno</text>
+  <text x="256" y="340" text-anchor="middle" font-family="sans-serif" font-weight="400" font-size="20" fill="rgba(245,240,232,0.8)">de Barranquilla</text>
+</svg>

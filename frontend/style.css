@@ -416,7 +416,14 @@ body {
 .pwa-installed .screen-scroll {
   padding-bottom: calc(60px + env(safe-area-inset-bottom, 0px));
 }
-.pwa-installed .startup-overlay { display: none !important; }
+.pwa-installed .startup-overlay {
+  display: flex !important;
+}
+
+/* Allow JS to hide the startup overlay even in PWA mode */
+.pwa-installed .startup-overlay.hidden {
+  display: none !important;
+}
 
 /* ---------- PWA Install Banner ---------- */
 .install-banner {
