@@ -6,7 +6,6 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>MAMB – Museo de Arte Moderno de Barranquilla</title>
-  <meta name="description" content="Explora el arte moderno del Caribe colombiano. Galeria virtual, IA de poses y juegos interactivos.">
   <meta name="theme-color" content="#C1440E">
   <link rel="manifest" href="/frontend/manifest.json">
   <link rel="icon" href="/frontend/icons/icon.svg" type="image/svg+xml">
@@ -100,7 +99,7 @@
             <span class="notif-dot"></span>
           </button>
           <button class="avatar-btn" onclick="navigate('screen-perfil', document.querySelector('[data-screen=screen-perfil]'))">
-            <img src="https://i.pravatar.cc/40?img=45" alt="Avatar" id="header-avatar" />
+            <img src="https://api.dicebear.com/7.x/thumbs/svg?seed=avatar_pinguino" alt="Avatar" id="header-avatar" />
           </button>
         </div>
       </header>
@@ -376,18 +375,7 @@
         </div>
       </section>
 
-      <!-- OBRAS DE VISITANTES (from API) -->
-      <section class="home-section">
-        <div class="section-header">
-          <div>
-            <p class="section-label">COMUNIDAD</p>
-            <h2 class="section-title">Obras de Visitantes</h2>
-          </div>
-        </div>
-        <div class="cards-scroll" id="api-obras-container">
-          <p class="api-empty-msg">Cargando obras...</p>
-        </div>
-      </section>
+      
     </div>
   </div>
 
@@ -632,7 +620,7 @@
       </header>
       <div class="perfil-top">
         <div class="perfil-avatar-wrap">
-          <img src="https://i.pravatar.cc/80?img=45" id="perfil-main-avatar" class="perfil-avatar" alt="Avatar" />
+          <img src="https://api.dicebear.com/7.x/thumbs/svg?seed=avatar_pinguino" id="perfil-main-avatar" class="perfil-avatar" alt="Avatar" />
           <button class="edit-av-btn" onclick="openAvatarModal()">✏️</button>
         </div>
         <h2 class="perfil-user-name">ANA MARÍA GÓMEZ</h2>
@@ -640,34 +628,35 @@
       </div>
       <div class="perfil-data-card">
         <div class="perfil-data-row"><span>Nombre completo:</span><span>Ana María Gómez</span></div>
-        <div class="perfil-data-row"><span>Edad:</span><span>8 años</span></div>
         <div class="perfil-data-row"><span>Ciudad:</span><span>Barranquilla, Colombia</span></div>
         <div class="perfil-data-row"><span>Fecha de registro:</span><span>15/02/2026</span></div>
       </div>
       <div class="perfil-info-section" style="margin-top: 24px; padding-top: 24px; border-top: 1px solid rgba(0,0,0,0.1);">
-        <label for="perfil-favorito" style="display:block; margin-bottom:8px; font-weight:550; opacity:.85;">Elige tu tipo de obra favorita</label>
-        <select id="perfil-favorito" style="width:80%; padding:10px 12px; border-radius:14px; border:1px solid rgba(0,0,0,0.12); background:#fff; margin-bottom:16px;">
-          <option value="">Selecciona una opción</option>
-          <option value="óleo">Óleo</option>
-          <option value="acuarela">Acuarela</option>
-          <option value="acrílico">Acrílico</option>
-          <option value="mixta">Mixta</option>
-          <option value="escultura">Escultura</option>
-          <option value="digital">Arte digital</option>
-        </select>
-        <label for="perfil-interes" style="display:block; margin-bottom:8px; font-weight:600; opacity:.85;">Otros intereses personales</label>
-        <select id="perfil-interes" style="width:100%; padding:10px 12px; border-radius:14px; border:1px solid rgba(0,0,0,0.12); background:#fff; margin-bottom:8px;">
-          <option value="">Selecciona un interés</option>
-          <option value="naturaleza">Naturaleza</option>
-          <option value="colores">Colores</option>
-          <option value="historias">Historias</option>
-          <option value="música">Música</option>
-          <option value="animales">Animales</option>
-          <option value="juegos">Juegos</option>
-        </select>
-        <p style="font-size:13px; color:rgba(0,0,0,.6); margin-top:8px;">Esta elección es solo para tu experiencia local en la app, no se guarda en una base de datos.</p>
+        <label for="perfil-favorito" class="perfil-select-label">Elige tu tipo de obra favorita</label>
+        <div class="perfil-select-wrapper">
+          <select id="perfil-favorito" class="perfil-select">
+            <option value="">Selecciona una opción</option>
+            <option value="óleo">🎨 Óleo</option>
+            <option value="acuarela">💧 Acuarela</option>
+            <option value="acrílico">✨ Acrílico</option>
+            <option value="mixta">🌈 Mixta</option>
+            <option value="escultura">🗿 Escultura</option>
+            <option value="digital">💻 Arte digital</option>
+          </select>
+        </div>
+        <label for="perfil-interes" class="perfil-select-label">Otros intereses personales</label>
+        <div class="perfil-select-wrapper">
+          <select id="perfil-interes" class="perfil-select">
+            <option value="">Selecciona un interés</option>
+            <option value="naturaleza">🌿 Naturaleza</option>
+            <option value="colores">🎨 Colores</option>
+            <option value="historias">📖 Historias</option>
+            <option value="música">🎵 Música</option>
+            <option value="animales">🐾 Animales</option>
+            <option value="juegos">🎮 Juegos</option>
+          </select>
+        </div>
       </div>
-      <button class="logout-btn" onclick="confirmLogout()">CERRAR SESIÓN ➜</button>
     </div>
   </div>
 
@@ -772,63 +761,6 @@
     </div>
   </div>
 
-  <!-- ═══════════════════════════════════════════
-       SCREEN: IA POSES
-  ═══════════════════════════════════════════ -->
-  <div class="screen" id="screen-ia">
-    <div class="screen-scroll">
-      <header class="app-header">
-        <div class="logo-block">
-          <span class="logo-mamb">MAMB</span>
-          <span class="logo-sub">Museo de Arte Moderno de Barranquilla</span>
-        </div>
-        <div class="header-actions">
-          <button class="icon-btn">
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/>
-              <path d="M13.73 21a2 2 0 0 1-3.46 0"/>
-            </svg>
-          </button>
-          <button class="avatar-btn">
-            <img src="https://i.pravatar.cc/40?img=45" alt="Avatar" />
-          </button>
-        </div>
-      </header>
-      <div class="ia-hero">
-        <p class="ia-hero-label">INTELIGENCIA ARTIFICIAL</p>
-        <h2 class="ia-hero-title">Detector de Poses</h2>
-        <p class="ia-hero-sub">Muéstrale al museo cómo te sientes frente al arte. Activa la cámara y el modelo detectará tu pose en tiempo real.</p>
-      </div>
-      <div class="ia-camera-block">
-        <div class="ia-canvas-wrap" id="ia-canvas-wrap">
-          <canvas id="ia-canvas"></canvas>
-          <div class="ia-scan-line"></div>
-          <div class="ia-corner tl"></div>
-          <div class="ia-corner tr"></div>
-          <div class="ia-corner bl"></div>
-          <div class="ia-corner br"></div>
-          <div class="ia-placeholder" id="ia-placeholder">
-            <span class="ia-placeholder-icon">🤸</span>
-            <span>Cámara inactiva</span>
-          </div>
-          <div class="ia-status-badge" id="ia-status">● Esperando inicio</div>
-        </div>
-      </div>
-      <button class="ia-start-btn" id="ia-btn-start" onclick="iaInit()">▶&nbsp; Iniciar detección</button>
-      <div class="ia-top-card" id="ia-top-card">
-        <div class="ia-top-left">
-          <p class="ia-top-badge">▲ Mayor confianza</p>
-          <p class="ia-top-name" id="ia-top-name">—</p>
-        </div>
-        <div class="ia-top-pct" id="ia-top-pct">0%</div>
-      </div>
-      <div class="ia-bars-block" id="ia-label-container"></div>
-      <div class="ia-info-pill">
-        Modelo entrenado con <strong>Teachable Machine</strong> · Poses detectadas:
-        <strong>pensando</strong> y <strong>sorprendido</strong>
-      </div>
-    </div>
-  </div>
 
   <!-- ═══════════════════════════════════════════
        SCREEN: MEMORIA ARTÍSTICA
@@ -965,12 +897,8 @@
       <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
       <span>Sobre Nosotros</span>
     </button>
-    <button class="nav-btn" data-screen="screen-ia" onclick="navigate('screen-ia', this)">
-      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-        <circle cx="12" cy="12" r="3"/>
-        <path d="M12 2v3M12 19v3M4.22 4.22l2.12 2.12M17.66 17.66l2.12 2.12M2 12h3M19 12h3M4.22 19.78l2.12-2.12M17.66 6.34l2.12-2.12"/>
-      </svg>
-      <span>IA Poses</span>
+    
+      
     </button>
   </nav>
 
@@ -984,12 +912,12 @@
         <button onclick="closeAvatarModal()">✕</button>
       </div>
       <div class="avatar-grid">
-        <img src="https://i.pravatar.cc/60?img=60" class="av-opt" onclick="selectAvatar(this)" />
-        <img src="https://i.pravatar.cc/60?img=61" class="av-opt" onclick="selectAvatar(this)" />
-        <img src="https://i.pravatar.cc/60?img=62" class="av-opt" onclick="selectAvatar(this)" />
-        <img src="https://i.pravatar.cc/60?img=63" class="av-opt" onclick="selectAvatar(this)" />
-        <img src="https://i.pravatar.cc/60?img=64" class="av-opt" onclick="selectAvatar(this)" />
-        <img src="https://i.pravatar.cc/60?img=65" class="av-opt" onclick="selectAvatar(this)" />
+        <img src="https://api.dicebear.com/10.x/bottts/svg?seed=Felix" class="av-opt" onclick="selectAvatar(this)" />
+        <img src="https://api.dicebear.com/7.x/thumbs/svg?seed=avatar_gato" class="av-opt" onclick="selectAvatar(this)" />
+        <img src="https://api.dicebear.com/10.x/bottts/svg?seed=v2ky5a8g" class="av-opt" onclick="selectAvatar(this)" />
+        <img src="https://api.dicebear.com/10.x/bottts/svg?seed=pjssdt8i" class="av-opt" onclick="selectAvatar(this)" />
+        <img src="https://api.dicebear.com/10.x/bottts/svg?seed=ujg1hokn" class="av-opt" onclick="selectAvatar(this)" />
+        <img src="https://api.dicebear.com/7.x/thumbs/svg?seed=avatar_mariposa" class="av-opt" onclick="selectAvatar(this)" />
       </div>
       <div class="modal-btns">
         <button class="btn-cancel" onclick="closeAvatarModal()">Cancelar</button>

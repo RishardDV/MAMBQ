@@ -487,22 +487,7 @@ function buildApiCard(obra, index) {
   '</div>';
 }
 
-function loadObrasFromAPI() {
-  if (!window.API) return;
-  var container = document.getElementById('api-obras-container');
-  if (!container) return;
 
-  API.getObras().then(function (obras) {
-    state.apiObras = obras;
-    if (obras.length === 0) {
-      container.innerHTML = '<p class="api-empty-msg">Aun no hay obras de visitantes. Se el primero en subir una!</p>';
-      return;
-    }
-    container.innerHTML = obras.map(function (o, i) { return buildApiCard(o, i); }).join('');
-  }).catch(function () {
-    container.innerHTML = '<p class="api-empty-msg">No se pudieron cargar las obras del servidor.</p>';
-  });
-}
 
 function loadObrasForInicio() {
   if (!window.API) return;
