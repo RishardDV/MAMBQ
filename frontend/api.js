@@ -87,7 +87,15 @@ const API = {
         const err = await res.json().catch(() => ({}));
         throw new Error(err.error || 'Error al publicar obra');
       }
-      return res.json();
+      const text = await res.text();
+      console.log('Respuesta createObra:', text);
+
+      try {
+        return JSON.parse(text);
+      } catch (e) {
+        console.error('JSON inválido:', text);
+        throw e;
+      }
     } catch (err) {
       return new Promise(function (resolve, reject) {
         if (!imageFile || !window.FileReader) {
