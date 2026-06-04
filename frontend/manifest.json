@@ -2,7 +2,7 @@
   "name": "MAMB - Museo de Arte Moderno de Barranquilla",
   "short_name": "MAMB",
   "description": "Explora el arte moderno del Caribe colombiano. Galeria virtual, IA de poses y juegos interactivos.",
-  "start_url": "/index.html",
+  "start_url": "/frontend/app.html",
   "scope": "/",
   "display": "standalone",
   "background_color": "#F5F0E8",

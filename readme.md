@@ -14,7 +14,7 @@ Plataforma digital del Museo de Arte Moderno de Barranquilla. MAMBQ combina una 
 
 ## Que incluye
 
-- `frontend/index.html`: aplicacion principal single-page con 9 pantallas (inicio, galeria, subir obra, juego de memoria, IA de poses, perfil, colecciones, about, detalle de obra).
+- `frontend/app.html`: aplicacion principal single-page con 9 pantallas (inicio, galeria, subir obra, juego de memoria, IA de poses, perfil, colecciones, about, detalle de obra).
 - `frontend/`: recursos de la app (CSS, JS, Service Worker, manifest PWA, iconos).
 - `backend/`: API REST con Express, PostgreSQL, JWT, Multer para carga de imagenes.
 - `Landing MAMB/`: landing page estatica del museo con informacion de artistas destacados.
@@ -36,7 +36,7 @@ Plataforma digital del Museo de Arte Moderno de Barranquilla. MAMBQ combina una 
 ```
 MAMBQ/
 ├── frontend/                           # Aplicacion web (SPA)
-│   ├── index.html                      # Pagina principal (9 pantallas)
+│   ├── app.html                        # Pagina principal (9 pantallas)
 │   ├── style.css                       # Estilos
 │   ├── api.js                          # Cliente API
 │   ├── usernameModeration.js           # Filtro de contenido
@@ -66,7 +66,7 @@ MAMBQ/
 │   │   └── env.js                      # Configuracion de entorno
 │   └── uploads/                        # Imagenes subidas
 ├── Landing MAMB/                       # Landing page estatica
-│   ├── landing.html
+│   ├── index.html
 │   ├── styles.css
 │   └── img/                            # Assets de artistas
 └── README.md
@@ -76,7 +76,7 @@ MAMBQ/
 
 ### Frontend
 
-- Abre `frontend/index.html` directamente en el navegador, o usa un servidor local:
+- Abre `frontend/app.html` directamente en el navegador, o usa un servidor local:
 
 ```bash
 cd frontend
@@ -95,7 +95,7 @@ El servidor estara disponible en `http://localhost:3000`.
 
 ### Landing Page
 
-- Abre `Landing MAMB/landing.html` directamente en el navegador.
+- Abre `Landing MAMB/index.html` directamente en el navegador.
 
 ## Configuracion de entorno
 

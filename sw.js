@@ -1,11 +1,11 @@
 const CACHE_VERSION = "mamb-v1";
 const CORE_ASSETS = [
   "./",
-  "./index.html",
+  "./frontend/app.html",
   "./frontend/style.css",
   "./frontend/api.js",
   "./frontend/manifest.json",
-  "./frontend/landing.html",
+  "./Landing MAMB/index.html",
   "./frontend/icons/icon.svg",
 ];
 
