@@ -216,23 +216,4 @@ Authorization: Bearer <token>
 | **Logging** | Morgan |
 | **Hosting** | Render (app + API), GitHub Pages (landing) |
 
-## Paleta de Colores
 
-- **Primario (Terracota/Oxido)**: `#C1440E`
-- **Fondo (Marfil)**: `#F5F0E8`
-- **Texto (Negro Carbon)**: `#1E1E1E`
-
-## Contribuir
-
-1. Haz fork del repositorio.
-2. Crea una rama nueva: `git checkout -b feature/mi-feature`.
-3. Haz commit de tus cambios.
-4. Envia un pull request.
-
-## Licencia
-
-MIT - Ver [LICENSE](LICENSE) para mas detalles.
-
----
-
-Hecho con foco en experiencia cultural y arte moderno del Caribe colombiano. 🎨✨
