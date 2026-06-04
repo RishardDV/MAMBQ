@@ -428,8 +428,10 @@ function submitObra() {
       document.getElementById('upload-zone-inner').classList.remove('hidden');
       selectedFile = null;
       setTimeout(function () {
-        navigate('screen-galeria', document.querySelector('[data-screen="screen-galeria"]'));
-      }, 1000);
+        var galleryBtn = document.querySelector('.nav-btn[data-screen="screen-galeria"]');
+        if (galleryBtn) navigate('screen-galeria', galleryBtn);
+        else navigate('screen-galeria');
+      }, 500);
     }).catch(function (err) {
       showToast(err.message || 'Error al publicar la obra');
       navigate('screen-subir', document.querySelector('[data-screen="screen-subir"]'));
