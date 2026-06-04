@@ -607,10 +607,13 @@ window.selectAvatar = selectAvatar;
 
 function confirmAvatar() {
   if (!state.selectedAvatar) return showToast('Selecciona un avatar');
-  var mainAvatar = document.getElementById('perfil-main-avatar');
-  var headerAvatar = document.getElementById('header-avatar');
-  if (mainAvatar) mainAvatar.src = state.selectedAvatar;
-  if (headerAvatar) headerAvatar.src = state.selectedAvatar;
+
+  // Actualiza TODOS los avatares del header y el de perfil
+  document.querySelectorAll('.avatar-header-img, #perfil-main-avatar')
+    .forEach(function(img) {
+      img.src = state.selectedAvatar;
+    });
+
   closeAvatarModal();
   showToast('Avatar actualizado');
 }

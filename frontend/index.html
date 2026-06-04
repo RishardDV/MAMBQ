@@ -99,7 +99,7 @@
             <span class="notif-dot"></span>
           </button>
           <button class="avatar-btn" onclick="navigate('screen-perfil', document.querySelector('[data-screen=screen-perfil]'))">
-            <img src="https://api.dicebear.com/7.x/thumbs/svg?seed=avatar_pinguino" alt="Avatar" id="header-avatar" />
+            <img src="https://api.dicebear.com/7.x/thumbs/svg?seed=avatar_pinguino" alt="Avatar" id="header-avatar" class="avatar-header-img" />
           </button>
         </div>
       </header>
@@ -402,7 +402,9 @@
         </div>
         <div class="header-actions">
           <button class="icon-btn"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg></button>
-          <button class="avatar-btn" onclick="navigate('screen-perfil', document.querySelector('[data-screen=screen-perfil]'))"><img src="https://i.pravatar.cc/40?img=45" alt="Avatar" id="header-avatar" /></button>
+          <button class="avatar-btn" onclick="navigate('screen-perfil', document.querySelector('[data-screen=screen-perfil]'))">
+            <img src="https://api.dicebear.com/7.x/thumbs/svg?seed=avatar_pinguino" alt="Avatar" id="header-avatar" class="avatar-header-img" />
+          </button>
         </div>
       </header>
 
@@ -578,7 +580,9 @@
         </div>
         <div class="header-actions">
           <button class="icon-btn"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg></button>
-          <button class="avatar-btn"><img src="https://i.pravatar.cc/40?img=45" alt="Avatar" /></button>
+          <button class="avatar-btn" onclick="navigate('screen-perfil', document.querySelector('[data-screen=screen-perfil]'))">
+            <img src="https://api.dicebear.com/7.x/thumbs/svg?seed=avatar_pinguino" alt="Avatar" id="header-avatar" class="avatar-header-img" />
+          </button>
         </div>
       </header>
       <div class="subir-intro">
@@ -652,7 +656,7 @@
       </header>
       <div class="perfil-top">
         <div class="perfil-avatar-wrap">
-          <img src="https://api.dicebear.com/7.x/thumbs/svg?seed=avatar_pinguino" id="perfil-main-avatar" class="perfil-avatar" alt="Avatar" />
+          <img src="https://api.dicebear.com/7.x/thumbs/svg?seed=avatar_pinguino" id="perfil-main-avatar" class="perfil-avatar" alt="Avatar" aria-colspan=""/>
           <button class="edit-av-btn" onclick="openAvatarModal()">✏️</button>
         </div>
         <h2 class="perfil-user-name">ANA MARÍA GÓMEZ</h2>
@@ -661,7 +665,6 @@
       <div class="perfil-data-card">
         <div class="perfil-data-row"><span>Nombre completo:</span><span>Ana María Gómez</span></div>
         <div class="perfil-data-row"><span>Ciudad:</span><span>Barranquilla, Colombia</span></div>
-        <div class="perfil-data-row"><span>Fecha de registro:</span><span>15/02/2026</span></div>
       </div>
       <div class="perfil-info-section" style="margin-top: 24px; padding-top: 24px; border-top: 1px solid rgba(0,0,0,0.1);">
         <label for="perfil-favorito" class="perfil-select-label">Elige tu tipo de obra favorita</label>
@@ -704,8 +707,9 @@
         </div>
         <div class="header-actions">
           <button class="icon-btn"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg></button>
-          <button class="avatar-btn"><img src="https://i.pravatar.cc/40?img=45" alt="Avatar" /></button>
-        </div>
+          <button class="avatar-btn" onclick="navigate('screen-perfil', document.querySelector('[data-screen=screen-perfil]'))">
+            <img src="https://api.dicebear.com/7.x/thumbs/svg?seed=avatar_pinguino" alt="Avatar" id="header-avatar" class="avatar-header-img" />
+          </button>
       </header>
       <div class="about-hero">
         <div class="about-hero-text">
@@ -744,6 +748,10 @@
             <div class="artista-tags">
               <span>Barranquilla</span><span>Literatura</span><span>Arte</span>
             </div>
+          </div>
+          <div class="landing">
+            <a href="http://"></a>
+
           </div>
         </div>
         <div class="about-card">
