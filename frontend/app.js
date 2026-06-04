@@ -543,7 +543,7 @@ const topObrasFamosos = [
 ];
 function loadObrasFamosas() {
 
-  const container = document.getElementById('api-inicio-obras');
+  const container = document.getElementById('screen-inicio');
 
   container.innerHTML = topObrasFamosos.map((obra, i) => `
     <div class="top-card">
