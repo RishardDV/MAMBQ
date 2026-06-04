@@ -519,6 +519,27 @@ function loadObrasForInicio() {
   }).catch(function () {});
 }
 
+function loadObrasFamosas() {
+  const container = document.getElementById('api-inicio-obras');
+  if (!container) return;
+
+  container.innerHTML = topObrasFamosos.map((obra, i) => `
+    <div class="top-card">
+      <div class="top-card-img"
+           style="
+             background-image:url('${obra.imagen}');
+             background-size:cover;
+             background-position:center;
+           ">
+        <span class="rank-num">${i + 1}</span>
+      </div>
+
+      <p class="top-card-name">${obra.titulo}</p>
+      <p class="top-card-meta">${obra.artista}</p>
+    </div>
+  `).join('');
+}
+
 const topObrasFamosos = [
   {
     titulo: "La Noche Estrellada",
@@ -543,7 +564,7 @@ const topObrasFamosos = [
 ];
 function loadObrasFamosas() {
 
-  const container = document.getElementById('screen-inicio');
+  const container = document.getElementById('api-inicio-obras');
 
   container.innerHTML = topObrasFamosos.map((obra, i) => `
     <div class="top-card">
