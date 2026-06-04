@@ -7,10 +7,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>MAMB – Museo de Arte Moderno de Barranquilla</title>
   <meta name="theme-color" content="#C1440E">
-  <link rel="manifest" href="/frontend/manifest.json">
-  <link rel="icon" href="/frontend/icons/icon.svg" type="image/svg+xml">
-  <link rel="apple-touch-icon" href="/frontend/icons/icon.svg">
-  <link rel="stylesheet" href="/frontend/style.css" />
+  <link rel="manifest" href="./manifest.json">
+  <link rel="icon" href="./icons/icon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="./icons/icon.svg">
+  <link rel="stylesheet" href="./style.css" />
 
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
 </head>
@@ -605,6 +605,28 @@
   </div>
 
   <!-- ═══════════════════════════════════════════
+       SCREEN: CARGANDO OBRA
+  ═══════════════════════════════════════════ -->
+  <div class="screen" id="screen-cargando">
+    <div class="screen-scroll">
+      <header class="app-header">
+        <div class="logo-block">
+          <span class="logo-mamb">MAMB</span>
+          <span class="logo-sub">Museo de Arte Moderno de Barranquilla</span>
+        </div>
+      </header>
+      <div class="loading-screen-content">
+        <div class="loading-spinner" aria-hidden="true"></div>
+        <div>
+          <h2 class="loading-title">Proceso de IA para la foto</h2>
+          <p class="loading-copy">Por favor espera mientras nuestra IA analiza tu obra y la publica en la galería.</p>
+        </div>
+        <div class="loading-bar"><div class="loading-fill"></div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════
        SCREEN: PERFIL
   ═══════════════════════════════════════════ -->
   <div class="screen" id="screen-perfil">
@@ -940,7 +962,7 @@
       card.className = 'toast-card';
       card.innerHTML = `
         <div class="toast-left">
-          <img src="/frontend/icons/icon.svg" alt="MAMB" class="toast-icon" />
+          <img src="./icons/icon.svg" alt="MAMB" class="toast-icon" />
         </div>
         <div class="toast-body">
           <strong class="toast-title">${opts.title || 'Notificación'}</strong>
@@ -974,8 +996,8 @@
     }
   </script>
 
-  <script src="/frontend/usernameModeration.js"></script>
-  <script src="/frontend/api.js"></script>
-  <script src="/backend/app.js"></script>
+  <script src="./usernameModeration.js"></script>
+  <script src="./api.js"></script>
+  <script src="../backend/app.js"></script>
 </body>
 </html>

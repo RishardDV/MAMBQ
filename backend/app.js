@@ -167,6 +167,11 @@ function goBack() {
 }
 window.goBack = goBack;
 
+function loadObrasFromAPI() {
+  // No-op placeholder: si no existe un backend real, no se interrumpe la navegación.
+  // Si en el futuro se agrega una API activa, aquí puede actualizarse la galería dinámica.
+}
+
 /* ── ARTWORK DETAIL ─────────────────────────────────── */
 
 var gradients = {
@@ -405,6 +410,8 @@ function submitObra() {
     submitBtn.textContent = 'PUBLICANDO...';
   }
 
+  navigate('screen-cargando');
+
   if (window.API) {
     API.createObra({
       titulo: titulo,
@@ -425,6 +432,7 @@ function submitObra() {
       }, 1000);
     }).catch(function (err) {
       showToast(err.message || 'Error al publicar la obra');
+      navigate('screen-subir', document.querySelector('[data-screen="screen-subir"]'));
     }).finally(function () {
       if (submitBtn) {
         submitBtn.disabled = false;
@@ -433,6 +441,7 @@ function submitObra() {
     });
   } else {
     showToast('Error: API no disponible');
+    navigate('screen-subir', document.querySelector('[data-screen="screen-subir"]'));
     if (submitBtn) { submitBtn.disabled = false; submitBtn.textContent = 'PUBLICAR OBRA'; }
   }
 }
