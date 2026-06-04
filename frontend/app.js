@@ -189,17 +189,10 @@ var gradients = {
 
 function applyArtworkHeroStyle(el, data) {
   if (data.image) {
-    var g = gradients[data.bg] || gradients['bg-rust'];
-    el.style.background = g + ", url('" + data.image + "')";
+    el.style.backgroundImage = "url('" + data.image + "')";
     el.style.backgroundSize = 'cover';
     el.style.backgroundPosition = data.imagePosition || 'center center';
-    el.style.backgroundBlendMode = 'multiply';
-  } else if (data.imageUrl) {
-    el.style.background = "linear-gradient(160deg, rgba(0,0,0,0.3), rgba(0,0,0,0.5)), url('" + data.imageUrl + "')";
-    el.style.backgroundSize = 'cover';
-    el.style.backgroundPosition = 'center center';
-  } else {
-    el.style.background = gradients['bg-rust'];
+    el.style.backgroundRepeat = 'no-repeat';
   }
 }
 
@@ -462,13 +455,6 @@ function formatRating(obra) {
   return avg ? avg.toFixed(1) : '0.0';
 }
 
-function buildStarRow(obraId) {
-  var stars = '';
-  for (var s = 1; s <= 5; s++) {
-    stars += '<button class="rating-star" type="button" onclick="event.stopPropagation(); rateApiObra(\'' + obraId + '\',' + s + ')" aria-label="Puntuar ' + s + ' estrellas">\u2605</button>';
-  }
-  return stars;
-}
 
 function buildApiCard(obra, index) {
   var bgClass = BG_CLASSES[index % BG_CLASSES.length];
