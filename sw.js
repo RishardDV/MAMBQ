@@ -37,10 +37,6 @@ self.addEventListener("fetch", (event) => {
 
   const url = new URL(event.request.url);
 
-  // Landing page — never intercept
-  if (url.pathname === "/" || url.pathname.startsWith("/Landing") ||
-      url.pathname.endsWith("/MAMBQ/") || url.pathname.includes("/Landing%20MAMB")) return;
-
   // API requests — always network, no cache
   if (url.pathname.startsWith("/api/")) return;
 
