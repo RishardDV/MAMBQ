@@ -196,9 +196,14 @@ section.fade-up {
     background-color: var(--accent-terra);
 }
 
+.nav-buttons {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+}
+
 .nav-btn-online {
     background-color: var(--accent-terra);
-    margin-left: 8px;
 }
 
 .nav-btn-online:hover {
@@ -878,17 +883,21 @@ address p {
         order: 3;
     }
 
-    .nav-btn-download {
+    .nav-buttons {
         display: none;
+        width: 100%;
+        flex-direction: column;
+        gap: 0.25rem;
+        order: 4;
     }
 
-    .nav-menu.active ~ .nav-btn-download {
-        display: block;
+    .nav-menu.active ~ .nav-buttons {
+        display: flex;
+    }
+
+    .nav-buttons .nav-btn-download {
         width: 100%;
         text-align: center;
-        order: 4;
-        margin-top: 0.25rem;
-        margin-left: 0;
     }
 
     body {
