@@ -1,11 +1,9 @@
 const CACHE_VERSION = "mamb-v1";
 const CORE_ASSETS = [
-  "./",
-  "./frontend/app.html",
+  "./frontend/index.html",
   "./frontend/style.css",
   "./frontend/api.js",
   "./frontend/manifest.json",
-  "./Landing MAMB/index.html",
   "./frontend/icons/icon.svg",
 ];
 
@@ -38,6 +36,9 @@ self.addEventListener("fetch", (event) => {
   if (event.request.method !== "GET") return;
 
   const url = new URL(event.request.url);
+
+  // Landing page — never intercept
+  if (url.pathname === "/" || url.pathname.startsWith("/Landing")) return;
 
   // API requests — always network, no cache
   if (url.pathname.startsWith("/api/")) return;

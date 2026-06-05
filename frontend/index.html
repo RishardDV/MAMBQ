@@ -46,7 +46,7 @@
   }
 
   if ("serviceWorker" in navigator) {
-    navigator.serviceWorker.register("/sw.js", { scope: "/" })
+    navigator.serviceWorker.register("/sw.js", { scope: "/frontend/" })
       .then(() => console.log("SW registrado"))
       .catch((err) => console.error("SW error:", err));
   }
