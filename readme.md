@@ -1,4 +1,4 @@
-# MAMBQ
+# MAMB
 
 [![HTML5](https://img.shields.io/badge/HTML5-E34C26?style=flat&logo=html5&logoColor=white)](https://html.spec.whatwg.org/)
 [![CSS3](https://img.shields.io/badge/CSS3-1572B6?style=flat&logo=css3&logoColor=white)](https://www.w3.org/Style/CSS/)
@@ -10,7 +10,7 @@
 [![PWA](https://img.shields.io/badge/PWA-5A0FC8?style=flat&logo=pwa&logoColor=white)](https://web.dev/progressive-web-apps/)
 [![License](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
-Plataforma digital del Museo de Arte Moderno de Barranquilla. MAMBQ combina una interfaz web PWA con un backend en Node.js + PostgreSQL, integrando IA para deteccion de poses con Teachable Machine y TensorFlow.js, juegos interactivos y una galeria virtual donde los visitantes pueden explorar y subir obras.
+App Web del Museo de Arte Moderno de Barranquilla. MAMB combina una interfaz web PWA que tendrá un backend en Node.js + PostgreSQL , también ,tendrá un modelo de IA capaz de generar obras hechas por los niños, aplicando estilos artísticos,  juegos interactivos y una galeria virtual donde los visitantes pueden explorar y subir obras.
 
 ## Demo en vivo
 
@@ -21,29 +21,26 @@ Plataforma digital del Museo de Arte Moderno de Barranquilla. MAMBQ combina una 
 
 ## Que incluye
 
-- `frontend/index.html`: aplicacion principal single-page con 9 pantallas (inicio, galeria, subir obra, juego de memoria, IA de poses, perfil, colecciones, about, detalle de obra).
+- `frontend/index.html`: aplicacion principal single-page con 9 pantallas (inicio, galeria, subir obra, juego de memoria,perfil, colecciones, about, detalle de obra).
 - `frontend/`: recursos de la app (CSS, JS, manifest PWA, iconos).
-- `index.html` (raiz): landing page del museo desplegada en GitHub Pages con informacion de artistas destacados.
-- `Landing MAMB/`: version original de la landing page estatica.
-- `backend/`: API REST desplegada en Render (el codigo fuente del backend no se incluye en este repositorio; solo se almacenan las dependencias y la carpeta de uploads).
+- `Landing MAMB/`:landing page del museo desplegada en GitHub Pages con información de artistas destacados.
+- `backend/`: API REST desplegada en Render (el código fuente del backend no se incluye en este repositorio; solo se tendrá la carpeta vacía para luego agregar la base de datos).
 
 ## Caracteristicas clave
 
-- 🏛️ Galeria virtual con obras del museo y obras subidas por visitantes.
-- 🎨 Subida de obras por visitantes con moderacion de contenido.
-- 🤖 Deteccion de poses en tiempo real con Teachable Machine + TensorFlow.js.
-- 🧠 Juego de memoria con datos curiosos sobre pinturas famosas.
-- ❤️ Sistema de likes y ratings (1-5 estrellas) para obras.
-- 🔍 Busqueda y filtros por tecnica (Oleo, Acuarela, Acrilico, Mixta, Escultura).
-- 📱 PWA instalable con Service Worker y soporte offline parcial.
-- 🔐 Autenticacion JWT y headers de seguridad con Helmet.
-- 👤 Sistema de avatares y perfiles de visitante.
+- Galeria virtual con obras del museo y obras subidas por visitantes.
+-  Subida de obras por visitantes con moderacion de contenido.
+- Juego de memoria con datos curiosos sobre pinturas famosas.
+- Sistema de likes y ratings (1-5 estrellas) para obras.
+- Busqueda y filtros por tecnica (Oleo, Acuarela, Acrilico, Mixta, Escultura).
+- PWA instalable con Service Worker y soporte offline parcial.
+- Autenticacion JWT y headers de seguridad con Helmet.
+-  Sistema de avatares y perfiles de visitante(incluye ciudad y nombre del visitante).
 
 ## Estructura del proyecto
 
 ```
-MAMBQ/
-├── index.html                          # Landing page (GitHub Pages)
+MAMB/
 ├── index.js                            # Interactividad de la landing
 ├── styles.css                          # Estilos de la landing
 ├── sw.js                               # Service Worker (landing)
@@ -53,12 +50,10 @@ MAMBQ/
 │   ├── app.js                          # Logica de la aplicacion
 │   ├── style.css                       # Estilos de la app
 │   ├── api.js                          # Cliente API
-│   ├── usernameModeration.js           # Filtro de contenido
+│   ├── usernameModer8ation.js           # Filtro de contenido
 │   ├── manifest.json                   # Configuracion PWA
 │   └── icons/                          # Iconos SVG (192x192, 512x512)
-├── backend/                            # Dependencias del backend (desplegado en Render)
-│   ├── node_modules/                   # Dependencias instaladas
-│   └── uploads/                        # Imagenes subidas por visitantes
+├── Backend                             # Actualmente vacio
 ├── Landing MAMB/                       # Landing page estatica (version original)
 │   ├── index.html
 │   ├── index.js
@@ -70,16 +65,21 @@ MAMBQ/
 ## Despliegue
 
 ### Landing page (GitHub Pages)
+![landing](/img readme/landing1.png)
 
-La landing se sirve desde la raiz del repositorio en la rama `main`. Accesible en:
+La landing se sirve desde la carpeta Landing MAMB del repositorio en la rama `main`. Accesible en:
 
 ```
 https://risharddv.github.io/MAMBQ/
 ```
 
 ### Aplicacion + Backend (Render)
+![render](/img%20readme/app1.jpeg)
+![render](/img%20readme/app2.jpeg)
 
-La aplicacion PWA y la API REST estan desplegadas en Render:
+
+
+La aplicación PWA y la API REST están desplegadas en Render:
 
 ```
 https://mamb-qsi0.onrender.com/
@@ -95,10 +95,6 @@ Abre `frontend/index.html` directamente en el navegador, o usa un servidor local
 cd frontend
 npx http-server
 ```
-
-### Landing Page
-
-Abre `index.html` (raiz) directamente en el navegador.
 
 ## API REST
 
@@ -210,7 +206,7 @@ Authorization: Bearer <token>
 | **Backend** | Node.js, Express.js |
 | **Base de datos** | PostgreSQL |
 | **Autenticacion** | JWT, bcryptjs |
-| **IA** | TensorFlow.js, Teachable Machine (deteccion de poses) |
+| **IA** | TensorFlow.js |
 | **Seguridad** | Helmet, CORS |
 | **Subida de archivos** | Multer |
 | **Logging** | Morgan |

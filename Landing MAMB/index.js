@@ -3,7 +3,7 @@ const APP_DOWNLOAD_URL = '/frontend/app.html';
 
 // Registrar service worker para habilitar instalación PWA
 if ('serviceWorker' in navigator) {
-    navigator.serviceWorker.register('/sw.js', { scope: '/' })
+    navigator.serviceWorker.register('./sw.js')
         .then(() => console.log('Service Worker registrado en landing.'))
         .catch((err) => console.error('Error registrando SW en landing:', err));
 }
