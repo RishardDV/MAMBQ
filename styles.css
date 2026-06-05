@@ -196,6 +196,21 @@ section.fade-up {
     background-color: var(--accent-terra);
 }
 
+.nav-btn-online {
+    background-color: var(--accent-terra);
+    margin-left: 8px;
+}
+
+.nav-btn-online:hover {
+    background-color: var(--primary-color);
+}
+
+.btn-online {
+    text-decoration: none;
+    display: inline-block;
+    margin-left: 12px;
+}
+
 .hamburger {
     display: none;
     flex-direction: column;
@@ -873,6 +888,7 @@ address p {
         text-align: center;
         order: 4;
         margin-top: 0.25rem;
+        margin-left: 0;
     }
 
     body {
