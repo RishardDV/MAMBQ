@@ -10,7 +10,12 @@
 [![PWA](https://img.shields.io/badge/PWA-5A0FC8?style=flat&logo=pwa&logoColor=white)](https://web.dev/progressive-web-apps/)
 [![License](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
+![landing2](/img readme/landing2.png)
+
 App Web del Museo de Arte Moderno de Barranquilla. MAMB combina una interfaz web PWA que tendrá un backend en Node.js + PostgreSQL , también ,tendrá un modelo de IA capaz de generar obras hechas por los niños, aplicando estilos artísticos,  juegos interactivos y una galeria virtual donde los visitantes pueden explorar y subir obras.
+
+
+
 
 ## Demo en vivo
 
@@ -85,9 +90,21 @@ La aplicación PWA y la API REST están desplegadas en Render:
 https://mamb-qsi0.onrender.com/
 ```
 
+## Como funciona?
+Esta app principalmente es dirigida para niños, y va estar en un apartado del museo de arte moderno de Barranquilla, con el fin que los niños puedan subir sus obras 
+y puedan a dar a conocer su pasión por el arte a traves de ella, estas obras se verán reflejadas en el apartado de galeria y estas antes pasan por un proceso estilización
+para darle un toque más artístico e impresionante y no solo eso también podrán acceder a pequeños juegos, con el fin de entretener mientras exploran la aplicación y se divierten. 
+
+![subir](img%20readme/app7.jpeg)
+![](img%20readme/app4.jpeg)
+
 ## Ejecucion local
 
 ### Frontend
+
+![landing](/img readme/responsive1.png)
+
+
 
 Abre `frontend/index.html` directamente en el navegador, o usa un servidor local:
 
