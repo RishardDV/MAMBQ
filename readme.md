@@ -10,7 +10,7 @@
 [![PWA](https://img.shields.io/badge/PWA-5A0FC8?style=flat&logo=pwa&logoColor=white)](https://web.dev/progressive-web-apps/)
 [![License](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
-![landing2](/img readme/landing2.png)
+![landing2](/img%20readme/landing2.png)
 
 App Web del Museo de Arte Moderno de Barranquilla. MAMB combina una interfaz web PWA que tendrá un backend en Node.js + PostgreSQL , también ,tendrá un modelo de IA capaz de generar obras hechas por los niños, aplicando estilos artísticos,  juegos interactivos y una galeria virtual donde los visitantes pueden explorar y subir obras.
 
@@ -70,8 +70,7 @@ MAMB/
 ## Despliegue
 
 ### Landing page (GitHub Pages)
-![landing](/img readme/landing1.png)
-
+![landing1](/img%20readme/landing1.png)
 La landing se sirve desde la carpeta Landing MAMB del repositorio en la rama `main`. Accesible en:
 
 ```
