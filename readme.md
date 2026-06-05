@@ -12,12 +12,20 @@
 
 Plataforma digital del Museo de Arte Moderno de Barranquilla. MAMBQ combina una interfaz web PWA con un backend en Node.js + PostgreSQL, integrando IA para deteccion de poses con Teachable Machine y TensorFlow.js, juegos interactivos y una galeria virtual donde los visitantes pueden explorar y subir obras.
 
+## Demo en vivo
+
+| | URL |
+|---|---|
+| **Landing page** | [risharddv.github.io/MAMBQ](https://risharddv.github.io/MAMBQ/) |
+| **Aplicacion (PWA)** | [mamb-qsi0.onrender.com](https://mamb-qsi0.onrender.com/) |
+
 ## Que incluye
 
-- `frontend/app.html`: aplicacion principal single-page con 9 pantallas (inicio, galeria, subir obra, juego de memoria, IA de poses, perfil, colecciones, about, detalle de obra).
-- `frontend/`: recursos de la app (CSS, JS, Service Worker, manifest PWA, iconos).
-- `backend/`: API REST con Express, PostgreSQL, JWT, Multer para carga de imagenes.
-- `Landing MAMB/`: landing page estatica del museo con informacion de artistas destacados.
+- `frontend/index.html`: aplicacion principal single-page con 9 pantallas (inicio, galeria, subir obra, juego de memoria, IA de poses, perfil, colecciones, about, detalle de obra).
+- `frontend/`: recursos de la app (CSS, JS, manifest PWA, iconos).
+- `index.html` (raiz): landing page del museo desplegada en GitHub Pages con informacion de artistas destacados.
+- `Landing MAMB/`: version original de la landing page estatica.
+- `backend/`: API REST desplegada en Render (el codigo fuente del backend no se incluye en este repositorio; solo se almacenan las dependencias y la carpeta de uploads).
 
 ## Caracteristicas clave
 
@@ -35,94 +43,67 @@ Plataforma digital del Museo de Arte Moderno de Barranquilla. MAMBQ combina una 
 
 ```
 MAMBQ/
-├── frontend/                           # Aplicacion web (SPA)
-│   ├── app.html                        # Pagina principal (9 pantallas)
-│   ├── style.css                       # Estilos
+├── index.html                          # Landing page (GitHub Pages)
+├── index.js                            # Interactividad de la landing
+├── styles.css                          # Estilos de la landing
+├── sw.js                               # Service Worker (landing)
+├── img/                                # Assets de la landing (logo, artistas)
+├── frontend/                           # Aplicacion web (SPA / PWA)
+│   ├── index.html                      # Pagina principal (9 pantallas)
+│   ├── app.js                          # Logica de la aplicacion
+│   ├── style.css                       # Estilos de la app
 │   ├── api.js                          # Cliente API
 │   ├── usernameModeration.js           # Filtro de contenido
-│   ├── sw.js                           # Service Worker
 │   ├── manifest.json                   # Configuracion PWA
-│   └── icons/                          # Iconos SVG
-├── backend/                            # API REST
-│   ├── server.js                       # Punto de entrada
-│   ├── app.js                          # Configuracion Express
-│   ├── db.js                           # Conexion PostgreSQL
-│   ├── package.json                    # Dependencias
-│   ├── .env.example                    # Variables de entorno ejemplo
-│   ├── routes/
-│   │   ├── index.js                    # Router principal
-│   │   └── obras.js                    # CRUD de obras + likes + ratings
-│   ├── models/
-│   │   ├── Obra.js                     # Modelo de obra
-│   │   └── User.js                     # Modelo de usuario
-│   ├── middleware/
-│   │   ├── auth.js                     # Autenticacion JWT
-│   │   ├── error.js                    # Manejo de errores
-│   │   └── notFound.js                 # 404 handler
-│   ├── utils/
-│   │   ├── AppError.js                 # Clase de error personalizada
-│   │   ├── artworkValidation.js        # Validacion de obras
-│   │   ├── asyncHandler.js             # Wrapper async
-│   │   └── env.js                      # Configuracion de entorno
-│   └── uploads/                        # Imagenes subidas
-├── Landing MAMB/                       # Landing page estatica
+│   └── icons/                          # Iconos SVG (192x192, 512x512)
+├── backend/                            # Dependencias del backend (desplegado en Render)
+│   ├── node_modules/                   # Dependencias instaladas
+│   └── uploads/                        # Imagenes subidas por visitantes
+├── Landing MAMB/                       # Landing page estatica (version original)
 │   ├── index.html
+│   ├── index.js
 │   ├── styles.css
-│   └── img/                            # Assets de artistas
-└── README.md
+│   └── img/
+└── readme.md
+```
+
+## Despliegue
+
+### Landing page (GitHub Pages)
+
+La landing se sirve desde la raiz del repositorio en la rama `main`. Accesible en:
+
+```
+https://risharddv.github.io/MAMBQ/
+```
+
+### Aplicacion + Backend (Render)
+
+La aplicacion PWA y la API REST estan desplegadas en Render:
+
+```
+https://mamb-qsi0.onrender.com/
 ```
 
 ## Ejecucion local
 
 ### Frontend
 
-- Abre `frontend/app.html` directamente en el navegador, o usa un servidor local:
+Abre `frontend/index.html` directamente en el navegador, o usa un servidor local:
 
 ```bash
 cd frontend
 npx http-server
 ```
 
-### Backend
-
-```bash
-cd backend
-npm install
-npm run dev
-```
-
-El servidor estara disponible en `http://localhost:3000`.
-
 ### Landing Page
 
-- Abre `Landing MAMB/index.html` directamente en el navegador.
-
-## Configuracion de entorno
-
-Crea un archivo `.env` en `backend/` basado en `.env.example`:
-
-```bash
-cp backend/.env.example backend/.env
-```
-
-Variables requeridas:
-
-```env
-PORT=3000
-DATABASE_URL=postgresql://usuario:contraseña@localhost:5432/mamb
-JWT_SECRET=tu_clave_secreta_muy_larga_aqui
-```
-
-Opcional:
-
-```env
-CLIENT_ORIGIN=http://localhost:8080
-NODE_ENV=development
-```
+Abre `index.html` (raiz) directamente en el navegador.
 
 ## API REST
 
 ### Base URL
+- Produccion: `https://mamb-qsi0.onrender.com/api`
 - Local: `http://localhost:3000/api`
 
 ### Endpoints
@@ -233,6 +214,7 @@ Authorization: Bearer <token>
 | **Seguridad** | Helmet, CORS |
 | **Subida de archivos** | Multer |
 | **Logging** | Morgan |
+| **Hosting** | Render (app + API), GitHub Pages (landing) |
 
 ## Paleta de Colores
 
