@@ -1,4 +1,4 @@
-const CACHE_VERSION = "mamb-v1";
+const CACHE_VERSION = "mamb-v2";
 const CORE_ASSETS = [
   "./frontend/index.html",
   "./frontend/style.css",
@@ -38,7 +38,8 @@ self.addEventListener("fetch", (event) => {
   const url = new URL(event.request.url);
 
   // Landing page — never intercept
-  if (url.pathname === "/" || url.pathname.startsWith("/Landing")) return;
+  if (url.pathname === "/" || url.pathname.startsWith("/Landing") ||
+      url.pathname.endsWith("/MAMBQ/") || url.pathname.includes("/Landing%20MAMB")) return;
 
   // API requests — always network, no cache
   if (url.pathname.startsWith("/api/")) return;
@@ -72,11 +73,7 @@ self.addEventListener("fetch", (event) => {
           });
           return response;
         })
-        .catch(() =>
-          caches.match("/").then((fallback) => {
-            return fallback || new Response("Offline", { status: 503 });
-          })
-        );
+        .catch(() => new Response("Offline", { status: 503 }));
     })
   );
 });
