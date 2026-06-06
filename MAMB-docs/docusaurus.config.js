@@ -85,7 +85,7 @@ const config = {
             items: [
               { label: 'Vista general', to: '/arquitectura/overview' },
               { label: 'Frontend', to: '/arquitectura/frontend' },
-              { label: 'Base de datos', to: '/arquitectura/base-de-datos' },
+              { label: 'Hoja de ruta IA', to: '/guias/roadmap-ia' },
             ],
           },
           {

@@ -4,7 +4,7 @@ sidebar_position: 1
 
 # Museo de Arte Moderno de Barranquilla
 
-**Aplicación web PWA** para que estudiantes y visitantes suban sus obras, las organicen en una galería visual y puedan explorar el arte de forma sencilla y atractiva. Está pensada para ejecutarse en móvil y también funciona en escritorio con una vista adaptada.
+**Aplicación web PWA** para que estudiantes y visitantes del MAMB exploren la galería del museo, suban sus propias obras y participen en juegos interactivos. Diseñada mobile-first, también funciona en escritorio con una vista adaptada.
 
 :::info Proyecto académico
 Desarrollado en colaboración con el **Museo de Arte Moderno de Barranquilla (MAMB)** y la **Universidad Simón Bolívar**, Barranquilla.
@@ -16,11 +16,11 @@ Desarrollado en colaboración con el **Museo de Arte Moderno de Barranquilla (MA
 |------|------------|
 | **Frontend** | HTML5, CSS3, JavaScript Vanilla, PWA |
 | **Backend** | Node.js, Express.js |
-| **Base de datos** | PostgreSQL |
 | **Autenticación** | JWT, bcryptjs |
-| **IA** | TensorFlow.js |
 | **Seguridad** | Helmet, CORS |
 | **Subida de archivos** | Multer |
+| **Logging** | Morgan |
+| **IA (próximamente)** | TensorFlow.js — ver [Hoja de ruta IA](/guias/roadmap-ia) |
 | **Hosting** | Render (app + API), GitHub Pages (landing) |
 
 ## Características clave
@@ -31,7 +31,6 @@ Desarrollado en colaboración con el **Museo de Arte Moderno de Barranquilla (MA
 - ❤️ **Sistema de likes** y calificaciones (1–5 estrellas)
 - 🔍 **Búsqueda y filtros** por técnica (Óleo, Acuarela, Acrílico, Mixta, Escultura)
 - 📱 **PWA instalable** con Service Worker y soporte offline parcial
-- 🔐 **Autenticación JWT** y headers de seguridad con Helmet
 - 👤 **Perfiles de visitante** con avatar, ciudad y nombre
 
 ## Demo en vivo

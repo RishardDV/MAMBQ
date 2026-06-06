@@ -10,6 +10,9 @@ const sidebars = {
       items: [
         'guias/instalacion',
         'guias/uso',
+        'guias/landing',
+        'guias/render',
+        'guias/roadmap-ia',
       ],
     },
     {
@@ -18,7 +21,6 @@ const sidebars = {
       items: [
         'arquitectura/overview',
         'arquitectura/frontend',
-        'arquitectura/base-de-datos',
       ],
     },
     {
