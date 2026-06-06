@@ -1,85 +1,141 @@
 ---
 sidebar_position: 4
+toc_min_heading_level: 2
+toc_max_heading_level: 4
 ---
 
-# Alojamiento en Render
+# Despliegue en Render
 
-La aplicación PWA y la API REST están desplegadas en **[Render](https://render.com)**, una plataforma cloud que permite hospedar servicios Node.js con despliegue automático desde GitHub.
+La aplicacion MAMB (frontend + backend) esta desplegada en **[Render](https://render.com)**, una plataforma cloud con despliegue automatico desde GitHub.
 
-**URL de producción:** [mamb-qsi0.onrender.com](https://mamb-qsi0.onrender.com/)
+**URL de produccion:** [mamb.online](https://www.mamb.online/) (redirige a Render)
 
 ---
 
-## Cómo está estructurado el despliegue
+## Arquitectura del despliegue
 
-Render sirve tanto el **frontend estático** como el **backend Express** desde el mismo servicio. El servidor Express detecta si una ruta es de la API (`/api/*`) o del frontend, y responde en consecuencia.
+### Servicio unificado
+
+Render sirve tanto el **frontend estatico** como el **backend Express** desde un unico servicio. El servidor detecta si la peticion es para la API o para el frontend.
+
+### Diagrama de flujo
 
 ```
 Cliente (navegador)
-       │
-       ▼
+       |
+       v
+  mamb.online (Namecheap DNS)
+       |
+       v
   Render (Web Service)
-       │
-       ├── /api/*  → Express (Node.js)
-       └── /*      → Sirve frontend/index.html
+       |
+       |-- /api/*  --> Express (Node.js + PostgreSQL)
+       +-- /*      --> Sirve frontend/index.html
 ```
+
+![Dashboard de Render](/img/app/render1.png)
 
 ---
 
-## Pasos para desplegar
+## Configuracion del servicio
 
-### 1. Preparar el repositorio
+### Crear Web Service en Render
 
-Asegúrate de que el `.gitignore` excluye `node_modules/`, `.env` y archivos de build.
+1. Entra a [dashboard.render.com](https://dashboard.render.com)
+2. Clic en **New > Web Service**
+3. Conecta el repositorio de GitHub (`risharddv/MAMBQ`)
 
-### 2. Crear el Web Service en Render
-
-1. Entra a [dashboard.render.com](https://dashboard.render.com) y haz clic en **New → Web Service**
-2. Conecta tu repositorio de GitHub (`risharddv/MAMBQ`)
-3. Configura el servicio:
+### Parametros del servicio
 
 | Campo | Valor |
 |-------|-------|
 | **Name** | `mamb` |
-| **Region** | Oregon (US West) u otra disponible |
+| **Region** | Oregon (US West) |
 | **Branch** | `main` |
 | **Build Command** | `npm install` |
 | **Start Command** | `node backend/server.js` |
 | **Instance Type** | Free |
 
-### 3. Variables de entorno
+### Variables de entorno
 
-En la sección **Environment** del servicio, agrega:
+En la seccion **Environment** del servicio:
 
 ```
 PORT=10000
-DATABASE_URL=postgresql://...   # cuando tengas la BD
+DATABASE_URL=postgresql://...
 JWT_SECRET=tu_clave_secreta
 NODE_ENV=production
 ```
 
-:::caution Puerto en Render
-Render asigna el puerto dinámicamente. El backend debe leer `process.env.PORT`:
+#### Puerto dinamico
+
+:::caution
+Render asigna el puerto dinamicamente. El backend lee `process.env.PORT`:
 ```js
 const PORT = process.env.PORT || 3000;
 app.listen(PORT);
 ```
 :::
 
-### 4. Primer despliegue
+### Despliegue automatico
 
-Una vez guardada la configuración, Render ejecuta automáticamente el build y arranca el servidor. Cada `git push` a `main` dispara un nuevo despliegue.
+Cada `git push` a la rama `main` dispara un nuevo despliegue automaticamente. Render ejecuta el build y arranca el servidor sin intervencion manual.
+
+![Proceso de despliegue en Render](/img/app/render2.png)
+
+---
+
+## Dominio personalizado
+
+### Registro del dominio
+
+Se adquirio el dominio **[mamb.online](https://www.mamb.online/)** a traves de **Namecheap**.
+
+### Configuracion DNS
+
+Este dominio redirige automaticamente al servicio alojado en Render, proporcionando una URL profesional y facil de recordar.
+
+### Flujo de redireccion
+
+```
+https://www.mamb.online/  -->  https://mamb-qsi0.onrender.com/
+```
+
+![Configuracion del dominio en Namecheap](/img/dominio.jpeg)
 
 ---
 
 ## Plan gratuito — consideraciones
 
-- Los servicios gratuitos de Render **se duermen** tras 15 minutos de inactividad.
-- La primera petición después del reposo puede tardar **20–30 segundos** mientras el servicio despierta.
-- No tiene límite de peticiones por mes, pero sí de horas de cómputo (750 h/mes en la capa gratuita).
+### Limitaciones
+
+| Aspecto | Detalle |
+|---------|---------|
+| **Hibernacion** | El servicio se duerme tras 15 min de inactividad |
+| **Cold start** | Primera peticion tras reposo tarda 20-30 segundos |
+| **Horas de computo** | 750 h/mes en la capa gratuita |
+| **Peticiones** | Sin limite mensual |
+
+### Recomendaciones
+
+:::tip Rendimiento
+Para evitar cold starts en demos o presentaciones, puedes hacer un ping al endpoint `/api/health` unos minutos antes.
+:::
 
 ---
 
 ## Logs y monitoreo
 
-Desde el dashboard de Render puedes acceder a los logs en tiempo real del servicio. Si el despliegue falla, el log muestra el error exacto del proceso de build o arranque.
+### Acceso a logs
+
+Desde el dashboard de Render se accede a los logs en tiempo real del servicio.
+
+### Diagnostico de errores
+
+Si el despliegue falla, el log muestra el error exacto del proceso de build o del arranque del servidor. Errores comunes:
+
+- Variables de entorno faltantes
+- Dependencias no instaladas
+- Puerto ya en uso
+
+![Dashboard de Render con logs](/img/app/Render3.png)

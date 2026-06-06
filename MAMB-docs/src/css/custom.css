@@ -1,27 +1,209 @@
 /**
  * MAMB — Museo de Arte Moderno de Barranquilla
- * Paleta basada en el proyecto original
+ * Custom theme overrides
  */
 
 :root {
-  --ifm-color-primary: #2e4a7a;
-  --ifm-color-primary-dark: #293f6a;
-  --ifm-color-primary-darker: #243a62;
-  --ifm-color-primary-darkest: #1b2e50;
-  --ifm-color-primary-light: #33558a;
-  --ifm-color-primary-lighter: #375a92;
-  --ifm-color-primary-lightest: #4268a4;
+  --ifm-color-primary: #1a3a5c;
+  --ifm-color-primary-dark: #153050;
+  --ifm-color-primary-darker: #122b48;
+  --ifm-color-primary-darkest: #0d1f35;
+  --ifm-color-primary-light: #1f4468;
+  --ifm-color-primary-lighter: #224a70;
+  --ifm-color-primary-lightest: #2a5a88;
   --ifm-code-font-size: 95%;
-  --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.1);
+  --ifm-font-family-base: 'Inter', system-ui, -apple-system, sans-serif;
+  --ifm-heading-font-weight: 700;
+  --ifm-footer-background-color: #0d1f35;
+  --ifm-footer-color: #c8d6e5;
+  --docusaurus-highlighted-code-line-bg: rgba(26, 58, 92, 0.1);
 }
 
 [data-theme='dark'] {
-  --ifm-color-primary: #7aa3d4;
-  --ifm-color-primary-dark: #5e8fc8;
-  --ifm-color-primary-darker: #5085c2;
-  --ifm-color-primary-darkest: #3168a8;
-  --ifm-color-primary-light: #96b7e0;
-  --ifm-color-primary-lighter: #a4c1e4;
-  --ifm-color-primary-lightest: #c0d5ee;
-  --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.3);
+  --ifm-color-primary: #5b9bd5;
+  --ifm-color-primary-dark: #4389cc;
+  --ifm-color-primary-darker: #3a7fc4;
+  --ifm-color-primary-darkest: #2d66a0;
+  --ifm-color-primary-light: #73adde;
+  --ifm-color-primary-lighter: #7db3e1;
+  --ifm-color-primary-lightest: #a0c9ea;
+  --ifm-footer-background-color: #0a1929;
+  --docusaurus-highlighted-code-line-bg: rgba(91, 155, 213, 0.15);
+}
+
+/* Navbar */
+.navbar {
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+}
+
+.navbar__title {
+  font-weight: 800;
+  letter-spacing: -0.02em;
+}
+
+/* Sidebar */
+.menu__link {
+  font-size: 0.9rem;
+  border-radius: 6px;
+  transition: background 0.15s ease;
+}
+
+.menu__link--active:not(.menu__link--sublist) {
+  font-weight: 600;
+}
+
+/* Admonitions */
+.alert {
+  border-radius: 8px;
+  border-left-width: 4px;
+}
+
+/* Tables */
+table {
+  font-size: 0.9rem;
+}
+
+table th {
+  background: var(--ifm-color-emphasis-100);
+  font-weight: 600;
+  text-transform: uppercase;
+  font-size: 0.8rem;
+  letter-spacing: 0.04em;
+}
+
+table td, table th {
+  padding: 0.65rem 1rem;
+}
+
+/* Code blocks */
+.prism-code {
+  border-radius: 8px !important;
+  font-size: 0.85rem;
+}
+
+/* Footer */
+.footer__title {
+  font-weight: 700;
+  text-transform: uppercase;
+  font-size: 0.8rem;
+  letter-spacing: 0.06em;
+}
+
+.footer__link-item {
+  font-size: 0.88rem;
+}
+
+/* Doc page improvements */
+.markdown h2 {
+  margin-top: 2.5rem;
+  padding-bottom: 0.4rem;
+  border-bottom: 1px solid var(--ifm-color-emphasis-200);
+}
+
+.markdown h3 {
+  margin-top: 1.8rem;
+}
+
+.markdown img {
+  border-radius: 8px;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
+  margin: 1rem 0;
+}
+
+/* ==============================
+   TABLE OF CONTENTS (right sidebar)
+   ============================== */
+
+/* Make TOC wrapper wider */
+@media (min-width: 997px) {
+  [class*="tocCollapsible"],
+  [class*="tableOfContents"] {
+    min-width: 280px !important;
+    max-width: 320px !important;
+  }
+}
+
+/* TOC list styling */
+.table-of-contents {
+  font-size: 0.88rem;
+  border-left: 3px solid var(--ifm-color-primary-lightest);
+  padding-left: 1rem;
+  padding-right: 0.5rem;
+  max-height: calc(100vh - 120px);
+  overflow-y: auto;
+  position: sticky;
+  top: calc(var(--ifm-navbar-height) + 1rem);
+}
+
+.table-of-contents__left-border {
+  border-left: none;
+}
+
+/* TOC title */
+.table-of-contents::before {
+  content: 'En esta pagina';
+  display: block;
+  font-weight: 800;
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--ifm-color-primary);
+  margin-bottom: 0.8rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 2px solid var(--ifm-color-primary-lightest);
+}
+
+/* TOC links */
+.table-of-contents__link {
+  display: block;
+  padding: 0.3rem 0;
+  color: var(--ifm-color-emphasis-700);
+  transition: all 0.15s ease;
+  line-height: 1.4;
+}
+
+.table-of-contents__link:hover {
+  color: var(--ifm-color-primary);
+  text-decoration: none;
+  padding-left: 4px;
+}
+
+.table-of-contents__link--active {
+  color: var(--ifm-color-primary) !important;
+  font-weight: 700;
+  border-left: 3px solid var(--ifm-color-primary);
+  padding-left: 8px;
+  margin-left: -1rem;
+}
+
+/* Indent nested levels */
+.table-of-contents li > ul {
+  padding-left: 0.9rem;
+  margin-top: 0.1rem;
+}
+
+.table-of-contents li > ul .table-of-contents__link {
+  font-size: 0.82rem;
+  color: var(--ifm-color-emphasis-600);
+}
+
+.table-of-contents li > ul > li > ul .table-of-contents__link {
+  font-size: 0.78rem;
+  color: var(--ifm-color-emphasis-500);
+}
+
+/* Force sidebar visible on doc pages */
+@media (min-width: 997px) {
+  [class*="docSidebarContainer"] {
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    min-width: 250px !important;
+    width: var(--doc-sidebar-width, 300px) !important;
+  }
+}
+
+/* Smooth scrolling */
+html {
+  scroll-behavior: smooth;
 }

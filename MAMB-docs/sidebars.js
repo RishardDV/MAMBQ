@@ -6,7 +6,8 @@ const sidebars = {
     'intro',
     {
       type: 'category',
-      label: 'Guías',
+      label: 'Guias',
+      collapsed: false,
       items: [
         'guias/instalacion',
         'guias/uso',
@@ -18,14 +19,17 @@ const sidebars = {
     {
       type: 'category',
       label: 'Arquitectura',
+      collapsed: false,
       items: [
         'arquitectura/overview',
         'arquitectura/frontend',
+        'arquitectura/base-de-datos',
       ],
     },
     {
       type: 'category',
       label: 'API',
+      collapsed: false,
       items: [
         'api/endpoints',
         'api/obras',

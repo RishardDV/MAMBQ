@@ -7,10 +7,6 @@ const config = {
   tagline: 'Galería digital para estudiantes y visitantes del Museo de Arte Moderno de Barranquilla',
   favicon: 'img/favicon.ico',
 
-  future: {
-    v4: true,
-  },
-
   url: 'https://risharddv.github.io',
   baseUrl: '/MAMBQ/',
 
@@ -34,6 +30,7 @@ const config = {
           routeBasePath: '/',
           editUrl: 'https://github.com/risharddv/MAMBQ/tree/main/MAMB-docs/',
         },
+        sitemap: false,
         blog: false,
         theme: {
           customCss: './src/css/custom.css',
@@ -46,6 +43,10 @@ const config = {
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
     ({
       image: 'img/docusaurus-social-card.jpg',
+      tableOfContents: {
+        minHeadingLevel: 2,
+        maxHeadingLevel: 4,
+      },
       colorMode: {
         respectPrefersColorScheme: true,
       },
@@ -63,8 +64,13 @@ const config = {
             label: 'Documentación',
           },
           {
+            href: 'https://www.mamb.online',
+            label: 'App en vivo',
+            position: 'right',
+          },
+          {
             href: 'https://github.com/risharddv/MAMBQ',
-            label: 'Repositorio',
+            label: 'GitHub',
             position: 'right',
           },
         ],
@@ -73,10 +79,11 @@ const config = {
         style: 'dark',
         links: [
           {
-            title: 'Documentación',
+            title: 'Documentacion',
             items: [
-              { label: 'Introducción', to: '/intro' },
-              { label: 'Instalación', to: '/guias/instalacion' },
+              { label: 'Introduccion', to: '/intro' },
+              { label: 'Instalacion', to: '/guias/instalacion' },
+              { label: 'Guia de uso', to: '/guias/uso' },
               { label: 'API REST', to: '/api/endpoints' },
             ],
           },
@@ -85,6 +92,7 @@ const config = {
             items: [
               { label: 'Vista general', to: '/arquitectura/overview' },
               { label: 'Frontend', to: '/arquitectura/frontend' },
+              { label: 'Base de datos', to: '/arquitectura/base-de-datos' },
               { label: 'Hoja de ruta IA', to: '/guias/roadmap-ia' },
             ],
           },
@@ -92,21 +100,21 @@ const config = {
             title: 'Proyecto',
             items: [
               {
-                label: 'Universidad Simón Bolívar',
+                label: 'App en vivo (mamb.online)',
+                href: 'https://www.mamb.online',
+              },
+              {
+                label: 'Universidad Simon Bolivar',
                 href: 'https://www.unisimon.edu.co',
               },
               {
-                label: 'Código fuente',
+                label: 'Codigo fuente',
                 href: 'https://github.com/risharddv/MAMBQ',
-              },
-              {
-                label: 'App en vivo',
-                href: 'https://mamb-qsi0.onrender.com',
               },
             ],
           },
         ],
-        copyright: `Copyright © ${new Date().getFullYear()} MAMB — USB & Museo de Arte Moderno de Barranquilla. Documentación con Docusaurus.`,
+        copyright: `Copyright © ${new Date().getFullYear()} MAMB — USB & Museo de Arte Moderno de Barranquilla.`,
       },
       prism: {
         theme: prismThemes.github,

@@ -1,54 +1,103 @@
 ---
 sidebar_position: 5
+toc_min_heading_level: 2
+toc_max_heading_level: 4
 ---
 
 # Hoja de ruta — IA
 
-:::caution Funcionalidad no disponible aún
-El módulo de inteligencia artificial **no está implementado** en la versión actual. Esta página documenta lo que está planificado para fases futuras del proyecto.
+:::caution Funcionalidad planificada
+El modulo de inteligencia artificial **no esta implementado** en la version actual. Esta pagina documenta la funcionalidad prevista para fases futuras.
 :::
 
-## Qué se tiene previsto
+## Objetivo
 
-El objetivo es integrar un modelo de **estilización artística** (Neural Style Transfer) que procese las obras subidas por los niños y les aplique el estilo visual de pintores reconocidos del MAMB.
+Integrar un modelo de **estilizacion artistica** (Neural Style Transfer) que permita a los visitantes aplicar estilos de artistas reconocidos del MAMB a sus propias obras.
 
-### Flujo esperado
+---
+
+## Flujo previsto
+
+### Proceso del usuario
+
+1. El visitante sube una imagen de su obra
+2. La imagen pasa por moderacion de contenido (ya implementada)
+3. El visitante selecciona un estilo artistico
+4. TensorFlow.js procesa la imagen
+5. La imagen estilizada se publica en la galeria
+
+### Diagrama de flujo
 
 ```
 Visitante sube imagen
-        │
-        ▼
-  Moderación de contenido (ya existe)
-        │
-        ▼
-  Selección de estilo artístico
-  (ej: "estilo Obregón", "estilo Grau")
-        │
-        ▼
+        |
+        v
+  Moderacion de contenido (ya implementada)
+        |
+        v
+  Seleccion de estilo artistico
+  (ej: "estilo Obregon", "estilo Grau")
+        |
+        v
   TensorFlow.js aplica el estilo
-        │
-        ▼
-  Imagen estilizada guardada y publicada
-  en la galería de visitantes
+        |
+        v
+  Imagen estilizada publicada en la galeria
 ```
 
-### Tecnologías previstas
+---
 
-| Componente | Tecnología |
+## Tecnologias planificadas
+
+### Modelo de IA
+
+| Componente | Tecnologia |
 |------------|------------|
-| Modelo base | TensorFlow.js (browser o Node) |
-| Técnica | Neural Style Transfer / Arbitrary Style Transfer |
-| Almacenamiento de imágenes procesadas | Por definir (Render Disk, Cloudinary, S3) |
-| Base de datos | Por definir — necesaria para persistir imágenes procesadas |
+| Modelo base | TensorFlow.js (browser o Node.js) |
+| Tecnica | Neural Style Transfer / Arbitrary Style Transfer |
 
-## Por qué no está implementado aún
+### Almacenamiento
 
-El módulo de IA requiere definir primero la capa de almacenamiento persistente (base de datos e imágenes), que actualmente no está en producción. Una vez se establezca esa infraestructura, el módulo de TensorFlow.js se integrará como middleware del backend.
+| Opcion | Ventaja |
+|--------|---------|
+| Render Disk | Integrado, sin configuracion extra |
+| Cloudinary | CDN global, transformaciones de imagen |
+| Amazon S3 | Escalable, bajo costo por GB |
 
-## Estado actual
+---
 
-- ✅ Subida y moderación de imágenes operativa
-- ✅ Galería funcional con obras del museo
-- ⏳ Almacenamiento persistente en base de datos — pendiente
-- ⏳ Integración TensorFlow.js — pendiente
-- ⏳ Selección de estilos artísticos — pendiente
+## Estado actual del proyecto
+
+### Componentes implementados
+
+| Componente | Estado |
+|------------|--------|
+| Subida de imagenes | Implementado |
+| Moderacion de contenido | Implementado |
+| Galeria funcional | Implementado |
+| Base de datos PostgreSQL | Implementado |
+| API REST completa | Implementado |
+
+### Componentes pendientes
+
+| Componente | Estado |
+|------------|--------|
+| Integracion TensorFlow.js | Pendiente |
+| Seleccion de estilos artisticos | Pendiente |
+| Almacenamiento de imagenes procesadas | Pendiente |
+
+---
+
+## Requisitos para la implementacion
+
+### Modelos pre-entrenados
+
+Seleccionar y optimizar modelos de style transfer para ejecucion en el navegador. Los modelos deben ser lo suficientemente ligeros para funcionar en dispositivos moviles.
+
+### Galeria de estilos
+
+Recopilar obras de referencia de artistas del MAMB para usar como estilos base. Cada estilo necesita una imagen de referencia de alta calidad.
+
+### Infraestructura de almacenamiento
+
+Definir servicio para persistir las imagenes procesadas. Las imagenes originales ya se almacenan en Render, pero las procesadas requieren almacenamiento adicional.
