@@ -42,6 +42,7 @@
     initSidebar();
     initNavigation();
     initBackToTop();
+    initNavDropdown();
 
     // Load page from hash or default to intro
     const hash = window.location.hash.replace('#', '');
@@ -331,6 +332,26 @@
 
     btn.addEventListener('click', function () {
       window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+  }
+
+  // --- Navbar dropdown (mobile) ---
+  function initNavDropdown() {
+    var btn = document.getElementById('navbar-more-btn');
+    var dropdown = document.getElementById('navbar-dropdown');
+    if (!btn || !dropdown) return;
+
+    btn.addEventListener('click', function (e) {
+      e.stopPropagation();
+      dropdown.classList.toggle('open');
+    });
+
+    document.addEventListener('click', function () {
+      dropdown.classList.remove('open');
+    });
+
+    dropdown.addEventListener('click', function (e) {
+      e.stopPropagation();
     });
   }
 
