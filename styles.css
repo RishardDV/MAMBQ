@@ -753,7 +753,8 @@ img { max-width: 100%; height: auto; }
   position: fixed;
   inset: 0;
   z-index: 200;
-  overflow-y: auto;
+  overflow-y: scroll;
+  overflow-x: hidden;
   background: #ffffff;
   font-family: 'Jost', 'Inter', system-ui, sans-serif;
   color: #3a3a3a;
