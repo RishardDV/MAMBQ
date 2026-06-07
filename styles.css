@@ -654,6 +654,24 @@ img { max-width: 100%; height: auto; }
   display: block;
 }
 
+/* Navbar more button (mobile only) */
+.navbar__more {
+  display: none;
+  background: none;
+  border: 1px solid var(--ifm-border-color);
+  border-radius: 6px;
+  cursor: pointer;
+  padding: .35rem .55rem;
+  color: var(--ifm-font-color);
+  font-size: 1.2rem;
+  line-height: 1;
+  margin-left: .25rem;
+}
+
+.navbar__more:hover {
+  background: var(--ifm-background-surface);
+}
+
 /* ===== RESPONSIVE ===== */
 @media (max-width: 996px) {
   .sidebar {
@@ -697,24 +715,6 @@ img { max-width: 100%; height: auto; }
   .navbar__more {
     display: flex;
   }
-}
-
-/* Navbar more button (mobile only) */
-.navbar__more {
-  display: none;
-  background: none;
-  border: 1px solid var(--ifm-border-color);
-  border-radius: 6px;
-  cursor: pointer;
-  padding: .35rem .55rem;
-  color: var(--ifm-font-color);
-  font-size: 1.2rem;
-  line-height: 1;
-  margin-left: .25rem;
-}
-
-.navbar__more:hover {
-  background: var(--ifm-background-surface);
 }
 
 /* Dropdown */
