@@ -1,0 +1,1619 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MAMB — Documentacion</title>
+  <meta name="description" content="Documentacion del Museo de Arte Moderno de Barranquilla — PWA interactiva para estudiantes y visitantes.">
+  <link rel="icon" href="MAMB-docs/static/img/favicon.ico">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<!-- ===== NAVBAR ===== -->
+<nav class="navbar">
+  <div class="navbar__inner">
+    <button class="navbar__toggle" id="sidebar-toggle" aria-label="Menu">
+      <svg width="24" height="24" viewBox="0 0 30 30"><path stroke="currentColor" stroke-linecap="round" stroke-width="2" d="M4 7h22M4 15h22M4 23h22"/></svg>
+    </button>
+    <a class="navbar__brand" href="#intro" data-page="intro">
+      <img src="MAMB-docs/static/img/logo.svg" alt="MAMB">
+      MAMB
+    </a>
+    <div class="navbar__items navbar__items--left">
+      <a class="navbar__link navbar__link--active" href="#intro" data-page="intro">Documentacion</a>
+    </div>
+    <div class="navbar__items navbar__items--right">
+      <a class="navbar__link" href="https://www.mamb.online" target="_blank" rel="noopener">App en vivo <span class="ext-icon">&#x2197;</span></a>
+      <a class="navbar__link" href="https://github.com/risharddv/MAMBQ" target="_blank" rel="noopener">GitHub <span class="ext-icon">&#x2197;</span></a>
+      <button class="theme-toggle" id="theme-toggle" aria-label="Cambiar tema"></button>
+    </div>
+  </div>
+</nav>
+
+<!-- ===== SIDEBAR BACKDROP ===== -->
+<div class="sidebar-backdrop" id="sidebar-backdrop"></div>
+
+<!-- ===== MAIN LAYOUT ===== -->
+<div class="main-wrapper">
+
+  <!-- ===== SIDEBAR ===== -->
+  <aside class="sidebar" id="sidebar">
+    <ul class="sidebar__menu">
+      <li>
+        <a class="sidebar__link sidebar__link--active" href="#intro" data-page="intro">Museo de Arte Moderno de Barranquilla</a>
+      </li>
+
+      <li class="sidebar__category">
+        <div class="sidebar__category-label">Guias <span class="arrow">&#9660;</span></div>
+        <ul class="sidebar__submenu">
+          <li><a class="sidebar__link" href="#guias/instalacion" data-page="guias/instalacion">Instalacion</a></li>
+          <li><a class="sidebar__link" href="#guias/uso" data-page="guias/uso">Guia de uso</a></li>
+          <li><a class="sidebar__link" href="#guias/landing" data-page="guias/landing">Landing Page</a></li>
+          <li><a class="sidebar__link" href="#guias/render" data-page="guias/render">Despliegue en Render</a></li>
+          <li><a class="sidebar__link" href="#guias/roadmap-ia" data-page="guias/roadmap-ia">Hoja de ruta — IA</a></li>
+        </ul>
+      </li>
+
+      <li class="sidebar__category">
+        <div class="sidebar__category-label">Arquitectura <span class="arrow">&#9660;</span></div>
+        <ul class="sidebar__submenu">
+          <li><a class="sidebar__link" href="#arquitectura/overview" data-page="arquitectura/overview">Vista general</a></li>
+          <li><a class="sidebar__link" href="#arquitectura/frontend" data-page="arquitectura/frontend">Frontend</a></li>
+          <li><a class="sidebar__link" href="#arquitectura/base-de-datos" data-page="arquitectura/base-de-datos">Base de datos</a></li>
+        </ul>
+      </li>
+
+      <li class="sidebar__category">
+        <div class="sidebar__category-label">API <span class="arrow">&#9660;</span></div>
+        <ul class="sidebar__submenu">
+          <li><a class="sidebar__link" href="#api/endpoints" data-page="api/endpoints">API REST — Vista general</a></li>
+          <li><a class="sidebar__link" href="#api/obras" data-page="api/obras">Obras — Referencia completa</a></li>
+        </ul>
+      </li>
+    </ul>
+  </aside>
+
+  <!-- ===== DOC AREA ===== -->
+  <div class="doc-wrapper">
+    <div class="doc-content">
+
+      <!-- ==================== PAGE: INTRO ==================== -->
+      <div class="doc-page active" id="page-intro">
+        <div class="markdown">
+          <h1>Museo de Arte Moderno de Barranquilla</h1>
+
+          <p><strong>MAMB</strong> es una aplicacion web progresiva (PWA) desarrollada para el Museo de Arte Moderno de Barranquilla. Permite a estudiantes y visitantes explorar la galeria del museo, subir sus propias obras y participar en juegos interactivos.</p>
+
+          <div class="admonition admonition--info">
+            <div class="admonition__title">&#x2139;&#xFE0F; Proyecto academico</div>
+            <p>Desarrollado en colaboracion con el <strong>Museo de Arte Moderno de Barranquilla</strong> y la <strong>Universidad Simon Bolivar</strong>, Barranquilla.</p>
+          </div>
+
+          <img src="MAMB-docs/static/img/app/app5.jpeg" alt="Vista de la aplicacion MAMB" loading="lazy">
+
+          <h2 id="descripcion-general">Descripcion general</h2>
+          <p>El sistema busca fomentar la creatividad y la participacion artistica de ninos y visitantes del museo, ofreciendo una plataforma digital interactiva accesible desde cualquier dispositivo.</p>
+
+          <h3 id="objetivos-del-proyecto">Objetivos del proyecto</h3>
+          <ul>
+            <li>Incentivar la creatividad infantil a traves del arte digital</li>
+            <li>Facilitar la exposicion de obras artisticas de visitantes</li>
+            <li>Crear una experiencia digital interactiva y educativa</li>
+            <li>Acercar el museo a nuevas audiencias mediante tecnologia web</li>
+            <li>Promover el aprendizaje mediante actividades ludicas</li>
+          </ul>
+
+          <h3 id="publico-objetivo">Publico objetivo</h3>
+          <ul>
+            <li>Estudiantes de primaria y secundaria en visitas escolares</li>
+            <li>Visitantes del museo de todas las edades</li>
+            <li>Comunidad artistica de Barranquilla</li>
+          </ul>
+
+          <hr>
+
+          <h2 id="stack-tecnologico">Stack tecnologico</h2>
+
+          <h3 id="frontend-stack">Frontend</h3>
+          <table>
+            <thead><tr><th>Tecnologia</th><th>Uso</th></tr></thead>
+            <tbody>
+              <tr><td>HTML5</td><td>Estructura semantica de la SPA</td></tr>
+              <tr><td>CSS3</td><td>Diseno visual responsive, mobile-first</td></tr>
+              <tr><td>JavaScript Vanilla</td><td>Logica de la app, sin frameworks</td></tr>
+              <tr><td>PWA / Service Worker</td><td>Instalacion nativa y cache offline</td></tr>
+            </tbody>
+          </table>
+
+          <h3 id="backend-stack">Backend</h3>
+          <table>
+            <thead><tr><th>Tecnologia</th><th>Uso</th></tr></thead>
+            <tbody>
+              <tr><td>Node.js</td><td>Runtime del servidor</td></tr>
+              <tr><td>Express.js</td><td>Framework para la API REST</td></tr>
+              <tr><td>PostgreSQL</td><td>Base de datos relacional</td></tr>
+              <tr><td>JWT + bcryptjs</td><td>Autenticacion y hashing de contrasenas</td></tr>
+              <tr><td>Helmet</td><td>Headers HTTP de seguridad</td></tr>
+              <tr><td>CORS</td><td>Control de origenes cruzados</td></tr>
+              <tr><td>Multer</td><td>Subida de imagenes (hasta 20 MB)</td></tr>
+              <tr><td>Morgan</td><td>Logging de peticiones HTTP</td></tr>
+            </tbody>
+          </table>
+
+          <h3 id="infraestructura">Infraestructura</h3>
+          <table>
+            <thead><tr><th>Servicio</th><th>Uso</th></tr></thead>
+            <tbody>
+              <tr><td>Render</td><td>Hosting del backend + frontend</td></tr>
+              <tr><td>Namecheap</td><td>Dominio mamb.online</td></tr>
+              <tr><td>GitHub Pages</td><td>Landing page estatica</td></tr>
+            </tbody>
+          </table>
+
+          <hr>
+
+          <h2 id="componentes-del-sistema">Componentes del sistema</h2>
+          <p>El proyecto esta compuesto por tres modulos principales:</p>
+
+          <h3 id="landing-page-comp">Landing Page</h3>
+          <p>Sitio web informativo alojado en GitHub Pages donde los visitantes conocen el museo y acceden a la aplicacion principal.</p>
+          <ul>
+            <li>URL: <a href="https://risharddv.github.io/MAMBQ/" target="_blank" rel="noopener">risharddv.github.io/MAMBQ</a></li>
+            <li>Tecnologias: HTML, CSS, JavaScript</li>
+            <li>Despliegue automatico desde la rama <code>main</code></li>
+          </ul>
+
+          <h3 id="aplicacion-web-pwa">Aplicacion Web (PWA)</h3>
+          <p>Aplicacion principal con 9 pantallas interactivas:</p>
+          <ul>
+            <li><strong>Inicio</strong> — splash + ingreso de nombre</li>
+            <li><strong>Galeria</strong> — listado de obras con busqueda y filtros</li>
+            <li><strong>Subir obra</strong> — formulario con moderacion automatica</li>
+            <li><strong>Juego de memoria</strong> — mini-juego con datos de arte</li>
+            <li><strong>Perfil</strong> — configuracion del visitante</li>
+            <li><strong>Colecciones</strong> — obras favoritas guardadas</li>
+            <li><strong>Acerca de</strong> — informacion del museo</li>
+            <li><strong>Detalle</strong> — vista ampliada de una obra</li>
+            <li><strong>Autenticacion</strong> — registro e inicio de sesion</li>
+          </ul>
+
+          <h3 id="backend-api-comp">Backend API</h3>
+          <p>API REST que gestiona toda la logica del servidor:</p>
+          <ul>
+            <li><strong>Obras</strong> — CRUD completo con subida de imagenes</li>
+            <li><strong>Interacciones</strong> — likes y calificaciones (1-5 estrellas)</li>
+            <li><strong>Usuarios</strong> — registro, login, perfiles</li>
+            <li><strong>Moderacion</strong> — filtro de contenido inapropiado</li>
+            <li><strong>Seguridad</strong> — JWT, Helmet, CORS</li>
+          </ul>
+
+          <hr>
+
+          <h2 id="caracteristicas-principales">Caracteristicas principales</h2>
+
+          <h3 id="galeria-virtual">Galeria virtual</h3>
+          <p>Obras del museo y obras subidas por visitantes. Busqueda por titulo o artista, filtros por tecnica (Oleo, Acuarela, Acrilico, Mixta, Escultura).</p>
+
+          <h3 id="subida-de-obras">Subida de obras</h3>
+          <p>Formulario con seleccion de imagen, titulo, descripcion, tecnica y avatar. Moderacion automatica de contenido antes de publicar.</p>
+
+          <h3 id="juego-de-memoria">Juego de memoria</h3>
+          <p>Mini-juego de cartas con datos curiosos sobre pinturas famosas del MAMB. Encuentra los pares para desbloquear informacion educativa.</p>
+
+          <h3 id="sistema-de-interaccion">Sistema de interaccion</h3>
+          <ul>
+            <li><strong>Likes</strong> — contador de corazones por obra</li>
+            <li><strong>Calificaciones</strong> — sistema de 1 a 5 estrellas con promedio visible</li>
+          </ul>
+
+          <h3 id="pwa-instalable">PWA instalable</h3>
+          <p>Service Worker con estrategia de cache inteligente. Instalable en movil y escritorio como app nativa. Soporte offline con fallback a localStorage.</p>
+
+          <h3 id="moderacion-de-contenido">Moderacion de contenido</h3>
+          <p>Filtro automatico de apodos inapropiados con deteccion de leet-speak (ej: <code>h4ck3r</code>), homoglifos Unicode y lista de palabras prohibidas.</p>
+
+          <h3 id="perfiles-de-visitante">Perfiles de visitante</h3>
+          <p>Cada usuario tiene nombre, ciudad, avatar seleccionable (8 opciones) y historial de obras subidas.</p>
+
+          <hr>
+
+          <h2 id="enlaces-del-proyecto">Enlaces del proyecto</h2>
+          <table>
+            <thead><tr><th>Entorno</th><th>URL</th></tr></thead>
+            <tbody>
+              <tr><td><strong>Aplicacion (produccion)</strong></td><td><a href="https://www.mamb.online/" target="_blank" rel="noopener">mamb.online</a></td></tr>
+              <tr><td><strong>Render (directo)</strong></td><td><a href="https://mamb-qsi0.onrender.com/" target="_blank" rel="noopener">mamb-qsi0.onrender.com</a></td></tr>
+              <tr><td><strong>Landing page</strong></td><td><a href="https://risharddv.github.io/MAMBQ/" target="_blank" rel="noopener">risharddv.github.io/MAMBQ</a></td></tr>
+              <tr><td><strong>Repositorio</strong></td><td><a href="https://github.com/risharddv/MAMBQ" target="_blank" rel="noopener">github.com/risharddv/MAMBQ</a></td></tr>
+              <tr><td><strong>Documentacion</strong></td><td>Estas paginas</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- ==================== PAGE: INSTALACION ==================== -->
+      <div class="doc-page" id="page-guias-instalacion">
+        <div class="markdown">
+          <h1>Instalacion</h1>
+          <p>Guia para poner en marcha el proyecto MAMB en tu maquina local.</p>
+
+          <h2 id="requisitos-previos">Requisitos previos</h2>
+
+          <h3 id="software-necesario">Software necesario</h3>
+          <table>
+            <thead><tr><th>Requisito</th><th>Version minima</th></tr></thead>
+            <tbody>
+              <tr><td><a href="https://nodejs.org/" target="_blank" rel="noopener">Node.js</a></td><td>v18+</td></tr>
+              <tr><td><a href="https://www.postgresql.org/" target="_blank" rel="noopener">PostgreSQL</a></td><td>v14+</td></tr>
+              <tr><td><a href="https://git-scm.com/" target="_blank" rel="noopener">Git</a></td><td>cualquier version reciente</td></tr>
+            </tbody>
+          </table>
+
+          <h3 id="verificar-instalacion">Verificar instalacion</h3>
+          <pre data-lang="bash"><code>node -v    # debe mostrar v18 o superior
+psql --version
+git --version</code></pre>
+
+          <hr>
+
+          <h2 id="clonar-el-repositorio">Clonar el repositorio</h2>
+          <pre data-lang="bash"><code>git clone https://github.com/risharddv/MAMBQ.git
+cd MAMBQ</code></pre>
+
+          <hr>
+
+          <h2 id="configurar-el-backend">Configurar el backend</h2>
+
+          <h3 id="variables-de-entorno">Variables de entorno</h3>
+          <p>Crea un archivo <code>.env</code> en la carpeta <code>backend/</code>:</p>
+          <pre data-lang="env"><code>PORT=3000
+DATABASE_URL=postgresql://usuario:contraseña@localhost:5432/mamb
+JWT_SECRET=tu_clave_secreta_aqui
+NODE_ENV=development</code></pre>
+
+          <div class="admonition admonition--caution">
+            <div class="admonition__title">&#x26A0;&#xFE0F; Seguridad</div>
+            <p>Nunca subas el archivo <code>.env</code> al repositorio. Ya esta incluido en <code>.gitignore</code>.</p>
+          </div>
+
+          <h3 id="descripcion-de-variables">Descripcion de variables</h3>
+          <table>
+            <thead><tr><th>Variable</th><th>Descripcion</th></tr></thead>
+            <tbody>
+              <tr><td><code>PORT</code></td><td>Puerto donde escucha el servidor (default: 3000)</td></tr>
+              <tr><td><code>DATABASE_URL</code></td><td>Cadena de conexion a PostgreSQL</td></tr>
+              <tr><td><code>JWT_SECRET</code></td><td>Clave secreta para firmar tokens JWT</td></tr>
+              <tr><td><code>NODE_ENV</code></td><td>Entorno de ejecucion (<code>development</code> o <code>production</code>)</td></tr>
+            </tbody>
+          </table>
+
+          <h3 id="instalar-dependencias">Instalar dependencias</h3>
+          <pre data-lang="bash"><code>cd backend
+npm install</code></pre>
+
+          <h3 id="arrancar-el-servidor">Arrancar el servidor</h3>
+          <pre data-lang="bash"><code>npm run start</code></pre>
+          <p>El servidor quedara disponible en <code>http://localhost:3000</code>.</p>
+
+          <hr>
+
+          <h2 id="ejecutar-el-frontend">Ejecutar el frontend</h2>
+
+          <h3 id="con-servidor-local">Con servidor local</h3>
+          <p>El frontend es una SPA estatica que no necesita build ni dependencias adicionales:</p>
+          <pre data-lang="bash"><code>cd frontend
+npx http-server -p 8080</code></pre>
+          <p>Abre <a href="http://localhost:8080" target="_blank" rel="noopener">http://localhost:8080</a> en tu navegador.</p>
+
+          <h3 id="sin-servidor">Sin servidor (modo rapido)</h3>
+          <p>Tambien puedes abrir <code>frontend/index.html</code> directamente en el navegador.</p>
+
+          <div class="admonition admonition--tip">
+            <div class="admonition__title">&#x1F4A1; Tip</div>
+            <p>Algunas funciones de red (API calls) requieren que el backend este corriendo para funcionar correctamente.</p>
+          </div>
+
+          <hr>
+
+          <h2 id="base-de-datos-postgresql">Base de datos PostgreSQL</h2>
+
+          <h3 id="crear-la-base-de-datos">Crear la base de datos</h3>
+          <p>Asegurate de tener PostgreSQL corriendo y crea la base de datos:</p>
+          <pre data-lang="sql"><code>CREATE DATABASE mamb;</code></pre>
+
+          <h3 id="creacion-automatica-de-tablas">Creacion automatica de tablas</h3>
+          <p>El backend crea las tablas automaticamente al arrancar si no existen. No necesitas ejecutar migraciones manualmente.</p>
+
+          <h3 id="verificar-conexion">Verificar conexion</h3>
+          <p>Puedes probar que la base de datos esta conectada visitando:</p>
+          <pre><code>http://localhost:3000/api/health</code></pre>
+          <p>Deberia responder:</p>
+          <pre data-lang="json"><code>{ "status": "ok", "museo": "MAMB", "db": "PostgreSQL" }</code></pre>
+
+          <hr>
+
+          <h2 id="instalar-como-pwa">Instalar como PWA</h2>
+
+          <h3 id="en-dispositivo-movil">En dispositivo movil</h3>
+          <p>Una vez que la app este corriendo (local o en produccion):</p>
+          <ol>
+            <li>Abre la app en <strong>Chrome</strong> o un navegador compatible</li>
+            <li>Busca el icono de instalacion en la barra de direcciones</li>
+            <li>Selecciona <strong>"Instalar"</strong> o <strong>"Anadir a pantalla de inicio"</strong></li>
+          </ol>
+
+          <h3 id="en-escritorio">En escritorio (Chrome)</h3>
+          <ol>
+            <li>Abre la app en Chrome</li>
+            <li>Haz clic en el icono de instalacion en la barra de URL</li>
+            <li>Confirma la instalacion</li>
+          </ol>
+          <p>La app se instalara como aplicacion nativa en tu dispositivo.</p>
+          <img src="MAMB-docs/static/img/app/responsive1.png" alt="App MAMB en dispositivo movil" loading="lazy">
+
+          <hr>
+
+          <h2 id="resolucion-de-problemas">Resolucion de problemas</h2>
+
+          <h3 id="backend-no-arranca">El backend no arranca</h3>
+          <ul>
+            <li>Verifica que PostgreSQL este corriendo</li>
+            <li>Revisa que <code>DATABASE_URL</code> en <code>.env</code> sea correcta</li>
+            <li>Asegurate de haber ejecutado <code>npm install</code></li>
+          </ul>
+
+          <h3 id="app-no-conecta">La app no se conecta al backend</h3>
+          <ul>
+            <li>Verifica que el backend este corriendo en el puerto correcto</li>
+            <li>Revisa la consola del navegador para errores de CORS</li>
+            <li>En modo local, el frontend debe apuntar a <code>http://localhost:3000</code></li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- ==================== PAGE: USO ==================== -->
+      <div class="doc-page" id="page-guias-uso">
+        <div class="markdown">
+          <h1>Guia de uso</h1>
+          <p>La aplicacion MAMB cuenta con <strong>9 pantallas</strong> principales. A continuacion se describe cada una con su funcionalidad.</p>
+          <img src="MAMB-docs/static/img/app/app1.jpeg" alt="Pantalla principal de MAMB" loading="lazy">
+
+          <hr>
+
+          <h2 id="inicio">Inicio</h2>
+          <p>Pantalla de bienvenida donde el visitante ingresa su nombre para comenzar la experiencia.</p>
+          <h3 id="elementos-de-la-pantalla">Elementos de la pantalla</h3>
+          <ul>
+            <li>Campo de texto para ingresar nombre de visitante</li>
+            <li>Accesos directos a la galeria y a subir una obra</li>
+            <li>Carrusel de obras destacadas</li>
+          </ul>
+          <img src="MAMB-docs/static/img/app/app3.jpg" alt="Pantalla de inicio" loading="lazy">
+
+          <hr>
+
+          <h2 id="galeria">Galeria</h2>
+          <p>Vista principal con todas las obras del museo y de los visitantes.</p>
+          <h3 id="busqueda-y-filtros">Busqueda y filtros</h3>
+          <ul>
+            <li>Buscar por titulo o nombre del artista</li>
+            <li>Filtrar por tecnica artistica:
+              <ul>
+                <li>Oleo</li>
+                <li>Acuarela</li>
+                <li>Acrilico</li>
+                <li>Mixta</li>
+                <li>Escultura</li>
+              </ul>
+            </li>
+          </ul>
+          <h3 id="interacciones-galeria">Interacciones en la galeria</h3>
+          <ul>
+            <li>Dar like a una obra con un toque</li>
+            <li>Ver contador de likes acumulados</li>
+            <li>Acceder al detalle completo de cada pieza</li>
+          </ul>
+          <img src="MAMB-docs/static/img/app/app5.jpeg" alt="Galeria de obras" loading="lazy">
+
+          <hr>
+
+          <h2 id="subir-obra">Subir obra</h2>
+          <p>Formulario para que los visitantes publiquen su propia obra.</p>
+          <h3 id="pasos-para-subir">Pasos para subir</h3>
+          <ol>
+            <li>Selecciona o toma una fotografia de la obra</li>
+            <li>Ingresa titulo y descripcion</li>
+            <li>Selecciona la tecnica artistica</li>
+            <li>Elige un avatar y apodo de visitante</li>
+            <li>Envia el formulario</li>
+          </ol>
+          <h3 id="moderacion-automatica">Moderacion automatica</h3>
+          <p>El sistema filtra automaticamente nombres inapropiados antes de publicar, usando:</p>
+          <ul>
+            <li>Deteccion de leet-speak (ej: <code>h4ck3r</code>)</li>
+            <li>Deteccion de homoglifos Unicode</li>
+            <li>Lista de palabras prohibidas</li>
+          </ul>
+          <img src="MAMB-docs/static/img/app/app6.jpeg" alt="Formulario de subida" loading="lazy">
+
+          <hr>
+
+          <h2 id="juego-de-memoria-uso">Juego de memoria</h2>
+          <p>Mini-juego de cartas con datos curiosos sobre pinturas famosas del MAMB.</p>
+          <h3 id="como-jugar">Como jugar</h3>
+          <ol>
+            <li>Se muestran cartas boca abajo</li>
+            <li>Voltea dos cartas por turno</li>
+            <li>Encuentra los pares para desbloquear datos de cada obra</li>
+            <li>Completa el tablero para ganar</li>
+          </ol>
+          <h3 id="objetivo-educativo">Objetivo educativo</h3>
+          <p>Cada par desbloqueado revela informacion sobre una pintura famosa: autor, tecnica, ano y datos curiosos.</p>
+          <img src="MAMB-docs/static/img/app/app8.jpeg" alt="Juego de memoria" loading="lazy">
+
+          <hr>
+
+          <h2 id="perfil">Perfil</h2>
+          <p>Gestiona tu informacion de visitante.</p>
+          <h3 id="datos-del-perfil">Datos del perfil</h3>
+          <ul>
+            <li>Apodo (nombre de usuario)</li>
+            <li>Ciudad de origen</li>
+            <li>Avatar seleccionado</li>
+          </ul>
+          <h3 id="seleccion-de-avatar">Seleccion de avatar</h3>
+          <p>8 opciones de avatar disponibles, generados con la API de DiceBear.</p>
+          <h3 id="historial-de-obras">Historial de obras</h3>
+          <p>Lista de todas las obras que el visitante ha subido a la plataforma.</p>
+          <img src="MAMB-docs/static/img/app/app9.jpeg" alt="Pantalla de perfil" loading="lazy">
+
+          <hr>
+
+          <h2 id="colecciones">Colecciones</h2>
+          <p>Explora las colecciones permanentes del museo.</p>
+          <h3 id="organizacion">Organizacion</h3>
+          <p>Las colecciones estan organizadas por sala o artista. Puedes guardar tus obras favoritas para acceder rapidamente.</p>
+
+          <hr>
+
+          <h2 id="acerca-del-museo">Acerca del museo</h2>
+          <p>Informacion sobre el Museo de Arte Moderno de Barranquilla.</p>
+          <h3 id="contenido-acerca">Contenido</h3>
+          <ul>
+            <li>Historia del museo</li>
+            <li>Mision y vision cultural</li>
+            <li>Equipo detras del proyecto</li>
+            <li>Informacion de contacto</li>
+          </ul>
+
+          <hr>
+
+          <h2 id="detalle-de-obra">Detalle de obra</h2>
+          <p>Vista expandida de una obra especifica.</p>
+          <h3 id="informacion-mostrada">Informacion mostrada</h3>
+          <table>
+            <thead><tr><th>Elemento</th><th>Descripcion</th></tr></thead>
+            <tbody>
+              <tr><td><strong>Imagen</strong></td><td>Vista ampliada de la obra</td></tr>
+              <tr><td><strong>Titulo</strong></td><td>Nombre de la obra</td></tr>
+              <tr><td><strong>Autor</strong></td><td>Apodo del visitante o artista</td></tr>
+              <tr><td><strong>Tecnica</strong></td><td>Tipo de tecnica artistica</td></tr>
+              <tr><td><strong>Descripcion</strong></td><td>Texto descriptivo de la obra</td></tr>
+            </tbody>
+          </table>
+          <h3 id="sistema-interaccion-detalle">Sistema de interaccion</h3>
+          <ul>
+            <li><strong>Likes</strong> — contador de corazones acumulados</li>
+            <li><strong>Calificacion</strong> — promedio de estrellas (1-5)</li>
+            <li><strong>Boton calificar</strong> — permite asignar 1 a 5 estrellas</li>
+          </ul>
+          <img src="MAMB-docs/static/img/app/app7.jpeg" alt="Detalle de una obra" loading="lazy">
+
+          <hr>
+
+          <h2 id="autenticacion">Autenticacion</h2>
+          <p>Sistema de registro e inicio de sesion.</p>
+          <h3 id="registro">Registro</h3>
+          <ul>
+            <li>Nombre de usuario (apodo)</li>
+            <li>Ciudad</li>
+            <li>Seleccion de avatar</li>
+            <li>Contrasena</li>
+          </ul>
+          <h3 id="inicio-de-sesion">Inicio de sesion</h3>
+          <ul>
+            <li>Login con apodo y contrasena</li>
+            <li>Token JWT almacenado de forma segura</li>
+          </ul>
+          <h3 id="sesion-y-offline">Sesion y offline</h3>
+          <ul>
+            <li>Token con expiracion automatica</li>
+            <li>Sincronizacion con <code>localStorage</code> para soporte offline</li>
+            <li>Si el token expira, se solicita nuevo login</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- ==================== PAGE: LANDING ==================== -->
+      <div class="doc-page" id="page-guias-landing">
+        <div class="markdown">
+          <h1>Landing Page</h1>
+          <p>La landing page es el sitio web informativo del proyecto MAMB. Esta alojada en <strong>GitHub Pages</strong> y sirve como punto de entrada para que los visitantes conozcan el museo antes de acceder a la aplicacion principal.</p>
+          <p><strong>URL:</strong> <a href="https://risharddv.github.io/MAMBQ/" target="_blank" rel="noopener">risharddv.github.io/MAMBQ</a></p>
+          <img src="MAMB-docs/static/img/app/landing1.png" alt="Landing page del proyecto MAMB" loading="lazy">
+
+          <hr>
+
+          <h2 id="proposito">Proposito</h2>
+          <p>La landing page cumple tres funciones principales:</p>
+          <h3 id="presentar-el-museo">Presentar el museo</h3>
+          <p>Informacion sobre el MAMB, su mision cultural y su importancia para la comunidad artistica de Barranquilla.</p>
+          <h3 id="mostrar-el-proyecto">Mostrar el proyecto</h3>
+          <p>Descripcion de la aplicacion web, sus funcionalidades principales y las tecnologias utilizadas.</p>
+          <h3 id="redirigir-a-la-app">Redirigir a la app</h3>
+          <p>Enlace directo a la PWA en <a href="https://www.mamb.online/" target="_blank" rel="noopener">mamb.online</a> para que los visitantes accedan rapidamente.</p>
+
+          <hr>
+
+          <h2 id="estructura-del-codigo">Estructura del codigo</h2>
+          <p>La landing se encuentra en la carpeta <code>Landing MAMB/</code> del repositorio:</p>
+          <h3 id="archivos-principales">Archivos principales</h3>
+          <pre><code>Landing MAMB/
+├── index.html    # Estructura HTML de la pagina
+├── index.js      # Interacciones y animaciones
+├── styles.css    # Estilos visuales
+└── img/          # Imagenes y recursos graficos</code></pre>
+
+          <h3 id="descripcion-de-archivos">Descripcion de archivos</h3>
+          <table>
+            <thead><tr><th>Archivo</th><th>Funcion</th></tr></thead>
+            <tbody>
+              <tr><td><code>index.html</code></td><td>Estructura semantica de la pagina (~398 lineas)</td></tr>
+              <tr><td><code>index.js</code></td><td>Animaciones, scroll suave e interacciones (~200 lineas)</td></tr>
+              <tr><td><code>styles.css</code></td><td>Diseno visual responsive</td></tr>
+              <tr><td><code>img/</code></td><td>Imagenes del museo y del proyecto</td></tr>
+            </tbody>
+          </table>
+
+          <hr>
+
+          <h2 id="tecnologias-landing">Tecnologias</h2>
+          <table>
+            <thead><tr><th>Tecnologia</th><th>Uso</th></tr></thead>
+            <tbody>
+              <tr><td>HTML5</td><td>Estructura semantica</td></tr>
+              <tr><td>CSS3</td><td>Diseno visual y responsive</td></tr>
+              <tr><td>JavaScript</td><td>Animaciones e interacciones</td></tr>
+              <tr><td>GitHub Pages</td><td>Hosting gratuito</td></tr>
+            </tbody>
+          </table>
+
+          <hr>
+
+          <h2 id="despliegue-landing">Despliegue</h2>
+          <h3 id="github-pages">GitHub Pages</h3>
+          <p>La landing se despliega automaticamente desde la rama <code>main</code> del repositorio mediante <strong>GitHub Pages</strong>. Cualquier cambio que se suba a <code>main</code> se refleja en produccion en minutos.</p>
+          <h3 id="configuracion-en-github">Configuracion en GitHub</h3>
+          <ol>
+            <li>Ve a <strong>Settings > Pages</strong> en el repositorio</li>
+            <li>Selecciona la rama <code>main</code> como source</li>
+            <li>La URL publica sera <code>https://risharddv.github.io/MAMBQ/</code></li>
+          </ol>
+          <h3 id="actualizaciones">Actualizaciones</h3>
+          <p>Cada <code>git push</code> a la rama <code>main</code> actualiza automaticamente la landing page sin necesidad de configuracion adicional.</p>
+          <img src="MAMB-docs/static/img/app/landing2.png" alt="Vista de la landing page" loading="lazy">
+        </div>
+      </div>
+
+      <!-- ==================== PAGE: RENDER ==================== -->
+      <div class="doc-page" id="page-guias-render">
+        <div class="markdown">
+          <h1>Despliegue en Render</h1>
+          <p>La aplicacion MAMB (frontend + backend) esta desplegada en <strong><a href="https://render.com" target="_blank" rel="noopener">Render</a></strong>, una plataforma cloud con despliegue automatico desde GitHub.</p>
+          <p><strong>URL de produccion:</strong> <a href="https://www.mamb.online/" target="_blank" rel="noopener">mamb.online</a> (redirige a Render)</p>
+
+          <hr>
+
+          <h2 id="arquitectura-del-despliegue">Arquitectura del despliegue</h2>
+          <h3 id="servicio-unificado">Servicio unificado</h3>
+          <p>Render sirve tanto el <strong>frontend estatico</strong> como el <strong>backend Express</strong> desde un unico servicio. El servidor detecta si la peticion es para la API o para el frontend.</p>
+          <h3 id="diagrama-de-flujo-render">Diagrama de flujo</h3>
+          <pre><code>Cliente (navegador)
+       |
+       v
+  mamb.online (Namecheap DNS)
+       |
+       v
+  Render (Web Service)
+       |
+       |-- /api/*  --> Express (Node.js + PostgreSQL)
+       +-- /*      --> Sirve frontend/index.html</code></pre>
+          <img src="MAMB-docs/static/img/app/render1.png" alt="Dashboard de Render" loading="lazy">
+
+          <hr>
+
+          <h2 id="configuracion-del-servicio">Configuracion del servicio</h2>
+          <h3 id="crear-web-service">Crear Web Service en Render</h3>
+          <ol>
+            <li>Entra a <a href="https://dashboard.render.com" target="_blank" rel="noopener">dashboard.render.com</a></li>
+            <li>Clic en <strong>New > Web Service</strong></li>
+            <li>Conecta el repositorio de GitHub (<code>risharddv/MAMBQ</code>)</li>
+          </ol>
+
+          <h3 id="parametros-del-servicio">Parametros del servicio</h3>
+          <table>
+            <thead><tr><th>Campo</th><th>Valor</th></tr></thead>
+            <tbody>
+              <tr><td><strong>Name</strong></td><td><code>mamb</code></td></tr>
+              <tr><td><strong>Region</strong></td><td>Oregon (US West)</td></tr>
+              <tr><td><strong>Branch</strong></td><td><code>main</code></td></tr>
+              <tr><td><strong>Build Command</strong></td><td><code>npm install</code></td></tr>
+              <tr><td><strong>Start Command</strong></td><td><code>node backend/server.js</code></td></tr>
+              <tr><td><strong>Instance Type</strong></td><td>Free</td></tr>
+            </tbody>
+          </table>
+
+          <h3 id="variables-de-entorno-render">Variables de entorno</h3>
+          <p>En la seccion <strong>Environment</strong> del servicio:</p>
+          <pre><code>PORT=10000
+DATABASE_URL=postgresql://...
+JWT_SECRET=tu_clave_secreta
+NODE_ENV=production</code></pre>
+
+          <h4 id="puerto-dinamico">Puerto dinamico</h4>
+          <div class="admonition admonition--caution">
+            <div class="admonition__title">&#x26A0;&#xFE0F; Precaucion</div>
+            <p>Render asigna el puerto dinamicamente. El backend lee <code>process.env.PORT</code>:</p>
+            <pre data-lang="js"><code>const PORT = process.env.PORT || 3000;
+app.listen(PORT);</code></pre>
+          </div>
+
+          <h3 id="despliegue-automatico">Despliegue automatico</h3>
+          <p>Cada <code>git push</code> a la rama <code>main</code> dispara un nuevo despliegue automaticamente. Render ejecuta el build y arranca el servidor sin intervencion manual.</p>
+          <img src="MAMB-docs/static/img/app/render2.png" alt="Proceso de despliegue en Render" loading="lazy">
+
+          <hr>
+
+          <h2 id="dominio-personalizado">Dominio personalizado</h2>
+          <h3 id="registro-del-dominio">Registro del dominio</h3>
+          <p>Se adquirio el dominio <strong><a href="https://www.mamb.online/" target="_blank" rel="noopener">mamb.online</a></strong> a traves de <strong>Namecheap</strong>.</p>
+          <h3 id="configuracion-dns">Configuracion DNS</h3>
+          <p>Este dominio redirige automaticamente al servicio alojado en Render, proporcionando una URL profesional y facil de recordar.</p>
+          <h3 id="flujo-de-redireccion">Flujo de redireccion</h3>
+          <pre><code>https://www.mamb.online/  -->  https://mamb-qsi0.onrender.com/</code></pre>
+          <img src="MAMB-docs/static/img/dominio.jpeg" alt="Configuracion del dominio en Namecheap" loading="lazy">
+
+          <hr>
+
+          <h2 id="plan-gratuito">Plan gratuito — consideraciones</h2>
+          <h3 id="limitaciones">Limitaciones</h3>
+          <table>
+            <thead><tr><th>Aspecto</th><th>Detalle</th></tr></thead>
+            <tbody>
+              <tr><td><strong>Hibernacion</strong></td><td>El servicio se duerme tras 15 min de inactividad</td></tr>
+              <tr><td><strong>Cold start</strong></td><td>Primera peticion tras reposo tarda 20-30 segundos</td></tr>
+              <tr><td><strong>Horas de computo</strong></td><td>750 h/mes en la capa gratuita</td></tr>
+              <tr><td><strong>Peticiones</strong></td><td>Sin limite mensual</td></tr>
+            </tbody>
+          </table>
+          <h3 id="recomendaciones">Recomendaciones</h3>
+          <div class="admonition admonition--tip">
+            <div class="admonition__title">&#x1F4A1; Rendimiento</div>
+            <p>Para evitar cold starts en demos o presentaciones, puedes hacer un ping al endpoint <code>/api/health</code> unos minutos antes.</p>
+          </div>
+
+          <hr>
+
+          <h2 id="logs-y-monitoreo">Logs y monitoreo</h2>
+          <h3 id="acceso-a-logs">Acceso a logs</h3>
+          <p>Desde el dashboard de Render se accede a los logs en tiempo real del servicio.</p>
+          <h3 id="diagnostico-de-errores">Diagnostico de errores</h3>
+          <p>Si el despliegue falla, el log muestra el error exacto del proceso de build o del arranque del servidor. Errores comunes:</p>
+          <ul>
+            <li>Variables de entorno faltantes</li>
+            <li>Dependencias no instaladas</li>
+            <li>Puerto ya en uso</li>
+          </ul>
+          <img src="MAMB-docs/static/img/app/Render3.png" alt="Dashboard de Render con logs" loading="lazy">
+        </div>
+      </div>
+
+      <!-- ==================== PAGE: ROADMAP IA ==================== -->
+      <div class="doc-page" id="page-guias-roadmap-ia">
+        <div class="markdown">
+          <h1>Hoja de ruta — IA</h1>
+
+          <div class="admonition admonition--caution">
+            <div class="admonition__title">&#x26A0;&#xFE0F; Funcionalidad planificada</div>
+            <p>El modulo de inteligencia artificial <strong>no esta implementado</strong> en la version actual. Esta pagina documenta la funcionalidad prevista para fases futuras.</p>
+          </div>
+
+          <h2 id="objetivo-ia">Objetivo</h2>
+          <p>Integrar un modelo de <strong>estilizacion artistica</strong> (Neural Style Transfer) que permita a los visitantes aplicar estilos de artistas reconocidos del MAMB a sus propias obras.</p>
+
+          <hr>
+
+          <h2 id="flujo-previsto">Flujo previsto</h2>
+          <h3 id="proceso-del-usuario">Proceso del usuario</h3>
+          <ol>
+            <li>El visitante sube una imagen de su obra</li>
+            <li>La imagen pasa por moderacion de contenido (ya implementada)</li>
+            <li>El visitante selecciona un estilo artistico</li>
+            <li>TensorFlow.js procesa la imagen</li>
+            <li>La imagen estilizada se publica en la galeria</li>
+          </ol>
+          <h3 id="diagrama-de-flujo-ia">Diagrama de flujo</h3>
+          <pre><code>Visitante sube imagen
+        |
+        v
+  Moderacion de contenido (ya implementada)
+        |
+        v
+  Seleccion de estilo artistico
+  (ej: "estilo Obregon", "estilo Grau")
+        |
+        v
+  TensorFlow.js aplica el estilo
+        |
+        v
+  Imagen estilizada publicada en la galeria</code></pre>
+
+          <hr>
+
+          <h2 id="tecnologias-planificadas">Tecnologias planificadas</h2>
+          <h3 id="modelo-de-ia">Modelo de IA</h3>
+          <table>
+            <thead><tr><th>Componente</th><th>Tecnologia</th></tr></thead>
+            <tbody>
+              <tr><td>Modelo base</td><td>TensorFlow.js (browser o Node.js)</td></tr>
+              <tr><td>Tecnica</td><td>Neural Style Transfer / Arbitrary Style Transfer</td></tr>
+            </tbody>
+          </table>
+          <h3 id="almacenamiento-ia">Almacenamiento</h3>
+          <table>
+            <thead><tr><th>Opcion</th><th>Ventaja</th></tr></thead>
+            <tbody>
+              <tr><td>Render Disk</td><td>Integrado, sin configuracion extra</td></tr>
+              <tr><td>Cloudinary</td><td>CDN global, transformaciones de imagen</td></tr>
+              <tr><td>Amazon S3</td><td>Escalable, bajo costo por GB</td></tr>
+            </tbody>
+          </table>
+
+          <hr>
+
+          <h2 id="estado-actual-del-proyecto">Estado actual del proyecto</h2>
+          <h3 id="componentes-implementados">Componentes implementados</h3>
+          <table>
+            <thead><tr><th>Componente</th><th>Estado</th></tr></thead>
+            <tbody>
+              <tr><td>Subida de imagenes</td><td>Implementado</td></tr>
+              <tr><td>Moderacion de contenido</td><td>Implementado</td></tr>
+              <tr><td>Galeria funcional</td><td>Implementado</td></tr>
+              <tr><td>Base de datos PostgreSQL</td><td>Implementado</td></tr>
+              <tr><td>API REST completa</td><td>Implementado</td></tr>
+            </tbody>
+          </table>
+          <h3 id="componentes-pendientes">Componentes pendientes</h3>
+          <table>
+            <thead><tr><th>Componente</th><th>Estado</th></tr></thead>
+            <tbody>
+              <tr><td>Integracion TensorFlow.js</td><td>Pendiente</td></tr>
+              <tr><td>Seleccion de estilos artisticos</td><td>Pendiente</td></tr>
+              <tr><td>Almacenamiento de imagenes procesadas</td><td>Pendiente</td></tr>
+            </tbody>
+          </table>
+
+          <hr>
+
+          <h2 id="requisitos-para-la-implementacion">Requisitos para la implementacion</h2>
+          <h3 id="modelos-pre-entrenados">Modelos pre-entrenados</h3>
+          <p>Seleccionar y optimizar modelos de style transfer para ejecucion en el navegador. Los modelos deben ser lo suficientemente ligeros para funcionar en dispositivos moviles.</p>
+          <h3 id="galeria-de-estilos">Galeria de estilos</h3>
+          <p>Recopilar obras de referencia de artistas del MAMB para usar como estilos base. Cada estilo necesita una imagen de referencia de alta calidad.</p>
+          <h3 id="infraestructura-almacenamiento">Infraestructura de almacenamiento</h3>
+          <p>Definir servicio para persistir las imagenes procesadas. Las imagenes originales ya se almacenan en Render, pero las procesadas requieren almacenamiento adicional.</p>
+        </div>
+      </div>
+
+      <!-- ==================== PAGE: ARQUITECTURA OVERVIEW ==================== -->
+      <div class="doc-page" id="page-arquitectura-overview">
+        <div class="markdown">
+          <h1>Vista general</h1>
+          <p>MAMB sigue una arquitectura <strong>cliente-servidor</strong> con el frontend desacoplado del backend. Ambos se despliegan dentro del mismo servicio en Render.</p>
+
+          <hr>
+
+          <h2 id="diagrama-de-componentes">Diagrama de componentes</h2>
+          <h3 id="arquitectura-completa">Arquitectura completa</h3>
+          <pre><code>+-----------------------------------------------------+
+|                   CLIENTE (PWA)                      |
+|  index.html - app.js - style.css - manifest.json    |
+|              Service Worker (sw.js)                  |
++-------------------------+---------------------------+
+                          | HTTPS / REST JSON
++-------------------------v---------------------------+
+|              BACKEND — Node.js + Express             |
+|  /api/obras  /api/obras/:id  /api/health             |
+|  JWT Auth - Helmet - CORS - Multer - Morgan          |
++-------------------------+---------------------------+
+                          |
+              +-----------v-----------+
+              |      PostgreSQL       |
+              |  obras | usuarios     |
+              |  likes | ratings      |
+              +-----------+-----------+
+                          |
+              +-----------v-----------+
+              |   Render Disk         |
+              |   /uploads (imagenes) |
+              +-----------------------+</code></pre>
+
+          <h3 id="capas-del-sistema">Capas del sistema</h3>
+          <table>
+            <thead><tr><th>Capa</th><th>Responsabilidad</th></tr></thead>
+            <tbody>
+              <tr><td><strong>Presentacion</strong></td><td>PWA en el navegador (HTML/CSS/JS)</td></tr>
+              <tr><td><strong>API</strong></td><td>Express.js con middleware de seguridad</td></tr>
+              <tr><td><strong>Logica</strong></td><td>Validacion, moderacion, autenticacion</td></tr>
+              <tr><td><strong>Datos</strong></td><td>PostgreSQL + sistema de archivos</td></tr>
+            </tbody>
+          </table>
+
+          <hr>
+
+          <h2 id="flujo-de-peticiones">Flujo de peticiones</h2>
+          <h3 id="consultar-la-galeria">Consultar la galeria</h3>
+          <ol>
+            <li>El visitante abre la app y navega a la galeria</li>
+            <li><code>api.js</code> envia <code>GET /api/obras</code> con parametros de busqueda/filtro</li>
+            <li>Express consulta PostgreSQL y devuelve las obras en JSON</li>
+            <li><code>app.js</code> renderiza las tarjetas en el DOM</li>
+            <li>Si no hay conexion, se muestran obras guardadas en <code>localStorage</code></li>
+          </ol>
+          <h3 id="subir-una-obra">Subir una obra</h3>
+          <ol>
+            <li>El visitante llena el formulario y selecciona una imagen</li>
+            <li><code>api.js</code> envia <code>POST /api/obras</code> como <code>multipart/form-data</code></li>
+            <li>Express valida el JWT y procesa la imagen con Multer</li>
+            <li>Se ejecuta moderacion de contenido sobre el apodo</li>
+            <li>La obra se guarda en PostgreSQL y la imagen en <code>/uploads</code></li>
+            <li>Se devuelve la obra creada al cliente</li>
+          </ol>
+          <h3 id="dar-like-a-una-obra">Dar like a una obra</h3>
+          <ol>
+            <li>El visitante pulsa el boton de like</li>
+            <li><code>api.js</code> envia <code>POST /api/obras/:id/like</code></li>
+            <li>Express incrementa <code>likes_count</code> en PostgreSQL</li>
+            <li>Se devuelve el nuevo conteo al cliente</li>
+          </ol>
+          <h3 id="calificar-una-obra">Calificar una obra</h3>
+          <ol>
+            <li>El visitante selecciona estrellas (1-5)</li>
+            <li><code>api.js</code> envia <code>POST /api/obras/:id/rate</code> con el rating</li>
+            <li>Express suma al <code>rating_total</code> e incrementa <code>rating_count</code></li>
+            <li>Se devuelve el nuevo total al cliente</li>
+          </ol>
+
+          <hr>
+
+          <h2 id="estructura-del-repositorio">Estructura del repositorio</h2>
+          <h3 id="arbol-de-directorios">Arbol de directorios</h3>
+          <pre><code>MAMBQ/
+|-- frontend/
+|   |-- index.html              # SPA — 9 pantallas
+|   |-- app.js                  # Logica principal (1188 lineas)
+|   |-- style.css               # Estilos mobile-first (2509 lineas)
+|   |-- api.js                  # Cliente API REST con fallback offline
+|   |-- usernameModeration.js   # Filtro de contenido
+|   |-- manifest.json           # Configuracion PWA
+|   +-- icons/                  # Iconos SVG 192x192, 512x512
+|
+|-- Landing MAMB/               # Landing estatica (GitHub Pages)
+|   |-- index.html
+|   |-- index.js
+|   |-- styles.css
+|   +-- img/
+|
+|-- backend/                    # API REST (Render)
+|   |-- server.js               # Entry point del servidor
+|   +-- uploads/                # Imagenes subidas por visitantes
+|
+|-- MAMB-docs/                  # Documentacion (Docusaurus)
+|
+|-- sw.js                       # Service Worker global
++-- readme.md                   # README del proyecto</code></pre>
+
+          <h3 id="descripcion-de-carpetas">Descripcion de carpetas</h3>
+          <table>
+            <thead><tr><th>Carpeta</th><th>Contenido</th></tr></thead>
+            <tbody>
+              <tr><td><code>frontend/</code></td><td>SPA con 9 pantallas, PWA instalable</td></tr>
+              <tr><td><code>Landing MAMB/</code></td><td>Pagina informativa en GitHub Pages</td></tr>
+              <tr><td><code>backend/</code></td><td>Servidor Express con API REST</td></tr>
+              <tr><td><code>MAMB-docs/</code></td><td>Documentacion Docusaurus</td></tr>
+            </tbody>
+          </table>
+
+          <hr>
+
+          <h2 id="comunicacion-entre-componentes">Comunicacion entre componentes</h2>
+          <h3 id="tabla-de-comunicaciones">Tabla de comunicaciones</h3>
+          <table>
+            <thead><tr><th>Origen</th><th>Destino</th><th>Protocolo</th><th>Descripcion</th></tr></thead>
+            <tbody>
+              <tr><td>PWA</td><td>Backend</td><td>HTTPS/REST</td><td>Todas las operaciones CRUD</td></tr>
+              <tr><td>PWA</td><td>localStorage</td><td>JS API</td><td>Cache offline de obras</td></tr>
+              <tr><td>Backend</td><td>PostgreSQL</td><td>TCP</td><td>Persistencia de datos</td></tr>
+              <tr><td>Backend</td><td>Disk</td><td>FS</td><td>Almacenamiento de imagenes</td></tr>
+              <tr><td>Landing</td><td>PWA</td><td>Enlace HTTP</td><td>Redireccion a la app</td></tr>
+              <tr><td>Namecheap</td><td>Render</td><td>DNS</td><td>Dominio mamb.online</td></tr>
+            </tbody>
+          </table>
+          <h3 id="seguridad-en-la-comunicacion">Seguridad en la comunicacion</h3>
+          <ul>
+            <li><strong>HTTPS</strong> obligatorio en produccion</li>
+            <li><strong>JWT</strong> para endpoints protegidos</li>
+            <li><strong>Helmet</strong> para headers de seguridad</li>
+            <li><strong>CORS</strong> configurado para origenes permitidos</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- ==================== PAGE: FRONTEND ==================== -->
+      <div class="doc-page" id="page-arquitectura-frontend">
+        <div class="markdown">
+          <h1>Frontend</h1>
+          <p>El frontend es una <strong>Single Page Application (SPA)</strong> desarrollada en JavaScript vanilla, sin frameworks. Es instalable como PWA y esta disenada con enfoque mobile-first.</p>
+
+          <hr>
+
+          <h2 id="modulos-principales">Modulos principales</h2>
+          <h3 id="tabla-de-archivos">Tabla de archivos</h3>
+          <table>
+            <thead><tr><th>Archivo</th><th>Lineas</th><th>Responsabilidad</th></tr></thead>
+            <tbody>
+              <tr><td><code>index.html</code></td><td>~1018</td><td>Estructura HTML de las 9 pantallas</td></tr>
+              <tr><td><code>app.js</code></td><td>~1188</td><td>Logica de navegacion, renderizado, juego, perfiles</td></tr>
+              <tr><td><code>style.css</code></td><td>~2509</td><td>Diseno responsive, variables CSS, animaciones</td></tr>
+              <tr><td><code>api.js</code></td><td>~192</td><td>Llamadas a la API REST con fallback offline</td></tr>
+              <tr><td><code>usernameModeration.js</code></td><td>~132</td><td>Filtro de apodos inapropiados</td></tr>
+              <tr><td><code>manifest.json</code></td><td>~34</td><td>Metadatos PWA</td></tr>
+              <tr><td><code>sw.js</code></td><td>~76</td><td>Service Worker para cache offline</td></tr>
+            </tbody>
+          </table>
+
+          <h3 id="index-html">index.html</h3>
+          <p>Archivo HTML unico que contiene las 9 pantallas como secciones <code>&lt;section&gt;</code>. Solo una seccion es visible a la vez, controlada por CSS y JavaScript.</p>
+
+          <h3 id="app-js">app.js</h3>
+          <p>Modulo principal que maneja:</p>
+          <ul>
+            <li>Navegacion entre pantallas</li>
+            <li>Renderizado de tarjetas de obras</li>
+            <li>Logica del juego de memoria</li>
+            <li>Gestion de perfiles y avatares</li>
+            <li>Manejo de eventos de usuario</li>
+          </ul>
+
+          <h3 id="style-css">style.css</h3>
+          <p>Estilos mobile-first con:</p>
+          <ul>
+            <li>Variables CSS para temas</li>
+            <li>Grid y Flexbox para layout responsive</li>
+            <li>Animaciones y transiciones</li>
+            <li>Soporte para modo oscuro</li>
+          </ul>
+
+          <h3 id="api-js">api.js</h3>
+          <p>Cliente HTTP que encapsula todas las llamadas al backend con fallback automatico a localStorage cuando no hay conexion.</p>
+
+          <hr>
+
+          <h2 id="pantallas-de-la-app">Pantallas de la app</h2>
+          <h3 id="tabla-de-pantallas">Tabla de pantallas</h3>
+          <table>
+            <thead><tr><th>ID</th><th>Pantalla</th><th>Funcion</th></tr></thead>
+            <tbody>
+              <tr><td><code>screen-inicio</code></td><td>Inicio</td><td>Splash + ingreso de nombre</td></tr>
+              <tr><td><code>screen-galeria</code></td><td>Galeria</td><td>Listado de obras con busqueda y filtros</td></tr>
+              <tr><td><code>screen-subir</code></td><td>Subir obra</td><td>Formulario de publicacion</td></tr>
+              <tr><td><code>screen-memory</code></td><td>Juego</td><td>Juego de memoria con datos de arte</td></tr>
+              <tr><td><code>screen-perfil</code></td><td>Perfil</td><td>Configuracion del visitante</td></tr>
+              <tr><td><code>screen-colecciones</code></td><td>Colecciones</td><td>Obras favoritas guardadas</td></tr>
+              <tr><td><code>screen-about</code></td><td>Acerca de</td><td>Info del museo</td></tr>
+              <tr><td><code>screen-detalle</code></td><td>Detalle</td><td>Vista ampliada de una obra</td></tr>
+              <tr><td><code>screen-juego</code></td><td>Juegos</td><td>Actividades interactivas</td></tr>
+            </tbody>
+          </table>
+
+          <hr>
+
+          <h2 id="navegacion-spa">Navegacion SPA</h2>
+          <h3 id="mecanismo-de-navegacion">Mecanismo de navegacion</h3>
+          <p>No usa rutas del navegador. Cada pantalla es una seccion con <code>display: none</code> por defecto. <code>app.js</code> controla la visibilidad:</p>
+          <pre data-lang="js"><code>function showScreen(screenId) {
+  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+  document.getElementById(screenId).classList.add('active');
+}</code></pre>
+          <h3 id="ventajas-de-este-enfoque">Ventajas de este enfoque</h3>
+          <ul>
+            <li>Sin dependencia de router externo</li>
+            <li>Transiciones instantaneas entre pantallas</li>
+            <li>Compatible con cualquier navegador</li>
+            <li>Sin recarga de pagina</li>
+          </ul>
+
+          <hr>
+
+          <h2 id="cliente-api">Cliente API (<code>api.js</code>)</h2>
+          <h3 id="endpoints-consumidos">Endpoints consumidos</h3>
+          <table>
+            <thead><tr><th>Metodo</th><th>Endpoint</th><th>Funcion</th></tr></thead>
+            <tbody>
+              <tr><td><code>GET</code></td><td><code>/api/obras</code></td><td>Listar obras con filtros</td></tr>
+              <tr><td><code>GET</code></td><td><code>/api/obras/:id</code></td><td>Obtener obra por ID</td></tr>
+              <tr><td><code>POST</code></td><td><code>/api/obras</code></td><td>Crear obra (multipart)</td></tr>
+              <tr><td><code>DELETE</code></td><td><code>/api/obras/:id</code></td><td>Eliminar obra</td></tr>
+              <tr><td><code>POST</code></td><td><code>/api/obras/:id/like</code></td><td>Dar like</td></tr>
+              <tr><td><code>POST</code></td><td><code>/api/obras/:id/rate</code></td><td>Calificar (1-5)</td></tr>
+            </tbody>
+          </table>
+
+          <h3 id="fallback-offline">Fallback offline</h3>
+          <p>Cuando el backend no responde, <code>api.js</code> usa obras guardadas en <code>localStorage</code> bajo la clave <code>mamb_local_obras</code>, permitiendo navegar la galeria sin conexion.</p>
+
+          <h3 id="manejo-de-errores-frontend">Manejo de errores</h3>
+          <p>El cliente captura errores de red y muestra mensajes apropiados al usuario. En caso de fallo, los datos se persisten localmente para sincronizar despues.</p>
+
+          <hr>
+
+          <h2 id="service-worker">Service Worker</h2>
+          <h3 id="estrategias-de-cache">Estrategias de cache</h3>
+          <table>
+            <thead><tr><th>Tipo de recurso</th><th>Estrategia</th><th>Comportamiento</th></tr></thead>
+            <tbody>
+              <tr><td>Peticiones API (<code>/api/*</code>)</td><td>Network-first</td><td>Intenta red primero, cache como fallback</td></tr>
+              <tr><td>Assets estaticos (CSS, JS, imagenes)</td><td>Cache-first</td><td>Sirve desde cache, actualiza en background</td></tr>
+            </tbody>
+          </table>
+          <h3 id="ciclo-de-vida">Ciclo de vida</h3>
+          <ol>
+            <li><strong>Instalacion</strong> — precachea assets criticos</li>
+            <li><strong>Activacion</strong> — limpia caches antiguas</li>
+            <li><strong>Fetch</strong> — intercepta peticiones y aplica estrategia segun tipo</li>
+          </ol>
+
+          <hr>
+
+          <h2 id="pwa">PWA</h2>
+          <h3 id="criterios-de-instalacion">Criterios de instalacion</h3>
+          <p>La app cumple los requisitos minimos de PWA:</p>
+          <ul>
+            <li><code>manifest.json</code> con <code>name</code>, <code>short_name</code>, <code>start_url</code>, <code>display: standalone</code></li>
+            <li>Service Worker registrado con estrategias de cache</li>
+            <li>Iconos en formatos 192x192 y 512x512 px (SVG)</li>
+            <li>Tema de color y color de fondo definidos</li>
+          </ul>
+          <h3 id="configuracion-del-manifest">Configuracion del manifest</h3>
+          <table>
+            <thead><tr><th>Campo</th><th>Valor</th></tr></thead>
+            <tbody>
+              <tr><td><code>name</code></td><td>Museo de Arte Moderno</td></tr>
+              <tr><td><code>short_name</code></td><td>MAMB</td></tr>
+              <tr><td><code>display</code></td><td>standalone</td></tr>
+              <tr><td><code>start_url</code></td><td><code>/</code></td></tr>
+              <tr><td><code>theme_color</code></td><td>Definido en manifest</td></tr>
+            </tbody>
+          </table>
+          <img src="MAMB-docs/static/img/app/responsive1.png" alt="App MAMB responsive" loading="lazy">
+
+          <hr>
+
+          <h2 id="moderacion-de-contenido-frontend">Moderacion de contenido</h2>
+          <h3 id="usernamemoderation-js">usernameModeration.js</h3>
+          <p>Filtra apodos inapropiados del lado del cliente antes de enviarlos al servidor.</p>
+          <h3 id="tecnicas-de-deteccion">Tecnicas de deteccion</h3>
+          <ul>
+            <li><strong>Lista negra</strong> — palabras prohibidas directas</li>
+            <li><strong>Leet-speak</strong> — detecta sustituciones como <code>h4ck3r</code>, <code>@dmin</code></li>
+            <li><strong>Homoglifos</strong> — caracteres Unicode visualmente similares (ej: cirilico <code>а</code> vs latino <code>a</code>)</li>
+            <li><strong>Normalizacion</strong> — convierte a forma canonica para evitar evasiones</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- ==================== PAGE: BASE DE DATOS ==================== -->
+      <div class="doc-page" id="page-arquitectura-base-de-datos">
+        <div class="markdown">
+          <h1>Base de datos</h1>
+          <p>MAMB utiliza <strong>PostgreSQL</strong> como sistema de gestion de base de datos relacional. La conexion se configura mediante la variable de entorno <code>DATABASE_URL</code>.</p>
+
+          <hr>
+
+          <h2 id="modelo-de-datos">Modelo de datos</h2>
+          <h3 id="diagrama-de-entidades">Diagrama de entidades</h3>
+          <pre><code>+---------------------+       +---------------------+
+|       obras         |       |      usuarios       |
++---------------------+       +---------------------+
+| id (PK, SERIAL)     |       | id (PK, SERIAL)     |
+| titulo              |       | apodo (UNIQUE)       |
+| descripcion         |       | ciudad               |
+| image_url           |       | avatar_index         |
+| autor_apodo         |       | password_hash        |
+| avatar_index        |       | created_at           |
+| likes_count         |       +---------------------+
+| rating_total        |
+| rating_count        |
+| created_at          |
++---------------------+</code></pre>
+
+          <h3 id="relaciones">Relaciones</h3>
+          <p>Actualmente no hay claves foraneas entre tablas. La relacion entre obras y usuarios es implicita a traves del campo <code>autor_apodo</code>.</p>
+
+          <hr>
+
+          <h2 id="tabla-obras">Tabla <code>obras</code></h2>
+          <h3 id="descripcion-obras">Descripcion</h3>
+          <p>Almacena las obras de arte del museo y de los visitantes.</p>
+          <h3 id="columnas-obras">Columnas</h3>
+          <table>
+            <thead><tr><th>Columna</th><th>Tipo</th><th>Descripcion</th></tr></thead>
+            <tbody>
+              <tr><td><code>id</code></td><td><code>SERIAL PRIMARY KEY</code></td><td>ID autoincremental</td></tr>
+              <tr><td><code>titulo</code></td><td><code>VARCHAR(255)</code></td><td>Titulo de la obra (requerido)</td></tr>
+              <tr><td><code>descripcion</code></td><td><code>TEXT</code></td><td>Descripcion libre</td></tr>
+              <tr><td><code>image_url</code></td><td><code>TEXT</code></td><td>Ruta relativa al archivo subido en <code>/uploads</code></td></tr>
+              <tr><td><code>autor_apodo</code></td><td><code>VARCHAR(100)</code></td><td>Apodo del visitante que subio la obra</td></tr>
+              <tr><td><code>avatar_index</code></td><td><code>INTEGER</code></td><td>Indice del avatar seleccionado (0-7)</td></tr>
+              <tr><td><code>likes_count</code></td><td><code>INTEGER DEFAULT 0</code></td><td>Contador de likes</td></tr>
+              <tr><td><code>rating_total</code></td><td><code>INTEGER DEFAULT 0</code></td><td>Suma total de calificaciones recibidas</td></tr>
+              <tr><td><code>rating_count</code></td><td><code>INTEGER DEFAULT 0</code></td><td>Numero de calificaciones recibidas</td></tr>
+              <tr><td><code>created_at</code></td><td><code>TIMESTAMPTZ</code></td><td>Fecha y hora de creacion</td></tr>
+            </tbody>
+          </table>
+
+          <h3 id="calificacion-promedio">Calificacion promedio</h3>
+          <div class="admonition admonition--tip">
+            <div class="admonition__title">&#x1F4A1; Tip</div>
+            <p>El rating promedio se calcula como <code>rating_total / rating_count</code>. Este diseno permite actualizar con un solo <code>UPDATE</code> sin subconsultas.</p>
+          </div>
+
+          <hr>
+
+          <h2 id="tabla-usuarios">Tabla <code>usuarios</code></h2>
+          <h3 id="descripcion-usuarios">Descripcion</h3>
+          <p>Almacena los perfiles de visitantes registrados.</p>
+          <h3 id="columnas-usuarios">Columnas</h3>
+          <table>
+            <thead><tr><th>Columna</th><th>Tipo</th><th>Descripcion</th></tr></thead>
+            <tbody>
+              <tr><td><code>id</code></td><td><code>SERIAL PRIMARY KEY</code></td><td>ID autoincremental</td></tr>
+              <tr><td><code>apodo</code></td><td><code>VARCHAR(100) UNIQUE</code></td><td>Nombre de usuario unico</td></tr>
+              <tr><td><code>ciudad</code></td><td><code>VARCHAR(100)</code></td><td>Ciudad del visitante</td></tr>
+              <tr><td><code>avatar_index</code></td><td><code>INTEGER</code></td><td>Avatar elegido (0-7)</td></tr>
+              <tr><td><code>password_hash</code></td><td><code>TEXT</code></td><td>Hash bcrypt de la contrasena</td></tr>
+              <tr><td><code>created_at</code></td><td><code>TIMESTAMPTZ</code></td><td>Fecha de registro</td></tr>
+            </tbody>
+          </table>
+          <h3 id="seguridad-de-contrasenas">Seguridad de contrasenas</h3>
+          <p>Las contrasenas se almacenan como hash bcrypt, nunca en texto plano. El hashing se realiza en el backend antes de insertar en la base de datos.</p>
+
+          <hr>
+
+          <h2 id="conexion">Conexion</h2>
+          <h3 id="configuracion-del-pool">Configuracion del pool</h3>
+          <p>El backend se conecta usando el paquete <code>pg</code>:</p>
+          <pre data-lang="js"><code>const { Pool } = require('pg');
+const pool = new Pool({
+  connectionString: process.env.DATABASE_URL,
+  ssl: process.env.NODE_ENV === 'production'
+    ? { rejectUnauthorized: false }
+    : false
+});</code></pre>
+
+          <h3 id="variable-de-entorno-db">Variable de entorno</h3>
+          <pre data-lang="env"><code>DATABASE_URL=postgresql://usuario:contraseña@host:5432/mamb</code></pre>
+
+          <h3 id="ssl-segun-entorno">SSL segun entorno</h3>
+          <table>
+            <thead><tr><th>Entorno</th><th>SSL</th></tr></thead>
+            <tbody>
+              <tr><td>Produccion (Render)</td><td>Habilitado (<code>rejectUnauthorized: false</code>)</td></tr>
+              <tr><td>Desarrollo local</td><td>Deshabilitado</td></tr>
+            </tbody>
+          </table>
+
+          <hr>
+
+          <h2 id="migracion-automatica">Migracion automatica</h2>
+          <h3 id="comportamiento-migracion">Comportamiento</h3>
+          <p>El backend crea las tablas automaticamente al arrancar si no existen. No se usa un sistema de migraciones formal — la creacion es declarativa en el codigo del servidor.</p>
+          <h3 id="ventajas-migracion">Ventajas</h3>
+          <ul>
+            <li>Sin pasos manuales de migracion</li>
+            <li>El esquema siempre esta sincronizado con el codigo</li>
+            <li>Despliegue simplificado</li>
+          </ul>
+
+          <hr>
+
+          <h2 id="almacenamiento-de-imagenes">Almacenamiento de imagenes</h2>
+          <h3 id="ubicacion-imagenes">Ubicacion</h3>
+          <p>Las imagenes <strong>no se guardan en la base de datos</strong>. Se almacenan en el sistema de archivos bajo <code>backend/uploads/</code>. La BD solo guarda la ruta relativa en <code>image_url</code>.</p>
+          <h3 id="restricciones-imagenes">Restricciones</h3>
+          <table>
+            <thead><tr><th>Aspecto</th><th>Detalle</th></tr></thead>
+            <tbody>
+              <tr><td><strong>Ubicacion</strong></td><td><code>backend/uploads/</code></td></tr>
+              <tr><td><strong>Tamano maximo</strong></td><td>20 MB por imagen</td></tr>
+              <tr><td><strong>Formatos</strong></td><td><code>.jpg</code>, <code>.jpeg</code>, <code>.png</code>, <code>.webp</code>, <code>.gif</code></td></tr>
+              <tr><td><strong>Procesamiento</strong></td><td>Multer (middleware de Express)</td></tr>
+            </tbody>
+          </table>
+          <h3 id="disco-efimero">Disco efimero en Render</h3>
+          <div class="admonition admonition--caution">
+            <div class="admonition__title">&#x26A0;&#xFE0F; Precaucion</div>
+            <p>En el plan gratuito de Render, el disco es efimero: las imagenes se pierden cuando el servicio se reinicia o se redespliega. Para persistencia permanente se recomienda un servicio externo (Cloudinary, S3, etc.).</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- ==================== PAGE: API ENDPOINTS ==================== -->
+      <div class="doc-page" id="page-api-endpoints">
+        <div class="markdown">
+          <h1>API REST — Vista general</h1>
+          <p>La API de MAMB gestiona obras de arte, interacciones (likes y calificaciones) y autenticacion. Todos los endpoints retornan y aceptan <strong>JSON</strong>, excepto la creacion de obras que usa <code>multipart/form-data</code>.</p>
+
+          <hr>
+
+          <h2 id="base-url">Base URL</h2>
+          <h3 id="urls-por-entorno">URLs por entorno</h3>
+          <table>
+            <thead><tr><th>Entorno</th><th>URL</th></tr></thead>
+            <tbody>
+              <tr><td><strong>Produccion</strong></td><td><code>https://mamb-qsi0.onrender.com/api</code></td></tr>
+              <tr><td><strong>Produccion (dominio)</strong></td><td><code>https://www.mamb.online/api</code></td></tr>
+              <tr><td><strong>Local</strong></td><td><code>http://localhost:3000/api</code></td></tr>
+            </tbody>
+          </table>
+
+          <hr>
+
+          <h2 id="resumen-de-endpoints">Resumen de endpoints</h2>
+          <h3 id="obras-crud">Obras (CRUD)</h3>
+          <table>
+            <thead><tr><th>Metodo</th><th>Ruta</th><th>Descripcion</th></tr></thead>
+            <tbody>
+              <tr><td><code>GET</code></td><td><code>/api/obras</code></td><td>Listar obras con filtros y paginacion</td></tr>
+              <tr><td><code>GET</code></td><td><code>/api/obras/:id</code></td><td>Obtener una obra por ID</td></tr>
+              <tr><td><code>POST</code></td><td><code>/api/obras</code></td><td>Crear nueva obra (multipart)</td></tr>
+              <tr><td><code>PATCH</code></td><td><code>/api/obras/:id</code></td><td>Actualizar titulo/descripcion</td></tr>
+              <tr><td><code>DELETE</code></td><td><code>/api/obras/:id</code></td><td>Eliminar una obra</td></tr>
+            </tbody>
+          </table>
+          <h3 id="interacciones-api">Interacciones</h3>
+          <table>
+            <thead><tr><th>Metodo</th><th>Ruta</th><th>Descripcion</th></tr></thead>
+            <tbody>
+              <tr><td><code>POST</code></td><td><code>/api/obras/:id/like</code></td><td>Dar like a una obra</td></tr>
+              <tr><td><code>POST</code></td><td><code>/api/obras/:id/rate</code></td><td>Calificar una obra (1-5)</td></tr>
+            </tbody>
+          </table>
+          <h3 id="sistema-api">Sistema</h3>
+          <table>
+            <thead><tr><th>Metodo</th><th>Ruta</th><th>Descripcion</th></tr></thead>
+            <tbody>
+              <tr><td><code>GET</code></td><td><code>/api/health</code></td><td>Estado del servidor y conexion a BD</td></tr>
+            </tbody>
+          </table>
+
+          <hr>
+
+          <h2 id="autenticacion-api">Autenticacion</h2>
+          <h3 id="jwt-bearer-token">JWT Bearer Token</h3>
+          <p>Los endpoints protegidos requieren un <strong>JWT Bearer token</strong> en el header:</p>
+          <pre data-lang="http"><code>Authorization: Bearer &lt;token&gt;</code></pre>
+          <h3 id="obtencion-del-token">Obtencion del token</h3>
+          <p>El token se obtiene al registrarse o iniciar sesion y tiene expiracion automatica.</p>
+          <h3 id="endpoints-sin-autenticacion">Endpoints sin autenticacion</h3>
+          <p>Los endpoints de lectura (<code>GET</code>) son publicos y no requieren token.</p>
+
+          <hr>
+
+          <h2 id="health-check">Health check</h2>
+          <h3 id="endpoint-health">Endpoint</h3>
+          <pre data-lang="http"><code>GET /api/health</code></pre>
+          <h3 id="respuesta-exitosa-health">Respuesta exitosa</h3>
+          <p><strong><code>200 OK</code>:</strong></p>
+          <pre data-lang="json"><code>{
+  "status": "ok",
+  "museo": "MAMB",
+  "db": "PostgreSQL"
+}</code></pre>
+          <h3 id="uso-recomendado">Uso recomendado</h3>
+          <p>Usar este endpoint para verificar que el servidor y la base de datos estan operativos. Util para monitoreo y para "despertar" el servicio en Render antes de una demo.</p>
+
+          <hr>
+
+          <h2 id="manejo-de-errores">Manejo de errores</h2>
+          <h3 id="formato-de-error">Formato de error</h3>
+          <p>Todos los errores siguen el mismo formato:</p>
+          <pre data-lang="json"><code>{
+  "error": "Descripcion del error"
+}</code></pre>
+          <h3 id="codigos-de-estado">Codigos de estado</h3>
+          <table>
+            <thead><tr><th>Codigo</th><th>Significado</th><th>Ejemplo</th></tr></thead>
+            <tbody>
+              <tr><td><code>400</code></td><td>Datos invalidos o faltantes</td><td>Falta el titulo de la obra</td></tr>
+              <tr><td><code>401</code></td><td>Token JWT ausente o expirado</td><td>No se envio Authorization header</td></tr>
+              <tr><td><code>404</code></td><td>Recurso no encontrado</td><td>Obra con ese ID no existe</td></tr>
+              <tr><td><code>500</code></td><td>Error interno del servidor</td><td>Fallo en la conexion a BD</td></tr>
+            </tbody>
+          </table>
+
+          <hr>
+
+          <h2 id="middleware">Middleware</h2>
+          <h3 id="cadena-de-middleware">Cadena de middleware</h3>
+          <p>El backend aplica los siguientes middleware a todas las peticiones, en orden:</p>
+          <table>
+            <thead><tr><th>Middleware</th><th>Funcion</th></tr></thead>
+            <tbody>
+              <tr><td><strong>Helmet</strong></td><td>Headers HTTP de seguridad (XSS, HSTS, etc.)</td></tr>
+              <tr><td><strong>CORS</strong></td><td>Control de origenes cruzados</td></tr>
+              <tr><td><strong>Morgan</strong></td><td>Logging de peticiones HTTP en consola</td></tr>
+              <tr><td><strong>express.json()</strong></td><td>Parsing de body JSON</td></tr>
+              <tr><td><strong>Multer</strong></td><td>Procesamiento de archivos (solo en <code>POST /api/obras</code>)</td></tr>
+            </tbody>
+          </table>
+          <h3 id="helmet-headers">Helmet — headers de seguridad</h3>
+          <p>Helmet configura automaticamente headers como:</p>
+          <ul>
+            <li><code>X-Content-Type-Options: nosniff</code></li>
+            <li><code>X-Frame-Options: DENY</code></li>
+            <li><code>Strict-Transport-Security</code></li>
+          </ul>
+          <h3 id="cors-origenes">CORS — origenes permitidos</h3>
+          <p>CORS esta configurado para permitir peticiones desde el frontend desplegado y desde localhost en desarrollo.</p>
+        </div>
+      </div>
+
+      <!-- ==================== PAGE: API OBRAS ==================== -->
+      <div class="doc-page" id="page-api-obras">
+        <div class="markdown">
+          <h1>Obras — Referencia completa</h1>
+          <p>Documentacion detallada de todos los endpoints relacionados con obras de arte.</p>
+
+          <hr>
+
+          <h2 id="listar-obras">Listar obras</h2>
+          <h3 id="endpoint-listar">Endpoint</h3>
+          <pre data-lang="http"><code>GET /api/obras</code></pre>
+          <h3 id="parametros-de-consulta">Parametros de consulta</h3>
+          <table>
+            <thead><tr><th>Parametro</th><th>Tipo</th><th>Descripcion</th><th>Ejemplo</th></tr></thead>
+            <tbody>
+              <tr><td><code>search</code></td><td>string</td><td>Filtra por titulo o descripcion</td><td><code>?search=paisaje</code></td></tr>
+              <tr><td><code>autorApodo</code></td><td>string</td><td>Filtra por apodo del autor</td><td><code>?autorApodo=Carlos</code></td></tr>
+              <tr><td><code>page</code></td><td>number</td><td>Numero de pagina</td><td><code>?page=2</code></td></tr>
+              <tr><td><code>limit</code></td><td>number</td><td>Resultados por pagina</td><td><code>?limit=10</code></td></tr>
+            </tbody>
+          </table>
+          <h3 id="respuesta-exitosa-listar">Respuesta exitosa</h3>
+          <p><strong><code>200 OK</code>:</strong></p>
+          <pre data-lang="json"><code>[
+  {
+    "id": 1,
+    "titulo": "Paisaje Costero",
+    "descripcion": "Vista del Caribe desde el malecon",
+    "image_url": "/uploads/obra_123.jpg",
+    "autor_apodo": "Carlos",
+    "avatar_index": 0,
+    "likes_count": 5,
+    "rating_total": 12,
+    "rating_count": 3,
+    "created_at": "2026-05-29T14:00:00Z"
+  }
+]</code></pre>
+
+          <hr>
+
+          <h2 id="obtener-obra-por-id">Obtener obra por ID</h2>
+          <h3 id="endpoint-obtener">Endpoint</h3>
+          <pre data-lang="http"><code>GET /api/obras/:id</code></pre>
+          <h3 id="respuesta-exitosa-obtener">Respuesta exitosa</h3>
+          <p><strong><code>200 OK</code>:</strong> objeto obra (mismo esquema que el listado).</p>
+          <h3 id="respuesta-error-obtener">Respuesta de error</h3>
+          <p><strong><code>404</code>:</strong></p>
+          <pre data-lang="json"><code>{ "error": "Obra no encontrada" }</code></pre>
+
+          <hr>
+
+          <h2 id="crear-nueva-obra">Crear nueva obra</h2>
+          <h3 id="endpoint-crear">Endpoint</h3>
+          <pre data-lang="http"><code>POST /api/obras
+Content-Type: multipart/form-data</code></pre>
+          <h3 id="campos-del-formulario">Campos del formulario</h3>
+          <table>
+            <thead><tr><th>Campo</th><th>Tipo</th><th>Requerido</th><th>Descripcion</th></tr></thead>
+            <tbody>
+              <tr><td><code>image</code></td><td>File</td><td>Si</td><td>Imagen de la obra</td></tr>
+              <tr><td><code>titulo</code></td><td>string</td><td>Si</td><td>Titulo de la obra</td></tr>
+              <tr><td><code>descripcion</code></td><td>string</td><td>No</td><td>Descripcion libre</td></tr>
+              <tr><td><code>autorApodo</code></td><td>string</td><td>Si</td><td>Apodo del visitante</td></tr>
+              <tr><td><code>avatarIndex</code></td><td>number</td><td>No</td><td>Indice del avatar (0-7)</td></tr>
+            </tbody>
+          </table>
+          <h3 id="restricciones-de-imagen">Restricciones de imagen</h3>
+          <div class="admonition admonition--info">
+            <div class="admonition__title">&#x2139;&#xFE0F; Info</div>
+            <ul>
+              <li><strong>Tamano maximo:</strong> 20 MB</li>
+              <li><strong>Formatos aceptados:</strong> <code>.jpg</code>, <code>.jpeg</code>, <code>.png</code>, <code>.webp</code>, <code>.gif</code></li>
+            </ul>
+          </div>
+          <h3 id="respuesta-exitosa-crear">Respuesta exitosa</h3>
+          <p><strong><code>201 Created</code>:</strong> objeto obra creado con todos los campos.</p>
+          <h3 id="ejemplo-con-curl">Ejemplo con curl</h3>
+          <pre data-lang="bash"><code>curl -X POST https://www.mamb.online/api/obras \
+  -F "image=@mi-obra.jpg" \
+  -F "titulo=Mi primera obra" \
+  -F "descripcion=Pintura al oleo" \
+  -F "autorApodo=Carlos" \
+  -F "avatarIndex=3"</code></pre>
+
+          <hr>
+
+          <h2 id="actualizar-obra">Actualizar obra</h2>
+          <h3 id="endpoint-actualizar">Endpoint</h3>
+          <pre data-lang="http"><code>PATCH /api/obras/:id
+Content-Type: application/json</code></pre>
+          <h3 id="body-actualizar">Body de la peticion</h3>
+          <pre data-lang="json"><code>{
+  "titulo": "Nuevo titulo",
+  "descripcion": "Nueva descripcion"
+}</code></pre>
+          <h3 id="respuesta-exitosa-actualizar">Respuesta exitosa</h3>
+          <p><strong><code>200 OK</code>:</strong> obra actualizada con los nuevos valores.</p>
+
+          <hr>
+
+          <h2 id="eliminar-obra">Eliminar obra</h2>
+          <h3 id="endpoint-eliminar">Endpoint</h3>
+          <pre data-lang="http"><code>DELETE /api/obras/:id</code></pre>
+          <h3 id="respuesta-exitosa-eliminar">Respuesta exitosa</h3>
+          <p><strong><code>200 OK</code>:</strong></p>
+          <pre data-lang="json"><code>{ "message": "Obra eliminada" }</code></pre>
+          <h3 id="comportamiento-eliminar">Comportamiento</h3>
+          <p>Elimina la obra de la base de datos y el archivo de imagen del disco.</p>
+
+          <hr>
+
+          <h2 id="dar-like">Dar like</h2>
+          <h3 id="endpoint-like">Endpoint</h3>
+          <pre data-lang="http"><code>POST /api/obras/:id/like</code></pre>
+          <h3 id="comportamiento-like">Comportamiento</h3>
+          <p>Incrementa en 1 el contador de likes de la obra.</p>
+          <h3 id="respuesta-exitosa-like">Respuesta exitosa</h3>
+          <p><strong><code>200 OK</code>:</strong></p>
+          <pre data-lang="json"><code>{ "likes_count": 6 }</code></pre>
+
+          <hr>
+
+          <h2 id="calificar-obra">Calificar obra</h2>
+          <h3 id="endpoint-calificar">Endpoint</h3>
+          <pre data-lang="http"><code>POST /api/obras/:id/rate
+Content-Type: application/json</code></pre>
+          <h3 id="body-calificar">Body de la peticion</h3>
+          <pre data-lang="json"><code>{ "rating": 4 }</code></pre>
+          <h3 id="validacion-calificar">Validacion</h3>
+          <p>El valor de <code>rating</code> debe ser un entero entre <strong>1</strong> y <strong>5</strong>.</p>
+          <h3 id="respuesta-exitosa-calificar">Respuesta exitosa</h3>
+          <p><strong><code>200 OK</code>:</strong></p>
+          <pre data-lang="json"><code>{
+  "rating_total": 16,
+  "rating_count": 4
+}</code></pre>
+          <h3 id="calcular-promedio">Calcular promedio</h3>
+          <div class="admonition admonition--tip">
+            <div class="admonition__title">&#x1F4A1; Tip</div>
+            <p>Para obtener el rating promedio: <code>rating_total / rating_count</code> = <code>16 / 4</code> = <strong>4.0 estrellas</strong>.</p>
+          </div>
+
+          <hr>
+
+          <h2 id="esquema-completo">Esquema completo de una obra</h2>
+          <h3 id="objeto-obra">Objeto obra</h3>
+          <pre data-lang="json"><code>{
+  "id": 1,
+  "titulo": "Paisaje Costero",
+  "descripcion": "Vista del Caribe desde el malecon",
+  "image_url": "/uploads/obra_1717000000000.jpg",
+  "autor_apodo": "Carlos",
+  "avatar_index": 2,
+  "likes_count": 12,
+  "rating_total": 35,
+  "rating_count": 8,
+  "created_at": "2026-05-29T14:00:00.000Z"
+}</code></pre>
+          <h3 id="descripcion-de-campos">Descripcion de campos</h3>
+          <table>
+            <thead><tr><th>Campo</th><th>Tipo</th><th>Descripcion</th></tr></thead>
+            <tbody>
+              <tr><td><code>id</code></td><td>number</td><td>Identificador unico</td></tr>
+              <tr><td><code>titulo</code></td><td>string</td><td>Titulo de la obra</td></tr>
+              <tr><td><code>descripcion</code></td><td>string</td><td>Descripcion textual</td></tr>
+              <tr><td><code>image_url</code></td><td>string</td><td>Ruta relativa a la imagen</td></tr>
+              <tr><td><code>autor_apodo</code></td><td>string</td><td>Apodo del autor</td></tr>
+              <tr><td><code>avatar_index</code></td><td>number</td><td>Indice del avatar (0-7)</td></tr>
+              <tr><td><code>likes_count</code></td><td>number</td><td>Total de likes recibidos</td></tr>
+              <tr><td><code>rating_total</code></td><td>number</td><td>Suma de todas las calificaciones</td></tr>
+              <tr><td><code>rating_count</code></td><td>number</td><td>Numero de calificaciones</td></tr>
+              <tr><td><code>created_at</code></td><td>string (ISO 8601)</td><td>Fecha de creacion</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- ===== PAGINATION NAV ===== -->
+      <div class="pagination-nav" id="pagination"></div>
+
+    </div><!-- .doc-content -->
+
+    <!-- ===== TABLE OF CONTENTS ===== -->
+    <div class="toc-wrapper">
+      <div class="toc">
+        <div class="toc__title">En esta pagina</div>
+        <ul class="toc__list" id="toc-list"></ul>
+      </div>
+    </div>
+
+  </div><!-- .doc-wrapper -->
+</div><!-- .main-wrapper -->
+
+<!-- ===== FOOTER ===== -->
+<footer class="footer">
+  <div class="footer__inner">
+    <div>
+      <div class="footer__title">Documentacion</div>
+      <ul class="footer__links">
+        <li><a href="#intro" data-page="intro">Introduccion</a></li>
+        <li><a href="#guias/instalacion" data-page="guias/instalacion">Instalacion</a></li>
+        <li><a href="#guias/uso" data-page="guias/uso">Guia de uso</a></li>
+        <li><a href="#api/endpoints" data-page="api/endpoints">API REST</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="footer__title">Arquitectura</div>
+      <ul class="footer__links">
+        <li><a href="#arquitectura/overview" data-page="arquitectura/overview">Vista general</a></li>
+        <li><a href="#arquitectura/frontend" data-page="arquitectura/frontend">Frontend</a></li>
+        <li><a href="#arquitectura/base-de-datos" data-page="arquitectura/base-de-datos">Base de datos</a></li>
+        <li><a href="#guias/roadmap-ia" data-page="guias/roadmap-ia">Hoja de ruta IA</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="footer__title">Proyecto</div>
+      <ul class="footer__links">
+        <li><a href="https://www.mamb.online" target="_blank" rel="noopener">App en vivo (mamb.online)</a></li>
+        <li><a href="https://www.unisimon.edu.co" target="_blank" rel="noopener">Universidad Simon Bolivar</a></li>
+        <li><a href="https://github.com/risharddv/MAMBQ" target="_blank" rel="noopener">Codigo fuente</a></li>
+      </ul>
+    </div>
+    <div class="footer__copyright">
+      Copyright &copy; 2026 MAMB — USB &amp; Museo de Arte Moderno de Barranquilla.
+    </div>
+  </div>
+</footer>
+
+<!-- ===== BACK TO TOP ===== -->
+<button class="back-to-top" id="back-to-top" aria-label="Volver al principio">&uarr;</button>
+
+<script src="app.js"></script>
+</body>
+</html>
