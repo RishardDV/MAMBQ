@@ -342,3 +342,69 @@
     }
   });
 })();
+
+/* ============================================
+   LANDING OVERLAY CONTROLLER
+   ============================================ */
+(function () {
+  'use strict';
+
+  var overlay = document.getElementById('landing-overlay');
+  var openBtn = document.getElementById('landing-nav-btn');
+  var closeBtn = document.getElementById('landing-close-btn');
+
+  if (!overlay || !openBtn || !closeBtn) return;
+
+  function openLanding(e) {
+    e.preventDefault();
+    overlay.style.display = 'block';
+    document.body.style.overflow = 'hidden';
+    overlay.scrollTop = 0;
+  }
+
+  function closeLanding() {
+    overlay.style.display = 'none';
+    document.body.style.overflow = '';
+  }
+
+  openBtn.addEventListener('click', openLanding);
+  closeBtn.addEventListener('click', closeLanding);
+
+  // Also hook any footer links inside landing that point to doc pages
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape' && overlay.style.display === 'block') {
+      closeLanding();
+    }
+  });
+
+  // Landing hamburger menu
+  var lHamburger = document.getElementById('l-hamburger-btn');
+  var lMenu = document.getElementById('l-nav-menu');
+
+  if (lHamburger && lMenu) {
+    lHamburger.addEventListener('click', function () {
+      lMenu.classList.toggle('l-open');
+    });
+
+    // Close menu on nav link click
+    lMenu.querySelectorAll('.l-nav-link').forEach(function (link) {
+      link.addEventListener('click', function () {
+        lMenu.classList.remove('l-open');
+      });
+    });
+  }
+
+  // Smooth scroll for landing anchor links (l-*) within overlay
+  overlay.addEventListener('click', function (e) {
+    var target = e.target.closest('a[href^="#l-"]');
+    if (!target) return;
+    e.preventDefault();
+    var id = target.getAttribute('href').slice(1);
+    var el = document.getElementById(id);
+    if (el) {
+      var offset = el.getBoundingClientRect().top + overlay.scrollTop - 120;
+      overlay.scrollTo({ top: offset, behavior: 'smooth' });
+    }
+  });
+})();
+

@@ -8,7 +8,7 @@
   <link rel="icon" href="MAMB-docs/static/img/favicon.ico">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Cormorant+Garamond:wght@400;600;700&family=Jost:wght@400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -27,6 +27,7 @@
       <a class="navbar__link navbar__link--active" href="#intro" data-page="intro">Documentacion</a>
     </div>
     <div class="navbar__items navbar__items--right">
+      <a class="navbar__link" href="#" id="landing-nav-btn">Landing <span class="ext-icon">&#x2197;</span></a>
       <a class="navbar__link" href="https://www.mamb.online" target="_blank" rel="noopener">App en vivo <span class="ext-icon">&#x2197;</span></a>
       <a class="navbar__link" href="https://github.com/risharddv/MAMBQ" target="_blank" rel="noopener">GitHub <span class="ext-icon">&#x2197;</span></a>
       <button class="theme-toggle" id="theme-toggle" aria-label="Cambiar tema"></button>
@@ -1615,5 +1616,246 @@ Content-Type: application/json</code></pre>
 <button class="back-to-top" id="back-to-top" aria-label="Volver al principio">&uarr;</button>
 
 <script src="app.js"></script>
+
+<!-- ===== LANDING OVERLAY ===== -->
+<div id="landing-overlay" class="landing-overlay" style="display:none;">
+  <div class="landing-close-bar">
+    <button class="landing-close-btn" id="landing-close-btn">&#x2190; Volver a la documentacion</button>
+  </div>
+
+  <!-- LANDING NAVBAR -->
+  <nav class="l-navbar">
+    <div class="l-navbar-container">
+      <a href="#l-inicio" class="l-nav-logo">
+        <img src="Landing MAMB/img/mamb-logo.png" alt="MAMB" class="l-nav-logo-img" onerror="this.style.display='none'">
+      </a>
+      <button class="l-hamburger" id="l-hamburger-btn" aria-label="Abrir menu">
+        <span></span><span></span><span></span>
+      </button>
+      <ul class="l-nav-menu" id="l-nav-menu">
+        <li><a href="#l-inicio" class="l-nav-link">Inicio</a></li>
+        <li><a href="#l-artistas" class="l-nav-link">Artistas</a></li>
+        <li><a href="#l-coleccion" class="l-nav-link">Coleccion</a></li>
+        <li><a href="#l-visita" class="l-nav-link">Visita</a></li>
+        <li><a href="#l-sobre" class="l-nav-link">Sobre el Museo</a></li>
+      </ul>
+      <div class="l-nav-buttons">
+        <a href="https://www.mamb.online/" target="_blank" rel="noopener" class="l-nav-btn">App Online &#x2197;</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section id="l-inicio" class="l-hero">
+    <div class="l-hero-content">
+      <h1 class="l-hero-title">Museo de Arte Moderno de Barranquilla</h1>
+      <p class="l-hero-subtitle">Acercando el arte moderno y contemporaneo al Caribe colombiano y al mundo</p>
+      <p class="l-hero-description">Desde su creacion en 1996, el MAMB se ha convertido en un espacio vital para la preservacion, investigacion y difusion del arte latinoamericano y caribeno. Nuestra coleccion de mas de 350 obras reune las voces mas importantes del arte moderno y contemporaneo, surgidas a partir de las historicas Bienales Interamericanas de Arte de Barranquilla.</p>
+      <a href="https://www.mamb.online/" target="_blank" rel="noopener" class="l-btn l-btn-primary">App Online</a>
+    </div>
+  </section>
+
+  <!-- ARTISTAS -->
+  <section id="l-artistas" class="l-artistas">
+    <div class="l-container">
+      <h2 class="l-section-title">La Voz del Caribe en el Arte</h2>
+      <p class="l-section-subtitle">Artistas que han marcado la historia del arte latinoamericano</p>
+      <div class="l-artistas-grid">
+        <article class="l-artista-card">
+          <img src="Landing MAMB/../img/alvaro.png" alt="Alvaro Cepeda Samudio" class="l-artista-image" onerror="this.style.display='none'">
+          <h3>Alvaro Cepeda Samudio</h3>
+          <p class="l-artista-periodo">(1926-1972)</p>
+          <p class="l-artista-label">&#x1F31F; Artista Destacado del MAMB 2026</p>
+          <p class="l-artista-desc">Uno de los narradores mas innovadores de Colombia y figura clave del Grupo de Barranquilla. Su novela "La casa grande" (1962) es considerada una obra maestra de la literatura colombiana.</p>
+        </article>
+        <article class="l-artista-card">
+          <img src="Landing MAMB/../img/alejandro.jpg" alt="Alejandro Obregon" class="l-artista-image" onerror="this.style.display='none'">
+          <h3>Alejandro Obregon</h3>
+          <p class="l-artista-periodo">(1920-1992)</p>
+          <p class="l-artista-desc">Reconocido como una de las figuras mas importantes del arte colombiano moderno, pionero en la integracion de la poetica del Caribe con las tecnicas del arte moderno.</p>
+        </article>
+        <article class="l-artista-card">
+          <img src="Landing MAMB/../img/enrique.jpg" alt="Enrique Grau" class="l-artista-image" onerror="this.style.display='none'">
+          <h3>Enrique Grau</h3>
+          <p class="l-artista-periodo">(1920-2004)</p>
+          <p class="l-artista-desc">Pintor e ilustrador colombiano cuya obra combino figuracion con elementos surrealistas. Capturo la identidad cultural del Caribe a traves de personajes cotidianos.</p>
+        </article>
+        <article class="l-artista-card">
+          <img src="Landing MAMB/../img/alvarob.jpg" alt="Alvaro Barrios" class="l-artista-image" onerror="this.style.display='none'">
+          <h3>Alvaro Barrios</h3>
+          <p class="l-artista-periodo">(1945-)</p>
+          <p class="l-artista-desc">Artista multimedia cuya practica ha abarcado pintura, video, instalacion y arte conceptual. Voz fundamental en el arte contemporaneo colombiano.</p>
+        </article>
+        <article class="l-artista-card">
+          <img src="Landing MAMB/../img/marco.jpg" alt="Marco Mojica" class="l-artista-image" onerror="this.style.display='none'">
+          <h3>Marco Mojica</h3>
+          <p class="l-artista-periodo">(1956-)</p>
+          <p class="l-artista-desc">Pintor y dibujante barranquillero cuya obra se centra en la exploracion del paisaje y la figura humana.</p>
+        </article>
+        <article class="l-artista-card">
+          <img src="Landing MAMB/../img/jhon%20castles.jpg" alt="Jhon Castles" class="l-artista-image" onerror="this.style.display='none'">
+          <h3>Jhon Castles</h3>
+          <p class="l-artista-periodo">(1946-2023)</p>
+          <p class="l-artista-desc">Nacio en 1946 en Barranquilla, Atlantico, Colombia.</p>
+        </article>
+        <article class="l-artista-card">
+          <img src="Landing MAMB/../img/Mari.jpg" alt="Maria Paz Jaramillo Gonzalez" class="l-artista-image" onerror="this.style.display='none'">
+          <h3>Maria Paz Jaramillo Gonzalez</h3>
+          <p class="l-artista-periodo">(1948-)</p>
+          <p class="l-artista-desc">Artista plastica colombiana, ampliamente reconocida por sus pinturas de estilo pop expresionista.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- COLECCION -->
+  <section id="l-coleccion" class="l-coleccion">
+    <div class="l-container">
+      <h2 class="l-section-title">Coleccion</h2>
+      <p class="l-section-subtitle">Obras maestras del arte latinoamericano y caribeno</p>
+      <div class="l-coleccion-intro">
+        <p>La coleccion del MAMB reune mas de 350 obras de arte moderno y contemporaneo colombiano y latinoamericano, con enfasis especial en artistas del Caribe surgidos a partir de las historicas Bienales Interamericanas de Arte.</p>
+      </div>
+      <div class="l-obras-grid">
+        <article class="l-obra-card">
+          <div class="l-obra-img"><img src="Landing MAMB/../img/obregon1.jpg" alt="Vaso y una Manzana" onerror="this.style.display='none'"></div>
+          <h3>Vaso y una Manzana</h3>
+          <p class="l-obra-artista">Alejandro Obregon</p>
+          <p class="l-obra-info">1948 &bull; carton &bull; 39 x 44 cm</p>
+          <p class="l-obra-desc">Esta obra se encuentra en comodato en el Museo de Arte Moderno de Barranquilla y hace parte de la Coleccion Avianca.</p>
+        </article>
+        <article class="l-obra-card">
+          <div class="l-obra-img"><img src="Landing MAMB/../img/obregon2.jpg" alt="Flor Carnivora" onerror="this.style.display='none'"></div>
+          <h3>Flor Carnivora</h3>
+          <p class="l-obra-artista">Alejandro Obregon</p>
+          <p class="l-obra-info">2025 &bull; Madera &bull; 85 x 93 cm</p>
+          <p class="l-obra-desc">Esta obra se encuentra en comodato en el Museo de Arte Moderno de Barranquilla y hace parte de la Coleccion Avianca.</p>
+        </article>
+        <article class="l-obra-card">
+          <div class="l-obra-img"><img src="Landing MAMB/../img/barrios.jpg" alt="La multiplicacion de los cuadros" onerror="this.style.display='none'"></div>
+          <h3>La multiplicacion de los cuadros</h3>
+          <p class="l-obra-artista">Alvaro Barrios</p>
+          <p class="l-obra-info">2025 &bull; Exposicion</p>
+          <p class="l-obra-desc">Seleccion de obra sobre lienzo realizada entre 2013 y 2025 que refleja su interes por el apropiacionismo y por las tecnicas de reproduccion masiva de las imagenes.</p>
+        </article>
+        <article class="l-obra-card">
+          <div class="l-obra-img"><img src="Landing MAMB/../img/grau.jpg" alt="La llamada" onerror="this.style.display='none'"></div>
+          <h3>La llamada</h3>
+          <p class="l-obra-artista">Enrique Grau</p>
+          <p class="l-obra-info">1995 &bull; papel &bull; 138 x 123 cm</p>
+          <p class="l-obra-desc">Esta obra se encuentra en comodato en el Museo de Arte Moderno de Barranquilla y hace parte de la Coleccion Avianca.</p>
+        </article>
+        <article class="l-obra-card">
+          <div class="l-obra-img"><img src="Landing MAMB/../img/castles.jpg" alt="Cruzada" onerror="this.style.display='none'"></div>
+          <h3>Cruzada</h3>
+          <p class="l-obra-artista">Jhon Castles</p>
+          <p class="l-obra-info">2017 &bull; papel &bull; 70 x 71 cm</p>
+          <p class="l-obra-desc">Obra inedita del maestro John Castles presentada en la feria ARCO Madrid 18.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- VISITA -->
+  <section id="l-visita" class="l-visita">
+    <div class="l-container">
+      <h2 class="l-section-title">Visita al Museo</h2>
+      <p class="l-section-subtitle">Informacion y servicios para tu experiencia en el MAMB</p>
+      <div class="l-servicios-grid">
+        <div class="l-servicio-card">
+          <h3>Horarios y Boleteria</h3>
+          <ul class="l-horarios-list">
+            <li><strong>Martes a viernes:</strong><br>10:00am - 19:00pm</li>
+            <li><strong>Sabados:</strong><br>10:00am - 13:00pm</li>
+            <li><strong>Domingos:</strong><br>Cerrado</li>
+          </ul>
+          <p class="l-servicio-nota">Consulta en linea para tarifas especiales y promociones</p>
+        </div>
+        <div class="l-servicio-card">
+          <h3>Visitas Guiadas</h3>
+          <p>Nuestros expertos en arte ofrecen recorridos especializados a traves de la coleccion del MAMB.</p>
+          <p class="l-servicio-nota">Reserva con anticipacion contactando al museo</p>
+        </div>
+        <div class="l-servicio-card">
+          <h3>Programas Educativos</h3>
+          <p>Talleres, seminarios y actividades culturales para todas las edades.</p>
+          <p class="l-servicio-nota">Consulta nuestro calendario de actividades</p>
+        </div>
+        <div class="l-servicio-card">
+          <h3>Ubicacion y Contacto</h3>
+          <address>
+            <p><strong>Direccion:</strong><br>Calle 76#54-01<br>Ed. World Trade Center. L B3<br>Barranquilla, Colombia</p>
+            <p><strong>Telefono:</strong><br>+57 32252275408</p>
+          </address>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SOBRE EL MUSEO -->
+  <section id="l-sobre" class="l-sobre">
+    <div class="l-container">
+      <h2 class="l-section-title">Sobre el Museo</h2>
+      <div class="l-sobre-content">
+        <div class="l-sobre-text">
+          <h3>Nuestra Historia</h3>
+          <p>El Museo de Arte Moderno de Barranquilla nace del legado de las Bienales Interamericanas de Arte. Aunque el museo comenzo a funcionar desde 1974, fue institucionalmente creado en 1996, consolidandose como el principal espacio dedicado a la preservacion y difusion del arte latinoamericano y caribeno.</p>
+          <h3>Nuestra Mision</h3>
+          <p>Conservar, investigar y difundir el arte moderno y contemporaneo con especial enfasis en la produccion artistica del Caribe colombiano. El MAMB se compromete a ser un puente entre el patrimonio cultural del Caribe y el arte contemporaneo.</p>
+          <h3>Presente y Futuro</h3>
+          <p>Actualmente funcionamos en una sede transitoria mientras avanzamos en la construccion de nuestra sede definitiva en el Parque Cultural del Caribe. Continuamos expandiendo nuestra coleccion de mas de 350 obras de arte latinoamericano.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- APP SECTION -->
+  <section class="l-app-section">
+    <div class="l-container">
+      <h2>Accede a Nuestra Aplicacion</h2>
+      <p>Explora la coleccion del MAMB desde cualquier dispositivo</p>
+      <a href="https://www.mamb.online/" target="_blank" rel="noopener" class="l-btn l-btn-primary l-btn-large">App Online</a>
+    </div>
+  </section>
+
+  <!-- LANDING FOOTER -->
+  <footer class="l-footer">
+    <div class="l-container">
+      <div class="l-footer-grid">
+        <div class="l-footer-section">
+          <h4>Enlaces Rapidos</h4>
+          <ul class="l-footer-links">
+            <li><a href="#l-inicio" class="l-nav-link">Inicio</a></li>
+            <li><a href="#l-artistas" class="l-nav-link">Artistas</a></li>
+            <li><a href="#l-coleccion" class="l-nav-link">Coleccion</a></li>
+            <li><a href="#l-visita" class="l-nav-link">Visita</a></li>
+            <li><a href="#l-sobre" class="l-nav-link">Sobre el Museo</a></li>
+          </ul>
+        </div>
+        <div class="l-footer-section">
+          <h3>Contacto</h3>
+          <address>
+            <p>Calle 76#54-01 Ed. World Trade Center. L B3<br>Barranquilla, Colombia</p>
+            <p>Tel: +57 3225275408</p>
+          </address>
+        </div>
+        <div class="l-footer-section">
+          <h4>Redes Sociales</h4>
+          <ul class="l-social-links">
+            <li><a href="https://www.instagram.com/mambq_museo/" target="_blank" rel="noopener">&#x1F4F7; Instagram</a></li>
+            <li><a href="https://www.facebook.com/Museo-de-Arte-Moderno-de-Barranquilla/" target="_blank" rel="noopener">&#x1F465; Facebook</a></li>
+          </ul>
+        </div>
+        <div class="l-footer-section">
+          <a href="https://www.mamb.online/" target="_blank" rel="noopener" class="l-btn l-btn-secondary">App Online</a>
+        </div>
+      </div>
+      <div class="l-footer-bottom">
+        <p>&copy; 2026 Museo de Arte Moderno de Barranquilla. Todos los derechos reservados.</p>
+      </div>
+    </div>
+  </footer>
+</div><!-- #landing-overlay -->
+
 </body>
 </html>
